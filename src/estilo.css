@@ -1,0 +1,45 @@
+.cuerpo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80%;
+  width: 100%;
+}
+footer {
+  height: 25%;
+  color: #274690;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  width: 80%;
+}
+.descripciones__lista {
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start;
+  li {
+    margin-bottom: 20px;
+    color: #274690;
+    b {
+      color: #274690;
+    }
+  }
+}
+p {
+  margin-bottom: 20px;
+  color: #274690;
+}
+.creditos {
+  margin-bottom: 4em;
+  margin-top: 4em;
+}
+.inicio {
+  text-align: center;
+  background-color: #dbe9ee;
+  height: 82vh;
+  width: 207vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
