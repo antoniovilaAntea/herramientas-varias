@@ -73,19 +73,7 @@ const FileConverter = ({ tipo }: Props) => {
 
   return (
     <>
-      <div className="archivo">
-        <label className="input-group-text" htmlFor="inputGroupFile">
-          Examinar
-        </label>
-        <input
-          type="file"
-          className="form-control"
-          id="inputGroupFile"
-          placeholder="Ningún archivo seleccionado"
-          onChange={handleFileChange}
-        />
-      </div>
-      {tipo === "unificador" && (
+      <div className="botones">
         <div className="archivo">
           <label className="input-group-text" htmlFor="inputGroupFile">
             Examinar
@@ -97,6 +85,25 @@ const FileConverter = ({ tipo }: Props) => {
             placeholder="Ningún archivo seleccionado"
             onChange={handleFileChange}
           />
+        </div>
+        {tipo === "unificador" && (
+          <div className="archivo2">
+            <label className="input-group-text" htmlFor="inputGroupFile">
+              Examinar
+            </label>
+            <input
+              type="file"
+              className="form-control"
+              id="inputGroupFile"
+              placeholder="Ningún archivo seleccionado"
+              onChange={handleFileChange}
+            />
+          </div>
+        )}
+      </div>
+      {tipo === "unificador" && (
+        <div>
+          <button>Unir los dos archivos</button>
         </div>
       )}
     </>

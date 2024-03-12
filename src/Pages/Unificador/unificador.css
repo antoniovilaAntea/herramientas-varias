@@ -10,6 +10,21 @@
   align-items: center;
 }
 .archivo {
+  width: 90%;
+  height: 45px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #495b86;
+  border: 1px solid #495b86;
+  border-radius: 10px;
+  margin-top: 2em;
+  padding-left: 10px;
+  margin-bottom: 3em;
+}
+.archivo2 {
   /* display: flex;
     align-content: center;
     justify-content: center;
@@ -24,6 +39,8 @@
   color: #495b86;
   border: 1px solid #495b86;
   border-radius: 10px;
+  margin-top: 2em;
+  margin-left: 4em;
   padding-left: 10px;
   margin-bottom: 3em;
 }
@@ -31,7 +48,8 @@ input[type="file"] {
   background-color: transparent;
   width: 20vh;
 }
-.archivo input[type="file"] {
+.archivo input[type="file"],
+.archivo2 input[type="file"] {
   padding: 5px 0 0 15px;
   font-size: 13px;
   &::-webkit-file-upload-button {
@@ -41,17 +59,25 @@ input[type="file"] {
     display: none;
   }
 }
-.archivo:hover {
+.archivo:hover,
+.archivo2:hover {
   background-color: #c0d6df;
   border-radius: 10px;
   border: 1px solid #495b86;
   cursor: pointer;
 }
-.archivo :hover {
+.archivo :hover,
+.archivo2 :hover {
   cursor: pointer;
 }
 .unir {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.botones {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
