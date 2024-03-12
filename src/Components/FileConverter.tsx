@@ -2,7 +2,11 @@
 import React from "react";
 import { saveAs } from "file-saver";
 
-const FileConverter = () => {
+type Props = {
+  tipo: string;
+};
+
+const FileConverter = ({ tipo }: Props) => {
   const convertirDatos = (inputFile: File, outputFile: string) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -56,26 +60,46 @@ const FileConverter = () => {
     reader.readAsText(inputFile);
   };
 
+  const unificarDatos = () => {};
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
     if (selectedFile) {
-      convertirDatos(selectedFile, "outputFile");
+      tipo === "conversor"
+        ? convertirDatos(selectedFile, "outputFile")
+        : unificarDatos();
     }
   };
 
   return (
-    <div className="archivo">
-      <label className="input-group-text" htmlFor="inputGroupFile">
-        Examinar
-      </label>
-      <input
-        type="file"
-        className="form-control"
-        id="inputGroupFile"
-        placeholder="Ningún archivo seleccionado"
-        onChange={handleFileChange}
-      />
-    </div>
+    <>
+      <div className="archivo">
+        <label className="input-group-text" htmlFor="inputGroupFile">
+          Examinar
+        </label>
+        <input
+          type="file"
+          className="form-control"
+          id="inputGroupFile"
+          placeholder="Ningún archivo seleccionado"
+          onChange={handleFileChange}
+        />
+      </div>
+      {tipo === "unificador" && (
+        <div className="archivo">
+          <label className="input-group-text" htmlFor="inputGroupFile">
+            Examinar
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="inputGroupFile"
+            placeholder="Ningún archivo seleccionado"
+            onChange={handleFileChange}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

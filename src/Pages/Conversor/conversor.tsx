@@ -9,7 +9,7 @@ const Conversor = () => {
       <div className="descarga">
         <h3>Descargar Conversor</h3>
         <a
-          href="/Conversor_File/Aplicación Transformar txt en archivo de Aforos.zip"
+          href="https://iceacsaconsultores-my.sharepoint.com/:u:/g/personal/antoniovila_anteagroup_es/Ebo_KI0-PjlPoP6qZRg2O3EBvcWyuoYv619VrWdYPjF30g?e=TmFcH0"
           download={"Conversor txt en af1"}
           target="_blank"
           rel="noreferrer"
@@ -19,7 +19,7 @@ const Conversor = () => {
       </div>
       <div>
         <h3>Convertir un archivo .txt en un archivo de aforos (.af1)</h3>
-        <FileConverter></FileConverter>
+        <FileConverter tipo="conversor"></FileConverter>
       </div>
     </div>
   );
