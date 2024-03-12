@@ -16,7 +16,7 @@ const Unificador = () => {
           <button>Descargar .zip</button>
         </a>
       </div>
-      <h3>Unir dos archivos .af1</h3>
+      <h3>Unir archivos de aforos creciente y decreciente</h3>
       <div className="unir">
         <FileConverter tipo="unificador"></FileConverter>
       </div>
