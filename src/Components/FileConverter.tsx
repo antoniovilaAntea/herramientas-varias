@@ -1,5 +1,5 @@
 // Archivo: FileConverter.tsx
-import React from "react";
+import { useState } from "react";
 import { saveAs } from "file-saver";
 
 type Props = {
@@ -7,6 +7,18 @@ type Props = {
 };
 
 const FileConverter = ({ tipo }: Props) => {
+  const [archivoUno, setArchivoUno] = useState<File>();
+  const [archivoDos, setArchivoDos] = useState<File>();
+
+  const seleccionarArchivo1 = (event: any) => {
+    const archivo = event.target.files[0];
+    setArchivoUno(archivo);
+  };
+  const seleccionarArchivo2 = (event: any) => {
+    const archivo = event.target.files[0];
+    setArchivoDos(archivo);
+  };
+
   const convertirDatos = (inputFile: File, outputFile: string) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -60,15 +72,107 @@ const FileConverter = ({ tipo }: Props) => {
     reader.readAsText(inputFile);
   };
 
-  const unificarDatos = () => {};
+  const unificarDatos = async (
+    archivoEntrada1: File,
+    archivoEntrada2: File
+  ) => {
+    try {
+      let lineaDec = "";
+      let lineaCre = "";
+      let contadorLinea = 0;
+      let error = false;
+      let errorFechaMsg = "Error en la fecha de las líneas: ";
+      let lineaVeloBaMeCre = "";
+      let lineaVeloBaMeDec = "";
+      let lineaVeloMeAlCre = "";
+      let lineaVeloMeAlDec = "";
+      let errorVelocidad = false;
+      let errorVelocidadMsg = "";
+      let contador = 0;
+      let filaMayor = "";
+      let contadorFilasDistintas = 0;
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files && event.target.files[0];
-    if (selectedFile) {
-      tipo === "conversor"
-        ? convertirDatos(selectedFile, "outputFile")
-        : unificarDatos();
+      leerArchivo(archivoEntrada1, archivoEntrada2);
+
+      if (error) {
+        alert(errorFechaMsg);
+      }
+      if (errorVelocidad) {
+        alert(errorVelocidadMsg);
+      }
+    } catch (e: any) {
+      console.log(e);
     }
+  };
+
+  const handleFileChange = (e: any) => {
+    tipo === "conversor"
+      ? convertirDatos(e.target.files[0], "outputFile")
+      : archivoUno
+      ? archivoDos && unificarDatos(archivoUno, archivoDos)
+      : alert("Falta el archivo creciente");
+  };
+
+  const leerArchivo = (archivo1: File, archivo2: File) => {
+    const reader1 = new FileReader();
+    const reader2 = new FileReader();
+    let cont = 0;
+
+    reader1.onload = function (e) {
+      const contenidoArchivo1 = e.target?.result;
+
+      reader2.onload = function (e) {
+        const contenidoArchivo2 = e.target?.result;
+
+        const lineasArchivo1 = contenidoArchivo1
+          ? contenidoArchivo1.toString().split("\n")
+          : [""];
+
+        const contenidoFiltradoArchivo2 = contenidoArchivo2
+          ?.toString()
+          .split("\n")
+          .filter((lin: string) =>
+            lineasArchivo1?.some(
+              (lineaArchivo1: any) =>
+                !lin.includes("Informe".toUpperCase()) &&
+                !lin.includes("Emplazamiento") &&
+                !lin.includes("Bajas") &&
+                !lin.includes("Altas") &&
+                !lin.includes("Ligeros") &&
+                !lin.includes("FECHA")
+            )
+          );
+
+        const contenidoUnido = `${contenidoArchivo1}\n${contenidoFiltradoArchivo2?.join(
+          "\n"
+        )}`;
+
+        // Crea un nuevo Blob con el contenido unido
+        const blob = new Blob([contenidoUnido], {
+          type: "text/plain;charset=utf-8",
+        });
+
+        // Descarga el Blob como archivo
+        saveAs(blob, "ArchivoUnido.af1");
+
+        console.log(contenidoUnido);
+      };
+
+      reader2.onerror = function (e) {
+        console.error("Error al leer el segundo archivo:", e);
+      };
+
+      // Leer el segundo archivo como texto
+      reader2.readAsText(archivo2);
+      cont++;
+    };
+
+    reader1.onerror = function (e) {
+      console.error("Error al leer el primer archivo:", e);
+    };
+
+    // Leer el primer archivo como texto
+    reader1.readAsText(archivo1);
   };
 
   return (
@@ -76,34 +180,36 @@ const FileConverter = ({ tipo }: Props) => {
       <div className="botones">
         <div className="archivo">
           <label className="input-group-text" htmlFor="inputGroupFile">
-            Examinar
+            {tipo === "conversor" ? "Examinar" : "Archivo Creciente"}
           </label>
           <input
             type="file"
             className="form-control"
             id="inputGroupFile"
             placeholder="Ningún archivo seleccionado"
-            onChange={handleFileChange}
+            onChange={
+              tipo === "unificador" ? seleccionarArchivo1 : handleFileChange
+            }
           />
         </div>
         {tipo === "unificador" && (
           <div className="archivo2">
-            <label className="input-group-text" htmlFor="inputGroupFile">
-              Examinar
+            <label className="input-group-text" htmlFor="inputGroupFile2">
+              Archivo Decreciente
             </label>
             <input
               type="file"
               className="form-control"
-              id="inputGroupFile"
+              id="inputGroupFile2"
               placeholder="Ningún archivo seleccionado"
-              onChange={handleFileChange}
+              onChange={seleccionarArchivo2}
             />
           </div>
         )}
       </div>
       {tipo === "unificador" && (
         <div className="boton-unir">
-          <button>Unir los dos archivos</button>
+          <button onClick={handleFileChange}>Unir los dos archivos</button>
         </div>
       )}
     </>
