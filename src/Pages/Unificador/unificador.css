@@ -81,3 +81,10 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
 }
+.boton-unir button {
+  color: #eeeeee;
+  background-color: #4a6fa5ff;
+  border-radius: 10px;
+  width: 200px;
+  height: 35px;
+}

@@ -102,7 +102,7 @@ const FileConverter = ({ tipo }: Props) => {
         )}
       </div>
       {tipo === "unificador" && (
-        <div>
+        <div className="boton-unir">
           <button>Unir los dos archivos</button>
         </div>
       )}
