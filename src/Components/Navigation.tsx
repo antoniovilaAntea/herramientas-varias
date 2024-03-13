@@ -7,6 +7,7 @@ import Unificador from "../Pages/Unificador/unificador";
 import Emails from "../Pages/Emails/emails";
 
 import "./estilo.css";
+import Ayuda from "../Pages/Ayuda/Ayuda";
 
 const Navigation = () => {
   return (
@@ -24,6 +25,7 @@ const Navigation = () => {
           <Route path="/conversor" element={<Conversor />} />
           <Route path="/unificador" element={<Unificador />} />
           <Route path="/email" element={<Emails />} />
+          <Route path="/ayuda" element={<Ayuda />} />
         </Routes>
       </div>
     </>
