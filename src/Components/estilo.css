@@ -54,3 +54,33 @@ header {
 h3 {
   color: #274690;
 }
+
+.help {
+  margin-left: 2em;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  &:hover {
+    background-color: #c0d6df !important;
+    border-radius: 10px !important;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+  }
+  &:visited {
+    color: #495b86;
+    border-radius: 10px !important;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+  }
+}

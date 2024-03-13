@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Inicio = () => {
   return (
@@ -36,7 +37,11 @@ const Inicio = () => {
           </div>
         </div>
       </div>
-      <footer>Ayuda</footer>
+      <footer>
+        <Link to={"/ayuda"} className="help">
+          Ayuda
+        </Link>
+      </footer>
     </div>
   );
 };
