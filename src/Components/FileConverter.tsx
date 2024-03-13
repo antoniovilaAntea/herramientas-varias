@@ -77,20 +77,11 @@ const FileConverter = ({ tipo }: Props) => {
     archivoEntrada2: File
   ) => {
     try {
-      let lineaDec = "";
-      let lineaCre = "";
-      let contadorLinea = 0;
       let error = false;
       let errorFechaMsg = "Error en la fecha de las líneas: ";
-      let lineaVeloBaMeCre = "";
-      let lineaVeloBaMeDec = "";
-      let lineaVeloMeAlCre = "";
-      let lineaVeloMeAlDec = "";
+
       let errorVelocidad = false;
       let errorVelocidadMsg = "";
-      let contador = 0;
-      let filaMayor = "";
-      let contadorFilasDistintas = 0;
 
       leerArchivo(archivoEntrada1, archivoEntrada2);
 
@@ -114,65 +105,6 @@ const FileConverter = ({ tipo }: Props) => {
   };
 
   const leerArchivo = (archivo1: File, archivo2: File) => {
-    // const reader1 = new FileReader();
-    // const reader2 = new FileReader();
-    // let cont = 0;
-
-    // reader1.onload = function (e) {
-    //   const contenidoArchivo1 = e.target?.result;
-
-    //   reader2.onload = function (e) {
-    //     const contenidoArchivo2 = e.target?.result;
-
-    //     const lineasArchivo1 = contenidoArchivo1
-    //       ? contenidoArchivo1.toString().split("\n")
-    //       : [""];
-
-    //     const contenidoFiltradoArchivo2 = contenidoArchivo2
-    //       ?.toString()
-    //       .split("\n")
-    //       .filter((lin: string) =>
-    //         lineasArchivo1?.some(
-    //           (lineaArchivo1: any) =>
-    //             !lin.includes("Informe".toUpperCase()) &&
-    //             !lin.includes("Emplazamiento") &&
-    //             !lin.includes("Bajas") &&
-    //             !lin.includes("Altas") &&
-    //             !lin.includes("Ligeros") &&
-    //             !lin.includes("FECHA")
-    //         )
-    //       );
-
-    //     const contenidoUnido = `${contenidoArchivo1}\n${contenidoFiltradoArchivo2?.join(
-    //       "\n"
-    //     )}`;
-
-    //     // Crea un nuevo Blob con el contenido unido
-    //     const blob = new Blob([contenidoUnido], {
-    //       type: "text/plain;charset=utf-8",
-    //     });
-
-    //     // Descarga el Blob como archivo
-    //     saveAs(blob, "ArchivoUnido.af1");
-
-    //     console.log(contenidoUnido);
-    //   };
-
-    //   reader2.onerror = function (e) {
-    //     console.error("Error al leer el segundo archivo:", e);
-    //   };
-
-    //   // Leer el segundo archivo como texto
-    //   reader2.readAsText(archivo2);
-    //   cont++;
-    // };
-
-    // reader1.onerror = function (e) {
-    //   console.error("Error al leer el primer archivo:", e);
-    // };
-
-    // // Leer el primer archivo como texto
-    // reader1.readAsText(archivo1);
     const reader1 = new FileReader();
     const reader2 = new FileReader();
     let contenidoUnido = "";
