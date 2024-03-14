@@ -99,6 +99,9 @@ input[type="file"] {
   input {
     margin: 15px;
   }
+  label {
+    color: #495b86;
+  }
 }
 .fecha {
   margin-bottom: 2em;
@@ -108,7 +111,7 @@ input[type="file"] {
   input {
     width: 48%;
     padding: 8px 12px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 1px solid #495b86;
     border-radius: 4px;
     font-size: 14px;

@@ -112,7 +112,7 @@ function EmailGenerator() {
           <label>Fecha</label>
           <input
             type="text"
-            placeholder="dd"
+            placeholder="Ej: Lunes 12"
             value={fecha}
             onChange={(e) => setFecha(e.target.value!)}
           />
