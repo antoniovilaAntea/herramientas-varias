@@ -84,13 +84,16 @@ function EmailGenerator() {
       }
       emailBody += `Gomas a ${tipo.toString().toUpperCase()}:\n`;
       groupedData[key].forEach((row: any) => {
-        emailBody += row.join(" - ") + "\n";
+        emailBody += "• " + row.join(" - ") + "\n";
       });
 
       if (index < Object.keys(groupedData).length - 1) {
         emailBody += "\n";
       }
     });
+    driveLinks(datos);
+    emailBody += "\n";
+    emailBody += rutas.join("\n\n");
 
     return encodeURIComponent(emailBody);
   };
@@ -105,7 +108,7 @@ function EmailGenerator() {
         .join(", ")}:`
     );
 
-    const mailtoLink = `mailto:?subject=${emailSubject}&body=${emailBody}`;
+    const mailtoLink = `mailto:ignaciocubero@anteagroup.es;juanguerra@anteagroup.es&subject=${emailSubject}&body=${emailBody}`;
 
     window.location.href = mailtoLink;
   };
@@ -135,6 +138,73 @@ function EmailGenerator() {
     }
 
     return hayDuplicadosEnDatos;
+  };
+
+  let rutas: any[] = [];
+  const driveLinks = (datos: any[]) => {
+    const gruposUnicos: string[] = [];
+    datos.forEach((item) => {
+      item.selectedRows.forEach((row: any[]) => {
+        const grupo = row[0]; // El primer elemento de la matriz es el grupo
+        if (!gruposUnicos.includes(grupo)) {
+          gruposUnicos.push(grupo);
+        }
+      });
+    });
+    gruposUnicos.map((letra) => {
+      if (letra === "A") {
+        rutas.push(
+          "Enlaces Maps grupo A: https://www.google.com/maps/d/edit?mid=1GSOBFKzC07iY5GV5UjrwBfyFIEQ3sHg&usp=sharing"
+        );
+      }
+      if (letra === "B") {
+        rutas.push(
+          "Enlaces Maps grupo B: https://www.google.com/maps/d/edit?mid=1OPe70UmLtYg1d5HjFOEQxMGLIcLkq14&usp=sharing"
+        );
+      }
+      if (letra === "C") {
+        rutas.push(
+          "Enlaces Maps grupo C: https://www.google.com/maps/d/edit?mid=1Uo0L2YGIik2VCy4oehIWOUB9AeMLvts&usp=sharing"
+        );
+      }
+      if (letra === "D") {
+        rutas.push(
+          "Enlaces Maps grupo D: https://www.google.com/maps/d/edit?mid=1hSFVByMtXvw84PiCjCo6tiboTo5-MME&usp=sharing"
+        );
+      }
+      if (letra === "E") {
+        rutas.push(
+          "Enlaces Maps grupo E: https://www.google.com/maps/d/edit?mid=1UioRCBbjASI7Y3qveZ38EzFGe-8VYBY&usp=sharing"
+        );
+      }
+      if (letra === "F") {
+        rutas.push(
+          "Enlaces Maps grupo F: https://www.google.com/maps/d/edit?mid=1-YvDj0MAiEffy1lVzlDrve4bAW-oT3c&usp=sharing"
+        );
+      }
+      if (letra === "G") {
+        rutas.push(
+          "Enlaces Maps grupo G: https://www.google.com/maps/d/edit?mid=1gPj5riwfFfoTRPuvUb7VcwkFtnhmrxM&usp=sharing"
+        );
+      }
+      if (letra === "H") {
+        rutas.push(
+          "Enlaces Maps grupo H: https://www.google.com/maps/d/edit?mid=1jXPp6Qr1e8LVEgachKnxqM9v335GLmU&usp=sharing"
+        );
+      }
+      if (letra === "I") {
+        rutas.push(
+          "Enlaces Maps grupo I: https://www.google.com/maps/d/edit?mid=19DWbKHrepom79sm4uuyAPnByL8Z4oWQ&usp=sharing"
+        );
+      }
+      if (letra === "J") {
+        rutas.push(
+          "Enlaces Maps grupo J: https://www.google.com/maps/d/edit?mid=1rz1zPzRJu9CnDyR2gD2W-goapP06OME&usp=sharing"
+        );
+      }
+    });
+
+    console.log(rutas);
   };
 
   return (
