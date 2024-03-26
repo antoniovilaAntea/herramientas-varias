@@ -146,6 +146,29 @@ input[type="file"] {
     height: 35px;
     cursor: pointer;
     margin-right: 2em;
+    margin-bottom: 2em;
   }
-  margin-bottom: 2em;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.btnAux {
+  display: flex;
+  flex-direction: column;
+}
+
+.deseleccionar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  button {
+    color: #eeeeee;
+    background-color: #4a6fa5ff;
+    border-radius: 10px;
+    width: 150px;
+    height: 35px;
+    cursor: pointer;
+    margin-bottom: 2em;
+  }
 }
