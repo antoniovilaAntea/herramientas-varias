@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import isEqual from "lodash/isEqual";
+import emails from "../Data/emailData";
 
 import "./emailGenerator.css";
 
@@ -10,10 +11,85 @@ function EmailGenerator() {
   const [selectedRows, setSelectedRows] = useState<any[]>([]);
   const [instalar, setInstalar] = useState(false);
   const [retirar, setRetirar] = useState(false);
-  const [inicioSemana, setInicioSemana] = useState<string>();
-  const [finSemana, setFinSemana] = useState<string>();
-  const [fecha, setFecha] = useState<string>();
+  const [inicioSemana, setInicioSemana] = useState<string>("");
+  const [finSemana, setFinSemana] = useState<string>("");
+  const [fecha, setFecha] = useState<string>("");
   const [datos, setDatos] = useState<any[]>([]);
+
+  const handleMostrarEmails = () => {
+    datos.forEach((item) => {
+      item.selectedRows.forEach((selectedRow: any) => {
+        const concello = selectedRow[3];
+        const coincidencia = emails.find(
+          (email) => email.concello.toUpperCase() === concello
+        );
+        if (coincidencia) {
+        } else {
+        }
+      });
+    });
+  };
+  const handleSendEmailConcellos = () => {
+    generarArchivoConcellos(datos);
+  };
+
+  const generarArchivoConcellos = (datos: any[]) => {
+    let contenido =
+      "Plan Aforos Deputación Pontevedra \n\n" +
+      "Estimados,\n\n" +
+      "No ámbito do contrato de Realización, Execución e Explotación do Plan de Aforos e do Estudo da Accidentalidade na Rede" +
+      " de Estradas da Deputación Provincial de Pontevedra levado a cabo por Antea Group, informamos de que esta semana " +
+      `(${datos[0].inicioSemana}/2024 - ${datos[0].finSemana}/2024)` +
+      " instalaranse aforos vehiculares nas seguintes estradas provinciais:\n\n";
+
+    const concellosMap: { [key: string]: string[] } = {};
+
+    datos.forEach((item) => {
+      if (item.tipo === "Instalar") {
+        item.selectedRows.forEach((fila: any) => {
+          const concello = fila[3];
+          const fecha = item.fecha;
+          const dato = `${fila[1]}, aproximadamente no PK ${
+            fila[2]
+          } (instalación prevista para o ${fecha.toLowerCase()})`;
+
+          if (!concellosMap[concello]) {
+            concellosMap[concello] = [];
+          }
+
+          concellosMap[concello].push(dato);
+        });
+      }
+    });
+
+    Object.keys(concellosMap).forEach((concello) => {
+      contenido += `${concello.toUpperCase()}\n\n`;
+      concellosMap[concello].forEach((dato) => {
+        contenido += `${dato}\n\n`;
+      });
+    });
+
+    contenido +=
+      "Cabe destacar que os aforos serán de unha semana completa (7 días completos dende a data de instalación). \n\n";
+    contenido +=
+      "Indicar que os equipos a instalar son simplemente contadores da intensidade do tráfico (vehículos) que circula " +
+      "por cada vía ó longo do día, non son en ningún caso dispositivos radar. \n\n";
+    contenido +=
+      "Rogaríamos que tamén se puxese en coñecemento a policía local de cada concello da realización desta " +
+      "campaña de aforos, co fin de que, dentro da medida do posible, inspeccionen as zonas afectadas para comprobar que non se realizou acto de vandalismo algún. \n\n";
+    contenido +=
+      "En caso de que exista algunha incidencia, solicitamos que o poñades en coñecemento da persoa responsable dos traballos:\n\n";
+    contenido += "Javier: 647 95 12 05\n\n";
+    contenido += "Quedamos a súa disposición ante calquera cuestión.\n\n";
+    contenido += "Reciban un cordial saúdo.\n\n";
+
+    const elemento = document.createElement("a");
+    const archivo = new Blob([contenido], { type: "text/plain" });
+    elemento.href = URL.createObjectURL(archivo);
+    elemento.download = "correo_concellos.txt";
+    document.body.appendChild(elemento);
+    elemento.click();
+  };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -48,7 +124,7 @@ function EmailGenerator() {
     reader.readAsBinaryString(file as Blob);
   };
 
-  const handleRowClick = (rowIndex: number, row: any[]) => {
+  const handleRowClick = (row: any[]) => {
     if (selectedRows.some((selectedRow) => isEqual(selectedRow, row))) {
       setSelectedRows(
         selectedRows.filter((selectedRow) => !isEqual(selectedRow, row))
@@ -58,13 +134,14 @@ function EmailGenerator() {
     }
   };
 
-  const handleSendEmail = () => {
-    const emailBody = createEmailBody(datos);
+  const handleSendEmailOperarios = () => {
+    const emailBody = createEmailBodyOperarios(datos);
     openOutlook(emailBody);
   };
 
-  const createEmailBody = (data: any[]) => {
+  const createEmailBodyOperarios = (data: any[]) => {
     let emailBody = "\n\n";
+    console.log(data);
 
     const groupedData: { [key: string]: any[][] } = {};
     data.forEach((item) => {
@@ -203,8 +280,6 @@ function EmailGenerator() {
         );
       }
     });
-
-    console.log(rutas);
   };
 
   return (
@@ -247,7 +322,6 @@ function EmailGenerator() {
               onChange={() => {
                 setInstalar(!instalar);
                 setRetirar(false);
-                console.log(selectedRows);
               }}
             />
             <label htmlFor="instalar">Instalar</label>
@@ -277,8 +351,12 @@ function EmailGenerator() {
           <button onClick={manjearBotones}>Exportar</button>
           {mostrarBotones && (
             <div className="btnAux">
-              <button onClick={handleSendEmail}>Email a Operarios</button>{" "}
-              <button>Email a Ayuntamientos</button>
+              <button onClick={handleSendEmailOperarios}>
+                Email a Operarios
+              </button>{" "}
+              <button onClick={() => handleSendEmailConcellos()}>
+                Email a Ayuntamientos
+              </button>
             </div>
           )}
         </div>
@@ -302,7 +380,7 @@ function EmailGenerator() {
               return (
                 <tr
                   key={rowIndex}
-                  onClick={() => handleRowClick(rowIndex, row)}
+                  onClick={() => handleRowClick(row)}
                   style={{
                     background: selectedRows.includes(row)
                       ? "lightblue"
