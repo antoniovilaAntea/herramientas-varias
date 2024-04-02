@@ -17,20 +17,58 @@ function EmailGenerator() {
   const [datos, setDatos] = useState<any[]>([]);
 
   const handleMostrarEmails = () => {
+    let contenido = "";
+    let emailsAgregados: any = {};
+
     datos.forEach((item) => {
-      item.selectedRows.forEach((selectedRow: any) => {
-        const concello = selectedRow[3];
-        const coincidencia = emails.find(
-          (email) => email.concello.toUpperCase() === concello
-        );
-        if (coincidencia) {
-        } else {
-        }
-      });
+      if (item.tipo === "Instalar") {
+        item.selectedRows.forEach((selectedRow: any) => {
+          const concello = selectedRow[3];
+          const coincidencia = emails.find(
+            (email) => email.concello.toUpperCase() === concello.toUpperCase()
+          );
+
+          if (coincidencia !== undefined) {
+            const email = coincidencia.email;
+
+            if (!emailsAgregados[email]) {
+              contenido += email + "\n";
+              emailsAgregados[email] = true;
+            }
+
+            if (
+              coincidencia.email2 !== undefined &&
+              !emailsAgregados[coincidencia.email2]
+            ) {
+              contenido += coincidencia.email2 + "\n";
+              emailsAgregados[coincidencia.email2] = true;
+            }
+
+            if (
+              coincidencia.extra !== undefined &&
+              !emailsAgregados[coincidencia.extra]
+            ) {
+              contenido += coincidencia.extra + "\n";
+              emailsAgregados[coincidencia.extra] = true;
+            }
+          } else {
+            console.log("NO HAY CONCELLOS");
+          }
+        });
+      }
     });
+
+    console.log(contenido + " contenido");
+    const elemento = document.createElement("a");
+    const archivo = new Blob([contenido], { type: "text/plain" });
+    elemento.href = URL.createObjectURL(archivo);
+    elemento.download = "emails_concellos.txt";
+    document.body.appendChild(elemento);
+    elemento.click();
   };
   const handleSendEmailConcellos = () => {
     generarArchivoConcellos(datos);
+    handleMostrarEmails();
   };
 
   const generarArchivoConcellos = (datos: any[]) => {
@@ -135,12 +173,18 @@ function EmailGenerator() {
   };
 
   const handleSendEmailOperarios = () => {
-    const emailBody = createEmailBodyOperarios(datos);
-    openOutlook(emailBody);
+    createEmailBodyOperarios(datos);
+    createEmailsOperarios();
   };
-
   const createEmailBodyOperarios = (data: any[]) => {
-    let emailBody = "\n\n";
+    const emailSubject = `PROGRAMACIÓN AFOROS DEPO ${new Date().getFullYear()}, SEMANA DEL ${datos
+      .map((e) => e.inicioSemana)
+      .filter((value, index, self) => self.indexOf(value) === index)
+      .join(", ")} AL ${datos
+      .map((e) => e.finSemana)
+      .filter((value, index, self) => self.indexOf(value) === index)
+      .join(", ")}:`;
+    let contenido = emailSubject + "\n\n";
     console.log(data);
 
     const groupedData: { [key: string]: any[][] } = {};
@@ -156,38 +200,43 @@ function EmailGenerator() {
     Object.keys(groupedData).forEach((key, index) => {
       const [fecha, tipo] = key.split("-");
       if (fecha !== lastDate) {
-        emailBody += `${fecha.toUpperCase()}\n\n`;
+        contenido += `${fecha.toUpperCase()}\n\n`;
         lastDate = fecha;
       }
-      emailBody += `Gomas a ${tipo.toString().toUpperCase()}:\n`;
+      contenido += `Gomas a ${tipo.toString().toUpperCase()}:\n`;
+
       groupedData[key].forEach((row: any) => {
-        emailBody += "• " + row.join(" - ") + "\n";
+        const codigo = row[1];
+        const partes = row[2];
+        const grupo = row[0];
+
+        contenido += `• ${codigo}___PK ${partes} - Grupo: ${grupo}\n`;
       });
 
       if (index < Object.keys(groupedData).length - 1) {
-        emailBody += "\n";
+        contenido += "\n";
       }
     });
     driveLinks(datos);
-    emailBody += "\n";
-    emailBody += rutas.join("\n\n");
+    contenido += "\n";
+    contenido += rutas.join("\n\n");
 
-    return encodeURIComponent(emailBody);
+    const elemento = document.createElement("a");
+    const archivo = new Blob([contenido], { type: "text/plain" });
+    elemento.href = URL.createObjectURL(archivo);
+    elemento.download = "correo_operarios.txt";
+    document.body.appendChild(elemento);
+    elemento.click();
   };
-  const openOutlook = (emailBody: string) => {
-    const emailSubject = encodeURIComponent(
-      `PROGRAMACIÓN AFOROS DEPO ${new Date().getFullYear()}, SEMANA DEL ${datos
-        .map((e) => e.inicioSemana)
-        .filter((value, index, self) => self.indexOf(value) === index) // Filtrar fechas duplicadas
-        .join(", ")} AL ${datos
-        .map((e) => e.finSemana)
-        .filter((value, index, self) => self.indexOf(value) === index) // Filtrar fechas duplicadas
-        .join(", ")}:`
-    );
 
-    const mailtoLink = `mailto:ignaciocubero@anteagroup.es;juanguerra@anteagroup.es&subject=${emailSubject}&body=${emailBody}`;
-
-    window.location.href = mailtoLink;
+  const createEmailsOperarios = () => {
+    let contenido = "ignaciocubero@anteagroup.es\njuanguerra@anteagroup.es";
+    const elemento = document.createElement("a");
+    const archivo = new Blob([contenido], { type: "text/plain" });
+    elemento.href = URL.createObjectURL(archivo);
+    elemento.download = "emails_operarios.txt";
+    document.body.appendChild(elemento);
+    elemento.click();
   };
 
   const manjearBotones = () => {
@@ -222,12 +271,13 @@ function EmailGenerator() {
     const gruposUnicos: string[] = [];
     datos.forEach((item) => {
       item.selectedRows.forEach((row: any[]) => {
-        const grupo = row[0]; // El primer elemento de la matriz es el grupo
+        const grupo = row[0];
         if (!gruposUnicos.includes(grupo)) {
           gruposUnicos.push(grupo);
         }
       });
     });
+    // eslint-disable-next-line
     gruposUnicos.map((letra) => {
       if (letra === "A") {
         rutas.push(
