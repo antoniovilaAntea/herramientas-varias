@@ -33,6 +33,10 @@
     height: 30px;
     text-align: center;
   }
+  &.bold {
+    font-weight: bold;
+  }
+
   &:visited {
     color: #495b86;
     border-radius: 10px !important;
