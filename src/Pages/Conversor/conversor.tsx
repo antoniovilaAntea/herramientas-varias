@@ -1,7 +1,6 @@
-import React from "react";
+import FileConverter from "../../Components/FileConverter";
 
 import "./conversor.css";
-import FileConverter from "../../Components/FileConverter";
 
 const Conversor = () => {
   return (

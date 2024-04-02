@@ -1,4 +1,3 @@
-import React from "react";
 import EmailGenerator from "../../Components/EmailGenerator";
 
 const Emails = () => {
