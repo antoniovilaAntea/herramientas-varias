@@ -54,6 +54,13 @@ header {
   margin-top: 20px;
   /* margin-bottom: 20px; */
   height: 10%;
+  /* /* display: flex; */
+  width: 90%;
+  /* align-items: center;
+  flex-direction: row;
+  img {
+    margin-right: 28.5em;
+  } */
 }
 h3 {
   color: #274690;
@@ -86,5 +93,32 @@ h3 {
     width: 100px;
     height: 30px;
     text-align: center;
+  }
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-text {
+  text-align: center;
+  flex-grow: 1;
+  margin-right: 3%;
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+  }
+
+  .header-text {
+    text-align: center;
+    margin-top: 10px;
   }
 }

@@ -6,7 +6,7 @@ import Conversor from "../Pages/Conversor/conversor";
 import Unificador from "../Pages/Unificador/unificador";
 import Emails from "../Pages/Emails/emails";
 import Ayuda from "../Pages/Ayuda/Ayuda";
-
+import logoAntea from "../logoAntea.png";
 import "./estilo.css";
 
 const Navigation = () => {
@@ -14,7 +14,17 @@ const Navigation = () => {
 
   return (
     <>
-      <header>Herramientas</header>
+      <header className="header-container">
+        <div className="header-content">
+          <img
+            alt="Logo AnteaGroup"
+            width="80px"
+            height="43px"
+            src={logoAntea}
+          />
+        </div>
+        <div className="header-text">Herramientas</div>
+      </header>
       <div className="menu">
         <nav className="menu__nav">
           <Link
