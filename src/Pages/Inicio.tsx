@@ -32,6 +32,11 @@ const Inicio = () => {
                 trabajadoras\es y a los Ayuntamientos sobre las gomas a instalar
                 o retirar
               </li>
+              <li>
+                <b>Buscador de celdas</b>: Esta herramienta sirve para buscar el
+                valor de la celda o las celdas que el usuario escriba separadas
+                por comas y sacar un documento con estos valores
+              </li>
             </ul>
           </div>
         </div>

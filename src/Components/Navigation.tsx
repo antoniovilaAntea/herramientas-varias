@@ -8,6 +8,7 @@ import Emails from "../Pages/Emails/emails";
 import Ayuda from "../Pages/Ayuda/Ayuda";
 import logoAntea from "../logoAntea.png";
 import "./estilo.css";
+import Buscador from "../Pages/Buscador/Buscador";
 
 const Navigation = () => {
   const [activeLink, setActiveLink] = useState("");
@@ -55,12 +56,20 @@ const Navigation = () => {
           >
             Email
           </Link>
+          <Link
+            to="/buscador"
+            onClick={() => setActiveLink("buscador")}
+            className={activeLink === "buscador" ? "bold" : ""}
+          >
+            Buscador
+          </Link>
         </nav>
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/conversor" element={<Conversor />} />
           <Route path="/unificador" element={<Unificador />} />
           <Route path="/email" element={<Emails />} />
+          <Route path="/buscador" element={<Buscador />} />
           <Route path="/ayuda" element={<Ayuda />} />
         </Routes>
       </div>

@@ -74,6 +74,14 @@ h3 {
   width: 100px;
   height: 30px;
   text-align: center;
+  color: #495b86;
+  border-radius: 10px !important;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  text-align: center;
   &:hover {
     background-color: #c0d6df !important;
     border-radius: 10px !important;
