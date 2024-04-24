@@ -130,7 +130,7 @@ function EmailGenerator() {
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
+    const file = e.target.files ? e.target.files[0] : undefined;
     const reader = new FileReader();
 
     reader.onload = (event) => {
