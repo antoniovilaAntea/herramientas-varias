@@ -1,0 +1,56 @@
+.comparador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  .archivo {
+    width: 90%;
+    height: 45px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #495b86;
+    border: 1px solid #495b86;
+    border-radius: 10px;
+    margin-top: 2em;
+    padding-left: 10px;
+    margin-bottom: 3em;
+  }
+  .archivo2 {
+    width: 90%;
+    height: 45px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #495b86;
+    border: 1px solid #495b86;
+    border-radius: 10px;
+    margin-top: 2em;
+    margin-left: 4em;
+    padding-left: 10px;
+    margin-bottom: 3em;
+  }
+  .boton-unir button {
+    color: #eeeeee;
+    background-color: #4a6fa5ff;
+    border-radius: 10px;
+    width: 200px;
+    height: 35px;
+    cursor: pointer;
+  }
+  .comparar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.descarga {
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

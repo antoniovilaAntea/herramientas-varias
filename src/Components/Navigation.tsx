@@ -9,6 +9,7 @@ import Ayuda from "../Pages/Ayuda/Ayuda";
 import logoAntea from "../logoAntea.png";
 import "./estilo.css";
 import Buscador from "../Pages/Buscador/Buscador";
+import Comparador from "../Pages/Comparador/Comparador";
 
 const Navigation = () => {
   const [activeLink, setActiveLink] = useState("");
@@ -63,6 +64,13 @@ const Navigation = () => {
           >
             Buscador
           </Link>
+          <Link
+            to="/comparador"
+            onClick={() => setActiveLink("comparador")}
+            className={activeLink === "comparador" ? "bold" : ""}
+          >
+            Comparador
+          </Link>
         </nav>
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -70,6 +78,7 @@ const Navigation = () => {
           <Route path="/unificador" element={<Unificador />} />
           <Route path="/email" element={<Emails />} />
           <Route path="/buscador" element={<Buscador />} />
+          <Route path="/comparador" element={<Comparador />} />
           <Route path="/ayuda" element={<Ayuda />} />
         </Routes>
       </div>
