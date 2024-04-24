@@ -37,6 +37,11 @@ const Inicio = () => {
                 valor de la celda o las celdas que el usuario escriba separadas
                 por comas y sacar un documento con estos valores
               </li>
+              <li>
+                <b>Comparador de excel</b>: Esta herramienta sirve para comparar
+                dos excel con datos de las espiras de la Diputación de
+                Pontevedra y, exportar los Datos en un mismo Excel
+              </li>
             </ul>
           </div>
         </div>

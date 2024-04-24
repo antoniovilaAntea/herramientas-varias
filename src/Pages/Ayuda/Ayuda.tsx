@@ -55,6 +55,48 @@ const Ayuda = () => {
           tipos y pulsar el botón exportar
         </p>
       </div>
+      <div>
+        <h3>Buscador de celdas en Excel</h3>
+        <p>
+          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          <b>buscar las celdas de los documentos que desees</b>.
+        </p>
+        <p>
+          La primera opción, redirige a un archivo comprimido en Onedrive donde
+          está todo el instalable y ejecutable del Buscador de celdas
+        </p>
+        <p>
+          La segunda opción permite escribir las celdas donde se encuentran los
+          valores que queremos coger y subir el documento, o los documentos, de
+          los que
+          <br />
+          queremos sacar los valores de las celdas que introducimos
+          anteriormente. Después de este paso podemos clicar en el botón de
+          "Exportar a nuevo archivo Excel"
+          <br />y se descargará un archivo Excel con los datos de las celdas
+          seleccionadas y el Nombre del archivo al que pertenecen
+        </p>
+      </div>
+      <div>
+        <h3>Comparador de dos archivos Excel - Gomas Dip.Pontevedra</h3>
+        <p>
+          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          <b>subir los dos archivos y exportar el archivo nuevo</b>.
+        </p>
+        <p>
+          La primera opción, redirige a un archivo comprimido en Onedrive donde
+          está todo el instalable y ejecutable del Comparador de documentos
+          Excel
+        </p>
+        <p>
+          La segunda opción permite escoger dos archivos Excel y conseguir coger
+          los datos de las filas que tengan ciertas condiciones,
+          <br />
+          por ejemplo, se filtra dependiendo de si en la fila aparece la palabra
+          'Provincial', ya que interesan los datos de la provincia,
+          <br />y luego si están dentro de un rango de fecha o son anteriores
+        </p>
+      </div>
     </div>
   );
 };
