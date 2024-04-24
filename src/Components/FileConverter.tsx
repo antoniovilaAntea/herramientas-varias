@@ -1,4 +1,3 @@
-// Archivo: FileConverter.tsx
 import { useState } from "react";
 import { saveAs } from "file-saver";
 
@@ -35,7 +34,6 @@ const FileConverter = ({ tipo }: Props) => {
           if (line.includes(";")) {
             const parts = line.split(",");
             if (parts.length === 6) {
-              // Obtener datos
               const fechaHora = parts[0].trim();
               let carril = parseInt(parts[2].trim(), 10);
               if (carril === 1 || carril === 2) {
@@ -46,13 +44,9 @@ const FileConverter = ({ tipo }: Props) => {
               }
               const velocidad = parseInt(parts[3].trim(), 10);
               const longitud = (parseFloat(parts[4].trim()) / 100) * 0.696;
-
-              // Separar fecha y hora
               const fechaHoraArray = fechaHora.split(" ");
               const fecha = fechaHoraArray[0];
               const hora = fechaHoraArray[1];
-
-              // Escribir datos en el archivo de salida
               writer.push(
                 `${vehicleNumber};${fecha};${hora};${carril};0;0;0;${longitud.toFixed(
                   5
@@ -125,31 +119,19 @@ const FileConverter = ({ tipo }: Props) => {
         let indiceArchivo1 = 0;
         let indiceArchivo2 = 0;
 
-        // Iterar sobre las líneas del primer archivo
         if (lineasArchivo1.length >= lineasArchivo2.length) {
           lineasArchivo1.forEach((linea1, index1) => {
-            // Si ya hemos terminado de recorrer el segundo archivo, salimos del bucle
             if (indiceArchivo2 >= lineasArchivo2.length) return;
-
-            // Obtener las primeras dos columnas de la línea del primer archivo
             const primeraColumnaArchivo1 = linea1.substring(0, 8);
             const segundaColumnaArchivo1 = linea1.substring(9, 14);
-
-            // Variable para determinar si se ha encontrado una coincidencia en el segundo archivo
             let encontradaCoincidencia = false;
-
-            // Iterar sobre las líneas del segundo archivo a partir del índice guardado
             for (let i = indiceArchivo2; i < lineasArchivo2.length; i++) {
-              // Obtener las primeras dos columnas de la línea del segundo archivo
               const primeraColumnaArchivo2 = lineasArchivo2[i].substring(0, 8);
               const segundaColumnaArchivo2 = lineasArchivo2[i].substring(9, 14);
-
-              // Si las primeras dos columnas de ambas líneas coinciden
               if (
                 primeraColumnaArchivo1 === primeraColumnaArchivo2 &&
                 segundaColumnaArchivo1 === segundaColumnaArchivo2
               ) {
-                // Obtener las primeras 6 columnas del primer archivo y las últimas 4 columnas del segundo archivo
                 const columnasArchivo1 = linea1
                   .split(" ")
                   .slice(0, 6)
@@ -158,96 +140,61 @@ const FileConverter = ({ tipo }: Props) => {
                   .split(" ")
                   .slice(6)
                   .join(" ");
-
-                // Concatenar las columnas de ambos archivos
                 contenidoUnido += `${columnasArchivo1} ${columnasArchivo2}`;
-
-                // Guardar el índice del siguiente elemento del segundo archivo
                 indiceArchivo2 = i + 1;
-
-                // Indicar que se ha encontrado una coincidencia
                 encontradaCoincidencia = true;
 
                 break;
               }
             }
-
-            // Si no se ha encontrado coincidencia, agregar la línea del primer archivo sin cambios
             if (!encontradaCoincidencia) {
               contenidoUnido += `${linea1}`;
             }
           });
         } else if (lineasArchivo1.length < lineasArchivo2.length) {
           lineasArchivo2.forEach((linea2, index2) => {
-            // Si ya hemos terminado de recorrer el primer archivo, salimos del bucle
             if (indiceArchivo1 >= lineasArchivo1.length) return;
-
-            // Obtener las primeras dos columnas de la línea del segundo archivo
             const primeraColumnaArchivo2 = linea2.substring(0, 8);
             const segundaColumnaArchivo2 = linea2.substring(9, 14);
-
-            // Variable para determinar si se ha encontrado una coincidencia en el primer archivo
             let encontradaCoincidencia = false;
-
-            // Iterar sobre las líneas del primer archivo a partir del índice guardado
             for (let i = indiceArchivo1; i < lineasArchivo1.length; i++) {
-              // Obtener las primeras dos columnas de la línea del primer archivo
               const primeraColumnaArchivo1 = lineasArchivo1[i].substring(0, 8);
               const segundaColumnaArchivo1 = lineasArchivo1[i].substring(9, 14);
-
-              // Si las primeras dos columnas de ambas líneas coinciden
               if (
                 primeraColumnaArchivo1 === primeraColumnaArchivo2 &&
                 segundaColumnaArchivo1 === segundaColumnaArchivo2
               ) {
-                // Obtener las primeras 6 columnas del primer archivo y las últimas 4 columnas del segundo archivo
                 const columnasArchivo1 = lineasArchivo1[i]
                   .split(" ")
                   .slice(0, 6)
                   .join(" ");
                 const columnasArchivo2 = linea2.split(" ").slice(6).join(" ");
-
-                // Concatenar las columnas de ambos archivos
                 contenidoUnido += `${columnasArchivo1} ${columnasArchivo2}\n`;
-
-                // Guardar el índice del siguiente elemento del primer archivo
                 indiceArchivo1 = i + 1;
-
-                // Indicar que se ha encontrado una coincidencia
                 encontradaCoincidencia = true;
-
                 break;
               }
             }
-
-            // Si no se ha encontrado coincidencia, agregar la línea del segundo archivo sin cambios
             if (!encontradaCoincidencia) {
               contenidoUnido += `${linea2}\n`;
             }
           });
         }
-        // Crea un nuevo Blob con el contenido unido
         const blob = new Blob([contenidoUnido], {
           type: "text/plain;charset=utf-8",
         });
-
-        // Descarga el Blob como archivo
         saveAs(blob, "ArchivoUnido.af1");
       };
 
       reader2.onerror = function (e) {
         console.error("Error al leer el segundo archivo:", e);
       };
-
-      // Leer el segundo archivo como texto
       reader2.readAsText(archivo2);
     };
 
     reader1.onerror = function (e) {
       console.error("Error al leer el primer archivo:", e);
     };
-
-    // Leer el primer archivo como texto
     reader1.readAsText(archivo1);
   };
 

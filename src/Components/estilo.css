@@ -23,6 +23,7 @@
   width: 100px;
   height: 30px;
   text-align: center;
+  color: #495b86;
   &:hover {
     background-color: #c0d6df !important;
     border-radius: 10px !important;
@@ -52,15 +53,8 @@ header {
   font-size: 25px;
   color: #274690;
   margin-top: 20px;
-  /* margin-bottom: 20px; */
   height: 10%;
-  /* /* display: flex; */
   width: 90%;
-  /* align-items: center;
-  flex-direction: row;
-  img {
-    margin-right: 28.5em;
-  } */
 }
 h3 {
   color: #274690;
@@ -76,12 +70,6 @@ h3 {
   text-align: center;
   color: #495b86;
   border-radius: 10px !important;
-  padding: 5px 5px;
-  text-decoration: none;
-  display: inline-block;
-  width: 100px;
-  height: 30px;
-  text-align: center;
   &:hover {
     background-color: #c0d6df !important;
     border-radius: 10px !important;
