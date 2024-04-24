@@ -1,0 +1,51 @@
+.buscador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.descarga {
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.archivo {
+  width: 90%;
+  height: 45px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #495b86;
+  border: 1px solid #495b86;
+  border-radius: 10px;
+}
+input[type="file"] {
+  background-color: transparent;
+  width: 20vh;
+}
+.archivo input[type="file"] {
+  padding: 5px 0 0 15px;
+  font-size: 13px;
+  &::-webkit-file-upload-button {
+    display: none;
+  }
+  &::file-selector-button {
+    display: none;
+  }
+}
+.archivo:hover {
+  background-color: #c0d6df;
+  border-radius: 10px;
+  border: 1px solid #495b86;
+  cursor: pointer;
+}
+.archivo :hover {
+  cursor: pointer;
+}
+.texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
