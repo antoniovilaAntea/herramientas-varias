@@ -1,0 +1,66 @@
+.celdas {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  input[type="text"] {
+    margin: 15px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border: 1px solid #495b86;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #274690;
+    background-color: #c0d6df;
+    background-image: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  input[type="file"] {
+    padding: 5px 0 0 15px;
+    font-size: 13px;
+    cursor: pointer;
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+    &::file-selector-button {
+      display: none;
+    }
+  }
+}
+.btnSeleccion {
+  width: 90%;
+  height: 45px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #495b86;
+  border: 1px solid #495b86;
+  border-radius: 10px;
+  padding: 0.5em;
+  margin-bottom: 3em;
+}
+
+.celdas {
+  margin-bottom: 2em;
+}
+.boton {
+  button {
+    color: #eeeeee;
+    background-color: #4a6fa5ff;
+    border-radius: 10px;
+    width: 200px;
+    height: 35px;
+    cursor: pointer;
+
+    margin-bottom: 2em;
+  }
+}
