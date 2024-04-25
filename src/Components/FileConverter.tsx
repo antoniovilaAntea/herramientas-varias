@@ -213,6 +213,7 @@ const FileConverter = ({ tipo }: Props) => {
             onChange={
               tipo === "unificador" ? seleccionarArchivo1 : handleFileChange
             }
+            accept=".txt, .af1"
           />
         </div>
         {tipo === "unificador" && (
@@ -226,6 +227,7 @@ const FileConverter = ({ tipo }: Props) => {
               id="inputGroupFile2"
               placeholder="Ningún archivo seleccionado"
               onChange={seleccionarArchivo2}
+              accept=".txt, .af1"
             />
           </div>
         )}

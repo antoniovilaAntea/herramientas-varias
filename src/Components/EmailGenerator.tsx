@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import * as XLSX from "xlsx";
 import isEqual from "lodash/isEqual";
 import emails from "../Data/emailData";
+import * as XLSX from "xlsx";
 
 import "./emailGenerator.css";
 
@@ -336,7 +336,12 @@ function EmailGenerator() {
     <div className="email">
       <div className="email-importar">
         <label>Selecciona Excel</label>
-        <input id="input-file" type="file" onChange={handleFileUpload} />
+        <input
+          id="input-file"
+          type="file"
+          accept=".xls, .xlsx, .xlsm"
+          onChange={handleFileUpload}
+        />
       </div>
       <div className="formulario">
         <div className="semana">

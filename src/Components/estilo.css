@@ -118,3 +118,22 @@ h3 {
     margin-top: 10px;
   }
 }
+.rdrMonthsVertical,
+.rdrMonthAndYearWrapper,
+.rdrDateDisplayWrapper,
+.rdrNextPrevButton {
+  background-color: #dbe9ee !important;
+}
+
+.rdrDateDisplayWrapper {
+  display: none;
+}
+
+.calendar {
+  opacity: 0;
+  transition: opacity 5s ease;
+}
+
+.calendar.visible {
+  opacity: 1;
+}
