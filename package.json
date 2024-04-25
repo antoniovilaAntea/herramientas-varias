@@ -7,19 +7,20 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.87",
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.21",
+    "@types/node": "^16.18.96",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "docx": "^8.5.0",
-    "docxtemplater": "^3.46.1",
+    "docxtemplater": "^3.47.0",
     "file-saver": "^2.0.5",
     "fs": "^0.0.1-security",
     "papaparse": "^5.4.1",
-    "pizzip": "^3.1.6",
+    "pizzip": "^3.1.7",
     "react": "^18.2.0",
+    "react-date-range": "^2.0.1",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.2",
-    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.23.0",
+    "react-scripts": "^5.0.1",
     "scss": "^0.2.4",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
@@ -52,6 +53,8 @@
   "devDependencies": {
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "^4.17.0",
-    "@types/papaparse": "^5.3.14"
+    "@types/papaparse": "^5.3.14",
+    "@types/react-date-range": "^1.4.9",
+    "@types/stack-utils": "^2.0.3"
   }
 }
