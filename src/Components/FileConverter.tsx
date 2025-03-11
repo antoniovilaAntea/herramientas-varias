@@ -29,7 +29,7 @@ const FileConverter = ({ tipo }: Props) => {
           "Veh. No.;Date;Time;Lane;Axles;Spec;Class;Length (In Meters);Speed (In KPH);Gap (In Seconds);Follow (In Meters);Axle 1-2;Axle 2-3;Axle 3-4;Axle 4-5;Axle 5-6;Axle 6-7;Axle 7-8;Axle 8-9;Axle 9-10;Axle 10-11;Axle 11-12;Axle 12-13;Axle 13-14;Axle 14-15;Axle 15-16;;",
         ];
         let vehicleNumber = 1;
-
+        console.log(dataLines);
         dataLines.forEach((line) => {
           if (line.includes(";")) {
             const parts = line.split(",");
@@ -94,8 +94,8 @@ const FileConverter = ({ tipo }: Props) => {
     tipo === "conversor"
       ? convertirDatos(e.target.files[0], "outputFile")
       : archivoUno
-      ? archivoDos && unificarDatos(archivoUno, archivoDos)
-      : alert("Falta el archivo creciente");
+        ? archivoDos && unificarDatos(archivoUno, archivoDos)
+        : alert("Falta el archivo creciente");
   };
 
   const leerArchivo = (archivo1: File, archivo2: File) => {

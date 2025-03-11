@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import isEqual from "lodash/isEqual";
+//VIGILAR CADA AÑO
 import emails from "../Data/emailData";
 import * as XLSX from "xlsx";
 
@@ -15,6 +16,21 @@ function EmailGenerator() {
   const [finSemana, setFinSemana] = useState<string>("");
   const [fecha, setFecha] = useState<string>("");
   const [datos, setDatos] = useState<any[]>([]);
+
+  const handleInicioInputChange = (e: any) => {
+    let value = e.target.value;
+    if (value.length === 2 && !value.includes("/")) {
+      value = value + "/";
+    }
+    setInicioSemana(value);
+  };
+  const handleFinInputChange = (e: any) => {
+    let value = e.target.value;
+    if (value.length === 2 && !value.includes("/")) {
+      value = value + "/";
+    }
+    setFinSemana(value);
+  };
 
   const handleMostrarEmails = () => {
     let contenido = "";
@@ -150,8 +166,8 @@ function EmailGenerator() {
             ((row[4] % 1000).toString().length === 2
               ? "0" + (row[4] % 1000).toString()
               : (row[4] % 1000).toString().length === 1
-              ? "00" + (row[4] % 1000).toString()
-              : (row[4] % 1000).toString())
+                ? "00" + (row[4] % 1000).toString()
+                : (row[4] % 1000).toString())
           : row[4],
         row[5],
       ]);
@@ -228,9 +244,9 @@ function EmailGenerator() {
     document.body.appendChild(elemento);
     elemento.click();
   };
-
+  //MODIFICAR CADA AÑO
   const createEmailsOperarios = () => {
-    let contenido = "ignaciocubero@anteagroup.es\njuanguerra@anteagroup.es";
+    let contenido = "xxxxxx@anteagroup.es\njuanguerra@anteagroup.es";
     const elemento = document.createElement("a");
     const archivo = new Blob([contenido], { type: "text/plain" });
     elemento.href = URL.createObjectURL(archivo);
@@ -277,6 +293,7 @@ function EmailGenerator() {
         }
       });
     });
+    //MODIFICAR CADA AÑO
     // eslint-disable-next-line
     gruposUnicos.map((letra) => {
       if (letra === "A") {
@@ -350,14 +367,14 @@ function EmailGenerator() {
             placeholder="dd/MM"
             type="text"
             value={inicioSemana}
-            onChange={(e) => setInicioSemana(e.target.value)}
+            onChange={handleInicioInputChange}
           />
           <label> a </label>
           <input
             placeholder="dd/MM"
             type="text"
             value={finSemana}
-            onChange={(e) => setFinSemana(e.target.value)}
+            onChange={handleFinInputChange}
           />
         </div>
         <div className="fecha">
