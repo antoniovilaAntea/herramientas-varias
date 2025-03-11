@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./comparador.css";
-import ExcelComparator from "../../Components/ExcelComparator";
+// import ExcelComparator from "../../Components/ExcelComparator";
 
 const Comparador = () => {
   return (
@@ -19,7 +19,7 @@ const Comparador = () => {
       </div>
       <div className="texto">
         <h3>Comparar dos excel y exportarlos en un mismo excel</h3>
-        <ExcelComparator></ExcelComparator>
+        {/* <ExcelComparator></ExcelComparator> */}
       </div>
     </div>
   );

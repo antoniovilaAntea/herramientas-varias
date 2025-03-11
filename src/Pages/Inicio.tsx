@@ -40,7 +40,8 @@ const Inicio = () => {
               <li>
                 <b>Comparador de excel</b>: Esta herramienta sirve para comparar
                 dos excel con datos de las espiras de la Diputación de
-                Pontevedra y, exportar los Datos en un mismo Excel
+                Pontevedra y, exportar los Datos en un mismo Excel (En
+                desarrollo)
               </li>
             </ul>
           </div>
