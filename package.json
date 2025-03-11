@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.2.25",
     "docx": "^8.5.0",
     "docxtemplater": "^3.47.0",
+    "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "fs": "^0.0.1-security",
     "papaparse": "^5.4.1",
