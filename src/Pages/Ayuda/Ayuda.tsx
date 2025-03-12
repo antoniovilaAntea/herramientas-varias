@@ -97,6 +97,24 @@ const Ayuda = () => {
           <br />y luego si están dentro de un rango de fecha o son anteriores
         </p>
       </div>
+      <div>
+        <h3>Conversor de .xlsx a XML - EXPROPIACIONES -</h3>
+        <p>
+          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          <b>subir el .xlsx en su formato y exportar el archivo nuevo</b>.
+        </p>
+        <p>
+          La primera opción, redirige a un archivo comprimido en Onedrive donde
+          está todo el instalable y ejecutable del Conversor. En el mismo .zip 
+          hay unas instrucciones para que funcione correctamente (aconsejable 
+          si no se tiene el validarAnejo.bat)
+        </p>
+        <p>
+          La segunda opción permite subir el excel, escribir el nombre del proyecto
+          y el presupuesto, y sacar el archivo xml directamente al pulsar en 
+          "Convertir"
+        </p>
+      </div>
     </div>
   );
 };
