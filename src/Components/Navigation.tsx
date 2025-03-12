@@ -6,7 +6,7 @@ import Conversor from "../Pages/Conversor/conversor";
 import Unificador from "../Pages/Unificador/unificador";
 import Emails from "../Pages/Emails/emails";
 import Ayuda from "../Pages/Ayuda/Ayuda";
-import logoAntea from "../logoAntea.png";
+import logoAntea from "../logoAntea.webp";
 import "./estilo.css";
 import Buscador from "../Pages/Buscador/Buscador";
 import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
@@ -24,6 +24,7 @@ const Navigation = () => {
             width="80px"
             height="43px"
             src={logoAntea}
+            onClick={() => setActiveLink("Inicio")}
           />
         </div>
         <div className="header-text">Herramientas</div>
