@@ -4,7 +4,7 @@ const Ayuda = () => {
       <div>
         <h3>Conversor de .txt a .af1</h3>
         <p>
-          En esta página hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          En esta página hay dos opciones, o <b>descargar el zip</b> o,
           <b>convertir el archivo online</b>.
         </p>
         <p>
@@ -19,7 +19,7 @@ const Ayuda = () => {
       <div>
         <h3>Unificador de archivo de aforos</h3>
         <p>
-          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          Hay dos opciones, o <b>descargar el zip</b> o,
           <b>unir los dos archivos desde la misma página web</b>.
         </p>
         <p>
@@ -37,7 +37,7 @@ const Ayuda = () => {
           Generador de Emails para operarios y Ayuntamientos - Dep. Pontevedra
         </h3>
         <p>
-          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          Hay dos opciones, o <b>descargar el zip</b> o,
           <b>generar el texto del email de manera online</b>.
         </p>
         <p>
@@ -58,7 +58,7 @@ const Ayuda = () => {
       <div>
         <h3>Buscador de celdas en Excel</h3>
         <p>
-          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          Hay dos opciones, o <b>descargar el zip</b> o,
           <b>buscar las celdas de los documentos que desees</b>.
         </p>
         <p>
@@ -80,7 +80,7 @@ const Ayuda = () => {
       <div>
         <h3>Comparador de dos archivos Excel - Gomas Dip.Pontevedra</h3>
         <p>
-          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          Hay dos opciones, o <b>descargar el zip</b> o,
           <b>subir los dos archivos y exportar el archivo nuevo</b>.
         </p>
         <p>
@@ -100,13 +100,14 @@ const Ayuda = () => {
       <div>
         <h3>Conversor de .xlsx a XML - EXPROPIACIONES -</h3>
         <p>
-          Hay dos opciones, o <b>descargar el zip</b> o,{" "}
+          Hay dos opciones, o <b>descargar el zip</b> o,
           <b>subir el .xlsx en su formato y exportar el archivo nuevo</b>.
         </p>
         <p>
           La primera opción, redirige a un archivo comprimido en Onedrive donde
-          está todo el instalable y ejecutable del Conversor. En el mismo .zip 
-          hay unas instrucciones para que funcione correctamente (aconsejable 
+          está todo el instalable y ejecutable del Conversor.
+          <br/>
+          En el mismo .zip hay unas instrucciones para que funcione correctamente (aconsejable 
           si no se tiene el validarAnejo.bat)
         </p>
         <p>
