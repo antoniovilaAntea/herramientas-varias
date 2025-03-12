@@ -137,3 +137,9 @@ h3 {
 .calendar.visible {
   opacity: 1;
 }
+
+.logo {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

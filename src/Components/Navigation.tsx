@@ -1,6 +1,6 @@
 // Navigation.tsx
 import React, { useState } from "react";
-import { Route, Link, Routes } from "react-router-dom";
+import { Route, Link, Routes, useLocation } from "react-router-dom";
 import Inicio from "../Pages/Inicio";
 import Conversor from "../Pages/Conversor/conversor";
 import Unificador from "../Pages/Unificador/unificador";
@@ -13,19 +13,25 @@ import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
 // import Comparador from "../Pages/Comparador/Comparador";
 
 const Navigation = () => {
-  const [activeLink, setActiveLink] = useState("");
+  let location = useLocation();
+  const [activeLink, setActiveLink] = useState(
+    location.pathname.split("/")[1] === ""
+      ? "inicio"
+      : location.pathname.split("/")[1]
+  );
 
   return (
     <>
       <header className="header-container">
         <div className="header-content">
-          <img
-            alt="Logo AnteaGroup"
-            width="80px"
-            height="43px"
-            src={logoAntea}
-            onClick={() => setActiveLink("Inicio")}
-          />
+          <Link to="/" onClick={() => setActiveLink("inicio")} className="logo">
+            <img
+              alt="Logo AnteaGroup"
+              width="80px"
+              height="43px"
+              src={logoAntea}
+            />
+          </Link>
         </div>
         <div className="header-text">Herramientas</div>
       </header>
