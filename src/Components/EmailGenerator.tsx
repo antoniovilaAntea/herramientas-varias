@@ -74,7 +74,6 @@ function EmailGenerator() {
       }
     });
 
-    console.log(contenido + " contenido");
     const elemento = document.createElement("a");
     const archivo = new Blob([contenido], { type: "text/plain" });
     elemento.href = URL.createObjectURL(archivo);
@@ -201,7 +200,6 @@ function EmailGenerator() {
       .filter((value, index, self) => self.indexOf(value) === index)
       .join(", ")}:`;
     let contenido = emailSubject + "\n\n";
-    console.log(data);
 
     const groupedData: { [key: string]: any[][] } = {};
     data.forEach((item) => {

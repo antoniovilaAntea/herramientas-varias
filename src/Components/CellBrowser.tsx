@@ -33,7 +33,6 @@ const CellBrowser = () => {
       .toUpperCase()
       .split(",")
       .map((cell) => `Celda ${cell.trim()}`);
-    console.log(cellReferences);
 
     if (selectedFiles.length === 0 || cellInput.trim() === "") {
       alert("Por favor seleccione archivos y/o ingrese celdas.");
@@ -56,13 +55,10 @@ const CellBrowser = () => {
             const cellAddress = convertirDesignacionCelda(
               cellRef.replace("Celda ", "")
             );
-            console.log(cellRef);
             const jsonData = XLSX.utils.sheet_to_json(sheet, {
               header: 1,
             }) as any[][];
-            console.log(jsonData);
             const cellValue = jsonData[cellAddress.r - 1]?.[cellAddress.c - 1];
-            console.log(cellValue);
             data[file.name] = {
               ...data[file.name],
               [cellRef]: cellValue,
@@ -77,8 +73,7 @@ const CellBrowser = () => {
             });
             newData.push(row);
           }
-          console.log(data);
-          console.log(newData);
+
           const newWorkbook = XLSX.utils.book_new();
           const newWorksheet = XLSX.utils.aoa_to_sheet([
             ["Nombre del Archivo", ...cellReferences],

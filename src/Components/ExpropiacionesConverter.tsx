@@ -81,7 +81,6 @@ const ExpropiacionesConverter = () => {
 
       jsonData.forEach((row: any) => {
         if (!row[headers.indexOf("UnidadOrganizativa")]) return;
-        console.log(row);
         const finca = root.ele("Finca", {
           UnidadOrganizativa: row[headers.indexOf("UnidadOrganizativa")],
           N_orden: formatoPersonalizado(row[headers.indexOf("N_orden")]),
