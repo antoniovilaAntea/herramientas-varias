@@ -9,6 +9,7 @@ import Ayuda from "../Pages/Ayuda/Ayuda";
 import logoAntea from "../logoAntea.png";
 import "./estilo.css";
 import Buscador from "../Pages/Buscador/Buscador";
+import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
 // import Comparador from "../Pages/Comparador/Comparador";
 
 const Navigation = () => {
@@ -68,9 +69,16 @@ const Navigation = () => {
             to="/comparador"
             onClick={() => setActiveLink("comparador")}
             className={activeLink === "comparador" ? "bold" : ""}
-          >
+            >
             Comparador
           </Link> */}
+          <Link
+            to="/expropiaciones"
+            onClick={() => setActiveLink("expropiaciones")}
+            className={activeLink === "expropiaciones" ? "bold" : ""}
+          >
+            Expropiaciones
+          </Link>
         </nav>
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -79,6 +87,7 @@ const Navigation = () => {
           <Route path="/email" element={<Emails />} />
           <Route path="/buscador" element={<Buscador />} />
           {/* <Route path="/comparador" element={<Comparador />} /> */}
+          <Route path="/expropiaciones" element={<Expropiaciones />} />
           <Route path="/ayuda" element={<Ayuda />} />
         </Routes>
       </div>

@@ -1,0 +1,44 @@
+.botones__expropiar {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs {
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+  input {
+    width: 48%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #495b86;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #274690;
+    background-color: #c0d6df;
+    background-image: none;
+    transition:
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+  }
+  input:focus {
+    outline: none;
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 0.2rem #4a6fa560;
+  }
+}
+
+.convertir {
+  display: flex;
+  justify-content: center;
+  button {
+    color: #eeeeee;
+    background-color: #4a6fa5ff;
+    border-radius: 10px;
+    width: 200px;
+    height: 35px;
+    cursor: pointer;
+  }
+}
