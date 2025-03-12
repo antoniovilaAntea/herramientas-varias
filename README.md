@@ -25,3 +25,8 @@ Esta herramienta sirve para comparar dos excel con datos de las espiras de la Di
 ### Conversor Excel a xml [Expropiaciones]
 
 Esta herramienta es una adaptación de código en Python que convierte un excel con una estructura exacta en un xml
+
+#### Desarrollo
+
+El desarrollo de esta aplicación consiste en una web en Typescript y React.
+El ingeniero responsable de esto es Javier Álvarez y el programador Antonio Vila
