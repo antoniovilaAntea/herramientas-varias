@@ -5,6 +5,7 @@ import { DateRange, RangeKeyDict } from "react-date-range";
 import { utils, writeFile } from "xlsx";
 import { parse, isBefore, isAfter, format, isSameDay } from "date-fns";
 import * as XLSX from "xlsx";
+import { es } from "date-fns/locale";
 
 interface ProcessedData {
   datosConProvincial: any[][];
@@ -191,6 +192,7 @@ const ExcelComparator = () => {
           showMonthAndYearPickers={false}
           weekStartsOn={1}
           rangeColors={["#4a6fa5ff"]}
+          locale={es}
         />
       </div>
 
