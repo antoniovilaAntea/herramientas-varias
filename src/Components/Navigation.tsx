@@ -10,7 +10,7 @@ import logoAntea from "../logoAntea.webp";
 import "./estilo.css";
 import Buscador from "../Pages/Buscador/Buscador";
 import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
-// import Comparador from "../Pages/Comparador/Comparador";
+import Comparador from "../Pages/Comparador/Comparador";
 
 const Navigation = () => {
   let location = useLocation();
@@ -72,13 +72,13 @@ const Navigation = () => {
           >
             Buscador
           </Link>
-          {/* <Link
+          <Link
             to="/comparador"
             onClick={() => setActiveLink("comparador")}
             className={activeLink === "comparador" ? "bold" : ""}
-            >
+          >
             Comparador
-          </Link> */}
+          </Link>
           <Link
             to="/expropiaciones"
             onClick={() => setActiveLink("expropiaciones")}
@@ -93,7 +93,7 @@ const Navigation = () => {
           <Route path="/unificador" element={<Unificador />} />
           <Route path="/email" element={<Emails />} />
           <Route path="/buscador" element={<Buscador />} />
-          {/* <Route path="/comparador" element={<Comparador />} /> */}
+          <Route path="/comparador" element={<Comparador />} />
           <Route path="/expropiaciones" element={<Expropiaciones />} />
           <Route path="/ayuda" element={<Ayuda />} />
         </Routes>
