@@ -1,14 +1,10 @@
 import React, { useRef, useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css";
-import { DateRange, DateRangePicker, RangeKeyDict } from "react-date-range";
+import { DateRange, RangeKeyDict } from "react-date-range";
 import { utils, writeFile } from "xlsx";
 import { parse, isBefore, isAfter, format, isSameDay } from "date-fns";
 import * as XLSX from "xlsx";
-
-interface ExcelRow {
-  [key: string]: any;
-}
 
 interface ProcessedData {
   datosConProvincial: any[][];
@@ -124,8 +120,8 @@ const ExcelComparator = () => {
   const btnExportarClick = async () => {
     if (!file1.current || !file2.current) return;
 
-    const data1 = await readExcelFile(file1.current);
-    const data2 = await readExcelFile(file2.current);
+    const data1 = await readExcelFile(file2.current);
+    const data2 = await readExcelFile(file1.current);
 
     const {
       datosConProvincial,
