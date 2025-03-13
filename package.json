@@ -10,7 +10,7 @@
     "@types/node": "^16.18.96",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
-    "date-fns": "^2.30.0",
+    "date-fns": "^3.6.0",
     "docx": "^8.5.0",
     "docxtemplater": "^3.47.0",
     "exceljs": "^4.4.0",

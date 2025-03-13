@@ -3,8 +3,10 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css";
 import { DateRange, RangeKeyDict } from "react-date-range";
 import { utils, writeFile } from "xlsx";
-import { parse, isBefore, isAfter, format, isSameDay } from "date-fns";
+// import { parse, isBefore, isAfter, format, isSameDay } from "date-fns";
 import * as XLSX from "xlsx";
+import { parse, isBefore, isAfter, isSameDay, format } from "date-fns";
+// Añade el locale si es necesario
 import { es } from "date-fns/locale";
 
 interface ProcessedData {
