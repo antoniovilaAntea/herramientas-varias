@@ -10,6 +10,7 @@
     "@types/node": "^16.18.96",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
+    "date-fns": "^4.1.0",
     "docx": "^8.5.0",
     "docxtemplater": "^3.47.0",
     "exceljs": "^4.4.0",
@@ -56,7 +57,7 @@
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "^4.17.0",
     "@types/papaparse": "^5.3.14",
-    "@types/react-date-range": "^1.4.9",
+    "@types/react-date-range": "^1.4.10",
     "@types/stack-utils": "^2.0.3"
   }
 }
