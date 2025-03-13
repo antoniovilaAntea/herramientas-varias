@@ -44,7 +44,7 @@ const Inicio = () => {
               </li>
               <li>
                 <b>Comparador de excel</b>: Esta herramienta sirve para comparar
-                dos excel con datos de las espiras de la Diputación de
+                dos excel con datos de los accidentes de la Diputación de
                 Pontevedra y, exportar los Datos en un mismo Excel (En
                 desarrollo)
               </li>
