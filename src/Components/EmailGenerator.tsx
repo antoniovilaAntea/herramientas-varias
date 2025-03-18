@@ -16,6 +16,7 @@ function EmailGenerator() {
   const [finSemana, setFinSemana] = useState<string>("");
   const [fecha, setFecha] = useState<string>("");
   const [datos, setDatos] = useState<any[]>([]);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleInicioInputChange = (e: any) => {
     let value = e.target.value;
@@ -31,9 +32,25 @@ function EmailGenerator() {
     }
     setFinSemana(value);
   };
+  const handleCopyClick = async (texto: string) => {
+    try {
+      await navigator.clipboard.writeText(texto);
+      setIsCopied(true);
 
+      // Resetear el mensaje después de 2 segundos
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Error al copiar:", err);
+    }
+  };
+  const handleSendEmailConcellos = (e: any) => {
+    const cuerpo = generarArchivoConcellos(datos); // Obtener cuerpo
+    handleCopyClick(cuerpo);
+    const destinatarios = handleMostrarEmails(); // Obtener emails
+    abrirCorreoConcellos(cuerpo, destinatarios); // Abrir Outlook
+  };
   const handleMostrarEmails = () => {
-    let contenido = "";
+    let contenido: string[] = [];
     let emailsAgregados: any = {};
 
     datos.forEach((item) => {
@@ -48,7 +65,7 @@ function EmailGenerator() {
             const email = coincidencia.email;
 
             if (!emailsAgregados[email]) {
-              contenido += email + "\n";
+              contenido.push(email);
               emailsAgregados[email] = true;
             }
 
@@ -56,7 +73,7 @@ function EmailGenerator() {
               coincidencia.email2 !== undefined &&
               !emailsAgregados[coincidencia.email2]
             ) {
-              contenido += coincidencia.email2 + "\n";
+              contenido.push(coincidencia.email2);
               emailsAgregados[coincidencia.email2] = true;
             }
 
@@ -64,7 +81,7 @@ function EmailGenerator() {
               coincidencia.extra !== undefined &&
               !emailsAgregados[coincidencia.extra]
             ) {
-              contenido += coincidencia.extra + "\n";
+              contenido.push(coincidencia.extra);
               emailsAgregados[coincidencia.extra] = true;
             }
           } else {
@@ -73,26 +90,31 @@ function EmailGenerator() {
         });
       }
     });
-
-    const elemento = document.createElement("a");
-    const archivo = new Blob([contenido], { type: "text/plain" });
-    elemento.href = URL.createObjectURL(archivo);
-    elemento.download = "emails_concellos.txt";
-    document.body.appendChild(elemento);
-    elemento.click();
+    return contenido.join(",");
   };
-  const handleSendEmailConcellos = () => {
-    generarArchivoConcellos(datos);
-    handleMostrarEmails();
+  const abrirCorreoConcellos = (cuerpo: string, destinatarios: string) => {
+    const emlContent =
+      `Para: ${destinatarios}  \n\n Asunto: Plan Aforos Deputación Pontevedra  \n\n
+  
+  ${cuerpo}`.trim();
+    const blob = new Blob([emlContent], { type: "application/vnd.ms-outlook" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "correo_concellos.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const generarArchivoConcellos = (datos: any[]) => {
     let contenido =
-      "Plan Aforos Deputación Pontevedra \n\n" +
       "Estimados,\n\n" +
       "No ámbito do contrato de Realización, Execución e Explotación do Plan de Aforos e do Estudo da Accidentalidade na Rede" +
       " de Estradas da Deputación Provincial de Pontevedra levado a cabo por Antea Group, informamos de que esta semana " +
-      `(${datos[0].inicioSemana}/2024 - ${datos[0].finSemana}/2024)` +
+      `(${datos[0].inicioSemana}/${new Date().getFullYear()} - ${datos[0].finSemana}/${new Date().getFullYear()})` +
       " instalaranse aforos vehiculares nas seguintes estradas provinciais:\n\n";
 
     const concellosMap: { [key: string]: string[] } = {};
@@ -136,12 +158,8 @@ function EmailGenerator() {
     contenido += "Quedamos a súa disposición ante calquera cuestión.\n\n";
     contenido += "Reciban un cordial saúdo.\n\n";
 
-    const elemento = document.createElement("a");
-    const archivo = new Blob([contenido], { type: "text/plain" });
-    elemento.href = URL.createObjectURL(archivo);
-    elemento.download = "correo_concellos.txt";
-    document.body.appendChild(elemento);
-    elemento.click();
+    contenido = contenido.replace(/\n/g, "\r\n");
+    return contenido;
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -188,26 +206,31 @@ function EmailGenerator() {
   };
 
   const handleSendEmailOperarios = () => {
-    createEmailBodyOperarios(datos);
-    createEmailsOperarios();
+    const emailBody = createEmailBodyOperarios(datos);
+    const emails = createEmailsOperarios();
+    enviarCorreo(emailBody, emails, datos);
   };
-  const createEmailBodyOperarios = (data: any[]) => {
-    const emailSubject = `PROGRAMACIÓN AFOROS DEPO ${new Date().getFullYear()}, SEMANA DEL ${datos
-      .map((e) => e.inicioSemana)
+
+  const enviarCorreo = (cuerpo: string, destinatarios: string, data: any[]) => {
+    const emailSubject = `PROGRAMACIÓN AFOROS DEPO ${new Date().getFullYear()}, SEMANA DEL ${data
+      .map((e: any) => e.inicioSemana)
       .filter((value, index, self) => self.indexOf(value) === index)
-      .join(", ")} AL ${datos
-      .map((e) => e.finSemana)
+      .join(", ")} AL ${data
+      .map((e: any) => e.finSemana)
       .filter((value, index, self) => self.indexOf(value) === index)
       .join(", ")}:`;
-    let contenido = emailSubject + "\n\n";
+    const mailtoLink = `mailto:${destinatarios}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(cuerpo)}`;
+    window.location.href = mailtoLink;
+  };
+
+  const createEmailBodyOperarios = (data: any[]): string => {
+    let contenido = "";
 
     const groupedData: { [key: string]: any[][] } = {};
     data.forEach((item) => {
       const key = `${item.fecha}-${item.tipo}`;
-      if (!groupedData[key]) {
-        groupedData[key] = [];
-      }
-      groupedData[key] = groupedData[key].concat(item.selectedRows);
+      groupedData[key] = groupedData[key] || [];
+      groupedData[key].push(...item.selectedRows);
     });
 
     let lastDate = "";
@@ -217,42 +240,26 @@ function EmailGenerator() {
         contenido += `${fecha.toUpperCase()}\n\n`;
         lastDate = fecha;
       }
-      contenido += `Gomas a ${tipo.toString().toUpperCase()}:\n`;
+      contenido += `Gomas a ${tipo.toUpperCase()}:\n`;
 
       groupedData[key].forEach((row: any) => {
         const codigo = row[1];
         const partes = row[2];
         const grupo = row[0];
-
         contenido += `• ${codigo}___PK ${partes} - Grupo: ${grupo}\n`;
       });
 
-      if (index < Object.keys(groupedData).length - 1) {
-        contenido += "\n";
-      }
+      contenido += index < Object.keys(groupedData).length - 1 ? "\n" : "";
     });
-    driveLinks(datos);
-    contenido += "\n";
-    contenido += rutas.join("\n\n");
+    driveLinks(data);
+    contenido += "\n" + rutas.join("\n\n");
 
-    const elemento = document.createElement("a");
-    const archivo = new Blob([contenido], { type: "text/plain" });
-    elemento.href = URL.createObjectURL(archivo);
-    elemento.download = "correo_operarios.txt";
-    document.body.appendChild(elemento);
-    elemento.click();
-  };
-  //MODIFICAR CADA AÑO
-  const createEmailsOperarios = () => {
-    let contenido = "alfonsomosquera@anteagroup.es\njuanguerra@anteagroup.es";
-    const elemento = document.createElement("a");
-    const archivo = new Blob([contenido], { type: "text/plain" });
-    elemento.href = URL.createObjectURL(archivo);
-    elemento.download = "emails_operarios.txt";
-    document.body.appendChild(elemento);
-    elemento.click();
+    return contenido;
   };
 
+  const createEmailsOperarios = (): string => {
+    return "alfonsomosquera@anteagroup.es,juanguerra@anteagroup.es";
+  };
   const manjearBotones = () => {
     setMostrarBotones(!mostrarBotones);
   };
@@ -323,9 +330,11 @@ function EmailGenerator() {
       if (letra === "I") {
         rutas.push("Enlaces Maps grupo I: ");
       }
-      if (letra === "J") {
-        rutas.push("Enlaces Maps grupo J: ");
-      }
+      // if (letra === "J") {
+      //   rutas.push(
+      //     "Enlaces Maps grupo J: "
+      //   );
+      // }
     });
   };
   //EMAILS
@@ -406,7 +415,7 @@ function EmailGenerator() {
               <button onClick={handleSendEmailOperarios}>
                 Email a Operarios
               </button>{" "}
-              <button onClick={() => handleSendEmailConcellos()}>
+              <button onClick={(e) => handleSendEmailConcellos(e)}>
                 Email a Ayuntamientos
               </button>
             </div>
