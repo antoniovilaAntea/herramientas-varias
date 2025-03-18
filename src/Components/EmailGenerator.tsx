@@ -244,7 +244,7 @@ function EmailGenerator() {
   };
   //MODIFICAR CADA AÑO
   const createEmailsOperarios = () => {
-    let contenido = "xxxxxx@anteagroup.es\njuanguerra@anteagroup.es";
+    let contenido = "alfonsomosquera@anteagroup.es\njuanguerra@anteagroup.es";
     const elemento = document.createElement("a");
     const archivo = new Blob([contenido], { type: "text/plain" });
     elemento.href = URL.createObjectURL(archivo);
