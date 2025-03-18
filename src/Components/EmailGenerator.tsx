@@ -296,57 +296,39 @@ function EmailGenerator() {
     gruposUnicos.map((letra) => {
       if (letra === "A") {
         rutas.push(
-          "Enlaces Maps grupo A: https://www.google.com/maps/d/edit?mid=1GSOBFKzC07iY5GV5UjrwBfyFIEQ3sHg&usp=sharing"
+          "Enlaces Maps grupo A: https://www.google.com/maps/d/edit?mid=1Lfngolsi8wiIsczQa6OnonYIxz8Guqg&usp=sharing"
         );
       }
       if (letra === "B") {
-        rutas.push(
-          "Enlaces Maps grupo B: https://www.google.com/maps/d/edit?mid=1OPe70UmLtYg1d5HjFOEQxMGLIcLkq14&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo B: ");
       }
       if (letra === "C") {
-        rutas.push(
-          "Enlaces Maps grupo C: https://www.google.com/maps/d/edit?mid=1Uo0L2YGIik2VCy4oehIWOUB9AeMLvts&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo C: ");
       }
       if (letra === "D") {
-        rutas.push(
-          "Enlaces Maps grupo D: https://www.google.com/maps/d/edit?mid=1hSFVByMtXvw84PiCjCo6tiboTo5-MME&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo D: ");
       }
       if (letra === "E") {
-        rutas.push(
-          "Enlaces Maps grupo E: https://www.google.com/maps/d/edit?mid=1UioRCBbjASI7Y3qveZ38EzFGe-8VYBY&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo E: ");
       }
       if (letra === "F") {
-        rutas.push(
-          "Enlaces Maps grupo F: https://www.google.com/maps/d/edit?mid=1-YvDj0MAiEffy1lVzlDrve4bAW-oT3c&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo F: ");
       }
       if (letra === "G") {
-        rutas.push(
-          "Enlaces Maps grupo G: https://www.google.com/maps/d/edit?mid=1gPj5riwfFfoTRPuvUb7VcwkFtnhmrxM&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo G: ");
       }
       if (letra === "H") {
-        rutas.push(
-          "Enlaces Maps grupo H: https://www.google.com/maps/d/edit?mid=1jXPp6Qr1e8LVEgachKnxqM9v335GLmU&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo H: ");
       }
       if (letra === "I") {
-        rutas.push(
-          "Enlaces Maps grupo I: https://www.google.com/maps/d/edit?mid=19DWbKHrepom79sm4uuyAPnByL8Z4oWQ&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo I: ");
       }
       if (letra === "J") {
-        rutas.push(
-          "Enlaces Maps grupo J: https://www.google.com/maps/d/edit?mid=1rz1zPzRJu9CnDyR2gD2W-goapP06OME&usp=sharing"
-        );
+        rutas.push("Enlaces Maps grupo J: ");
       }
     });
   };
-
+  //EMAILS
   return (
     <div className="email">
       <div className="email-importar">
