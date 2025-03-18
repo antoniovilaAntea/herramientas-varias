@@ -251,7 +251,6 @@ function EmailGenerator() {
 
       contenido += index < Object.keys(groupedData).length - 1 ? "\n" : "";
     });
-
     driveLinks(data);
     contenido += "\n" + rutas.join("\n\n");
 
@@ -338,7 +337,7 @@ function EmailGenerator() {
       // }
     });
   };
-
+  //EMAILS
   return (
     <div className="email">
       <div className="email-importar">
