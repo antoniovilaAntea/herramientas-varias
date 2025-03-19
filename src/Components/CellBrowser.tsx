@@ -27,8 +27,7 @@ const CellBrowser = () => {
     }
     return { c: columna, r: numeros };
   };
-
-  const exportToExcel = () => {
+  const exportToExcel = async () => {
     const cellReferences = cellInput
       .toUpperCase()
       .split(",")
@@ -39,54 +38,57 @@ const CellBrowser = () => {
       return;
     }
 
-    const data: { [key: string]: { [key: string]: string } } = {};
+    const newData: any[][] = [];
 
-    selectedFiles.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target?.result) {
-          const workbook = XLSX.read(e.target.result as string, {
-            type: "binary",
-          });
-          const sheetName = workbook.SheetNames[0];
-          const sheet = workbook.Sheets[sheetName];
-
-          cellReferences.forEach((cellRef) => {
-            const cellAddress = convertirDesignacionCelda(
-              cellRef.replace("Celda ", "")
-            );
+    const processFile = (file: File): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target?.result) {
+            const workbook = XLSX.read(e.target.result as string, {
+              type: "binary",
+            });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
             const jsonData = XLSX.utils.sheet_to_json(sheet, {
               header: 1,
             }) as any[][];
-            const cellValue = jsonData[cellAddress.r - 1]?.[cellAddress.c - 1];
-            data[file.name] = {
-              ...data[file.name],
-              [cellRef]: cellValue,
-            };
-          });
 
-          const newData = [];
-          for (const [key, value] of Object.entries(data)) {
-            const row = [key];
+            const row = [file.name];
             cellReferences.forEach((cellRef) => {
-              row.push((value as { [key: string]: string })[cellRef] || "");
+              const cellAddress = convertirDesignacionCelda(
+                cellRef.replace("Celda ", "")
+              );
+              const cellValue =
+                jsonData[cellAddress.r - 1]?.[cellAddress.c - 1];
+              row.push(cellValue || "");
             });
+
             newData.push(row);
+            resolve();
           }
+        };
+        reader.onerror = (error) => reject(error);
+        reader.readAsBinaryString(file);
+      });
+    };
 
-          const newWorkbook = XLSX.utils.book_new();
-          const newWorksheet = XLSX.utils.aoa_to_sheet([
-            ["Nombre del Archivo", ...cellReferences],
-            ...newData,
-          ]);
-          XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Datos");
-          XLSX.writeFile(newWorkbook, "SALIDA.xlsx");
-        }
-      };
+    try {
+      await Promise.all(selectedFiles.map(processFile));
 
-      reader.readAsBinaryString(file);
-    });
+      const newWorkbook = XLSX.utils.book_new();
+      const newWorksheet = XLSX.utils.aoa_to_sheet([
+        ["Nombre del Archivo", ...cellReferences],
+        ...newData,
+      ]);
+      XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Datos");
+      XLSX.writeFile(newWorkbook, "SALIDA.xlsx");
+    } catch (error) {
+      console.error("Error procesando archivos:", error);
+      alert("Ocurrió un error al procesar los archivos.");
+    }
   };
+
   return (
     <div className="contenedor">
       <div>
@@ -95,7 +97,7 @@ const CellBrowser = () => {
           <input
             id="inputcelda"
             type="text"
-            placeholder="celda,celda1,celda2..."
+            placeholder="A1,B2,C3..."
             value={cellInput}
             onChange={handleCellInputChange}
           />
