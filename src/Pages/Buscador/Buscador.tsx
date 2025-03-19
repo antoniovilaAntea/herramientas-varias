@@ -9,7 +9,7 @@ const Buscador = () => {
       <div className="descarga">
         <h3>Descargar Buscador</h3>
         <a
-          href="https://iceacsaconsultores-my.sharepoint.com/:u:/g/personal/antoniovila_anteagroup_es/ERyref6CoLtKty9UfNoiBGcBjHIRs8iQxj2Pj-A6xk0xrg?e=GR5syW"
+          href="https://iceacsaconsultores-my.sharepoint.com/:u:/g/personal/antoniovila_anteagroup_es/Ecpb5-YmYV9Kk0QJc1h9RtUBa0SgOJB1jdZ2OIs0Wn8YQA?e=gS62Uu"
           download={"Buscador de celdas"}
           target="_blank"
           rel="noreferrer"
