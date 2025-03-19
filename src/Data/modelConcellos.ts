@@ -1,4 +1,4 @@
-export class concello {
+export class Concello {
   concello: string;
   email: string;
   email2?: string;

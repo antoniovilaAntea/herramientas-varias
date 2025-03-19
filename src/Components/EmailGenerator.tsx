@@ -3,8 +3,10 @@ import isEqual from "lodash/isEqual";
 //VIGILAR CADA AÑO
 import emails from "../Data/emailData";
 import * as XLSX from "xlsx";
+import Modal from "@mui/material/Modal";
 
 import "./emailGenerator.css";
+import { Box } from "@mui/material";
 
 function EmailGenerator() {
   const [excelData, setExcelData] = useState<any[]>([]);
@@ -17,6 +19,10 @@ function EmailGenerator() {
   const [fecha, setFecha] = useState<string>("");
   const [datos, setDatos] = useState<any[]>([]);
   const [isCopied, setIsCopied] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [emailContent, setEmailContent] = useState("");
+  const handleCloseModal = () => setOpenModal(false);
+  const handleOpenModal = () => setOpenModal(true);
 
   const handleInicioInputChange = (e: any) => {
     let value = e.target.value;
@@ -37,17 +43,19 @@ function EmailGenerator() {
       await navigator.clipboard.writeText(texto);
       setIsCopied(true);
 
-      // Resetear el mensaje después de 2 segundos
       setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
       console.error("Error al copiar:", err);
     }
   };
+
   const handleSendEmailConcellos = (e: any) => {
-    const cuerpo = generarArchivoConcellos(datos); // Obtener cuerpo
+    handleOpenModal();
+    const cuerpo = generarArchivoConcellos(datos);
+    setEmailContent(cuerpo);
     handleCopyClick(cuerpo);
-    const destinatarios = handleMostrarEmails(); // Obtener emails
-    abrirCorreoConcellos(cuerpo, destinatarios); // Abrir Outlook
+    const destinatarios = handleMostrarEmails();
+    abrirCorreoConcellos(cuerpo, destinatarios);
   };
   const handleMostrarEmails = () => {
     let contenido: string[] = [];
@@ -93,20 +101,9 @@ function EmailGenerator() {
     return contenido.join(",");
   };
   const abrirCorreoConcellos = (cuerpo: string, destinatarios: string) => {
-    const emlContent =
-      `Para: ${destinatarios}  \n\n Asunto: Plan Aforos Deputación Pontevedra  \n\n
-  
-  ${cuerpo}`.trim();
-    const blob = new Blob([emlContent], { type: "application/vnd.ms-outlook" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "correo_concellos.txt";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const subject = "Plan Aforos Deputación Pontevedra";
+    const mailtoUrl = `mailto:${destinatarios}?subject=${subject}`;
+    window.open(mailtoUrl);
   };
 
   const generarArchivoConcellos = (datos: any[]) => {
@@ -161,7 +158,12 @@ function EmailGenerator() {
     contenido = contenido.replace(/\n/g, "\r\n");
     return contenido;
   };
-
+  function formatNumber(value: number | string): string {
+    const num = typeof value === "string" ? parseInt(value) : value;
+    const thousands = Math.floor(num / 1000);
+    const remainder = num % 1000;
+    return `${thousands} + ${remainder.toString().padStart(3, "0")}`;
+  }
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : undefined;
     const reader = new FileReader();
@@ -177,18 +179,9 @@ function EmailGenerator() {
       const filteredData = data.map((row: any[]) => [
         row[0],
         row[3],
-        row[4] !== "PK" && row[4] !== undefined
-          ? ((parseInt(row[4]) - (parseInt(row[4]) % 1000)) / 1000).toString() +
-            " + " +
-            ((row[4] % 1000).toString().length === 2
-              ? "0" + (row[4] % 1000).toString()
-              : (row[4] % 1000).toString().length === 1
-                ? "00" + (row[4] % 1000).toString()
-                : (row[4] % 1000).toString())
-          : row[4],
+        row[4] !== "PK" && row[4] !== undefined ? formatNumber(row[4]) : row[4],
         row[5],
       ]);
-
       setExcelData(filteredData);
     };
 
@@ -341,7 +334,7 @@ function EmailGenerator() {
   return (
     <div className="email">
       <div className="email-importar">
-        <label>Selecciona Excel</label>
+        <label htmlFor="input-file">Selecciona Excel</label>
         <input
           id="input-file"
           type="file"
@@ -351,25 +344,30 @@ function EmailGenerator() {
       </div>
       <div className="formulario">
         <div className="semana">
-          <label>Semana de </label>
+          <label htmlFor="de">Semana de </label>
           <input
             placeholder="dd/MM"
+            maxLength={5}
+            id="de"
             type="text"
             value={inicioSemana}
             onChange={handleInicioInputChange}
           />
-          <label> a </label>
+          <label htmlFor="a"> a </label>
           <input
+            id="a"
             placeholder="dd/MM"
+            maxLength={5}
             type="text"
             value={finSemana}
             onChange={handleFinInputChange}
           />
         </div>
         <div className="fecha">
-          <label>Fecha</label>
+          <label htmlFor="fecha">Fecha</label>
           <input
             type="text"
+            id="fecha"
             placeholder="Ej: Lunes 12"
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
@@ -418,6 +416,13 @@ function EmailGenerator() {
               <button onClick={(e) => handleSendEmailConcellos(e)}>
                 Email a Ayuntamientos
               </button>
+              <Modal
+                open={openModal}
+                onClose={handleCloseModal}
+                className="modalMail"
+              >
+                <Box className="modalMail__texto">{emailContent}</Box>
+              </Modal>
             </div>
           )}
         </div>
@@ -430,7 +435,7 @@ function EmailGenerator() {
           <tr>
             {excelData.length > 0 &&
               excelData[0].map((cell: any, index: number) => (
-                <th key={index}>{cell}</th>
+                <th key={excelData[index]}>{cell}</th>
               ))}
           </tr>
         </thead>
@@ -440,7 +445,7 @@ function EmailGenerator() {
             if (!isRowEmpty) {
               return (
                 <tr
-                  key={rowIndex}
+                  key={excelData[rowIndex]}
                   onClick={() => handleRowClick(row)}
                   style={{
                     background: selectedRows.includes(row)
@@ -450,7 +455,7 @@ function EmailGenerator() {
                   }}
                 >
                   {row.map((cell: any, cellIndex: number) => (
-                    <td key={cellIndex}>{cell}</td>
+                    <td key={row[cellIndex]}>{cell}</td>
                   ))}
                 </tr>
               );

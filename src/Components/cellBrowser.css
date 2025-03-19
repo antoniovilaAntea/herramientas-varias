@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
+  margin-bottom: 2em;
   align-items: center;
 }
 .contenedor {
@@ -20,7 +21,9 @@
     color: #274690;
     background-color: #c0d6df;
     background-image: none;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition:
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
   }
   input[type="file"] {
     padding: 5px 0 0 15px;
@@ -49,9 +52,6 @@
   margin-bottom: 3em;
 }
 
-.celdas {
-  margin-bottom: 2em;
-}
 .boton {
   button {
     color: #eeeeee;

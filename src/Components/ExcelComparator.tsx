@@ -3,7 +3,6 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css";
 import { DateRange, RangeKeyDict } from "react-date-range";
 import { utils, writeFile } from "xlsx";
-// import { parse, isBefore, isAfter, format, isSameDay } from "date-fns";
 import * as XLSX from "xlsx";
 import { parse, isBefore, isAfter, isSameDay, format } from "date-fns";
 // Añade el locale si es necesario
@@ -55,7 +54,7 @@ const ExcelComparator = () => {
           const worksheet = workbook.Sheets[workbook.SheetNames[0]];
           const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-          resolve(jsonData as any[][]); // Añadir type assertion aquí
+          resolve(jsonData as any[][]);
         } catch (error) {
           reject(error);
         }

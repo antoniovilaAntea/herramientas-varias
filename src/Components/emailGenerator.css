@@ -79,7 +79,9 @@ input[type="file"] {
     color: #274690;
     background-color: #c0d6df;
     background-image: none;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition:
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
   }
   input:focus {
     outline: none;
@@ -119,7 +121,9 @@ input[type="file"] {
     color: #274690;
     background-color: #c0d6df;
     background-image: none;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition:
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
   }
   input:focus {
     outline: none;
@@ -171,4 +175,16 @@ input[type="file"] {
     cursor: pointer;
     margin-bottom: 2em;
   }
+}
+
+.modalMail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalMail__texto {
+  color: white;
+  /* height: fit-content; */
+  width: 50%;
 }

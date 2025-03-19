@@ -1,6 +1,6 @@
-import { concello } from "./modelConcellos";
+import { Concello } from "./modelConcellos";
 
-const emails: concello[] = [
+const emails: Concello[] = [
   {
     concello: "A Cañiza",
     email: "info@caniza.org",

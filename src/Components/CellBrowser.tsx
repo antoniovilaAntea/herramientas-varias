@@ -91,8 +91,9 @@ const CellBrowser = () => {
     <div className="contenedor">
       <div>
         <div className="celdas">
-          <label>Celdas: </label>
+          <label htmlFor="inputcelda">Celdas: </label>
           <input
+            id="inputcelda"
             type="text"
             placeholder="celda,celda1,celda2..."
             value={cellInput}
@@ -100,7 +101,7 @@ const CellBrowser = () => {
           />
         </div>
         <div className="btnSeleccion">
-          <label>Selecciona archivo/s Excel</label>
+          <label htmlFor="inputGroupFile2">Selecciona archivo/s Excel</label>
           <input
             type="file"
             className="form-control"
