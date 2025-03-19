@@ -42,6 +42,7 @@ function EmailGenerator() {
     try {
       await navigator.clipboard.writeText(texto);
       setIsCopied(true);
+      alert("El cuerpo del mensaje se ha copiado en el portapapeles");
 
       setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
@@ -137,7 +138,7 @@ function EmailGenerator() {
     Object.keys(concellosMap).forEach((concello) => {
       contenido += `${concello.toUpperCase()}\n\n`;
       concellosMap[concello].forEach((dato) => {
-        contenido += `${dato}\n\n`;
+        contenido += `  · ${dato}\n\n`;
       });
     });
 
@@ -265,8 +266,11 @@ function EmailGenerator() {
     const tipo = instalar ? "Instalar" : retirar ? "Retirar" : "No tipo";
     const hayDuplicadosEnDatos = datos.some(
       (obj) =>
-        JSON.stringify(obj) ===
-        JSON.stringify({ inicioSemana, finSemana, fecha, tipo, selectedRows })
+        obj.inicioSemana === inicioSemana &&
+        obj.finSemana === finSemana &&
+        obj.fecha === fecha &&
+        obj.tipo === tipo &&
+        JSON.stringify(obj.selectedRows) === JSON.stringify(selectedRows)
     );
     if (!hayDuplicadosEnDatos) {
       setDatos([
@@ -293,7 +297,8 @@ function EmailGenerator() {
     });
     //MODIFICAR CADA AÑO
     // eslint-disable-next-line
-    gruposUnicos.map((letra) => {
+
+    gruposUnicos.sort().map((letra) => {
       if (letra === "A") {
         rutas.push(
           "Enlaces Maps grupo A: https://www.google.com/maps/d/edit?mid=1Lfngolsi8wiIsczQa6OnonYIxz8Guqg&usp=sharing"
