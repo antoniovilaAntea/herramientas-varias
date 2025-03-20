@@ -11,7 +11,7 @@ const Inicio = () => {
               tareas repetitivas de manera mucho más rápida y práctica.
             </p>
             <p>
-              El ingeniero responsable de estas aplicaciones fue{" "}
+              El ingeniero responsable de estas aplicaciones es{" "}
               <b>Javier Álvarez</b>
             </p>
             <p>

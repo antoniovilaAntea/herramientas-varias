@@ -12,12 +12,14 @@ const Ayuda = () => {
           está todo el instalable y ejecutable del Conversor
         </p>
         <p>
-          La segunda opción permite la conversión del archivo subiendolo a la
-          propia página
+          La segunda opción permite la conversión del archivo, introduciendo un
+          archivo .txt de espiras "por pasadas" obtenido de AfoAnalisis 3.3 y
+          devuelve un archivo de gomas "por pasadas" para cargar en XesAforos
+          Gomas
         </p>
       </div>
       <div>
-        <h3>Unificador de archivo de aforos</h3>
+        <h3>Unificador de archivo de espiras</h3>
         <p>
           Hay dos opciones, o <b>descargar el zip</b> o,{" "}
           <b>unir los dos archivos desde la misma página web</b>.

@@ -9,7 +9,7 @@ const Comparador = () => {
       <div className="descarga">
         <h3>Descargar Comparador</h3>
         <a
-          href="https://iceacsaconsultores-my.sharepoint.com/:u:/g/personal/antoniovila_anteagroup_es/EcwA5OSrQR9IlMs5s4qc_1YBX2_Y7IKUqn2fEswMw8CEtw?e=bVFLED"
+          href="https://iceacsaconsultores-my.sharepoint.com/:u:/g/personal/antoniovila_anteagroup_es/EcwA5OSrQR9IlMs5s4qc_1YBX3YHOxt3covS2whtfu6kww?e=cJtrAa"
           download={"Comparador de celdas"}
           target="_blank"
           rel="noreferrer"
