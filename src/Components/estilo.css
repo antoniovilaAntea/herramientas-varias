@@ -1,145 +1,297 @@
-.menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  width: 90%;
-
-  a button {
-    color: #eeeeee;
-    background-color: #4a6fa5ff;
-    border-radius: 10px;
-    width: 200px;
-    height: 35px;
-    cursor: pointer;
-  }
-}
-.menu__nav a {
-  margin-left: 2em;
-  padding: 5px 5px;
-  text-decoration: none;
-  display: inline-block;
-  width: 100px;
-  height: 30px;
-  text-align: center;
-  color: #495b86;
-  &:hover {
-    background-color: #c0d6df !important;
-    border-radius: 10px !important;
-    padding: 5px 5px;
-    text-decoration: none;
-    display: inline-block;
-    width: 100px;
-    height: 30px;
-    text-align: center;
-  }
-  &.bold {
-    font-weight: bold;
-  }
-
-  &:visited {
-    color: #495b86;
-    border-radius: 10px !important;
-    padding: 5px 5px;
-    text-decoration: none;
-    display: inline-block;
-    width: 100px;
-    height: 30px;
-    text-align: center;
-  }
-}
-header {
-  font-size: 25px;
-  color: #274690;
-  margin-top: 20px;
-  height: 10%;
-  width: 90%;
-}
-h3 {
-  color: #274690;
-}
-
-.help {
-  margin-left: 2em;
-  padding: 5px 5px;
-  text-decoration: none;
-  display: inline-block;
-  width: 100px;
-  height: 30px;
-  text-align: center;
-  color: #495b86;
-  border-radius: 10px !important;
-  &:hover {
-    background-color: #c0d6df !important;
-    border-radius: 10px !important;
-    padding: 5px 5px;
-    text-decoration: none;
-    display: inline-block;
-    width: 100px;
-    height: 30px;
-    text-align: center;
-  }
-  &:visited {
-    color: #495b86;
-    border-radius: 10px !important;
-    padding: 5px 5px;
-    text-decoration: none;
-    display: inline-block;
-    width: 100px;
-    height: 30px;
-    text-align: center;
-  }
-}
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-}
-
-.header-text {
-  text-align: center;
-  flex-grow: 1;
-  margin-right: 3%;
-}
-
-@media (max-width: 600px) {
-  .header-container {
+@media (min-width: 1025px) {
+  .menu {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 90%;
+
+    a button {
+      color: #eeeeee;
+      background-color: #4a6fa5ff;
+      border-radius: 10px;
+      width: 200px;
+      height: 35px;
+      cursor: pointer;
+    }
+  }
+  .menu__nav a {
+    margin-left: 2em;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    color: #495b86;
+    &:hover {
+      background-color: #c0d6df !important;
+      border-radius: 10px !important;
+      padding: 5px 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+    &.bold {
+      font-weight: bold;
+    }
+
+    &:visited {
+      color: #495b86;
+      border-radius: 10px !important;
+      padding: 5px 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+  }
+  header {
+    font-size: 25px;
+    color: #274690;
+    margin-top: 20px;
+    height: 10%;
+    width: 90%;
+  }
+  h3 {
+    color: #274690;
+  }
+
+  .help {
+    margin-left: 2em;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    color: #495b86;
+    border-radius: 10px !important;
+    &:hover {
+      background-color: #c0d6df !important;
+      border-radius: 10px !important;
+      padding: 5px 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+    &:visited {
+      color: #495b86;
+      border-radius: 10px !important;
+      padding: 5px 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+  }
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
   }
 
   .header-text {
     text-align: center;
-    margin-top: 10px;
+    flex-grow: 1;
+    margin-right: 3%;
+  }
+
+  @media (max-width: 600px) {
+    .header-container {
+      flex-direction: column;
+    }
+
+    .header-text {
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+  .rdrMonthsVertical,
+  .rdrMonthAndYearWrapper,
+  .rdrDateDisplayWrapper,
+  .rdrNextPrevButton {
+    background-color: #dbe9ee !important;
+  }
+
+  .rdrDateDisplayWrapper {
+    display: none;
+  }
+
+  .calendar {
+    opacity: 0;
+    transition: opacity 5s ease;
+  }
+
+  .calendar.visible {
+    opacity: 1;
+  }
+
+  .logo {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
   }
 }
-.rdrMonthsVertical,
-.rdrMonthAndYearWrapper,
-.rdrDateDisplayWrapper,
-.rdrNextPrevButton {
-  background-color: #dbe9ee !important;
-}
+@media (max-width: 1024px) {
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 90%;
 
-.rdrDateDisplayWrapper {
-  display: none;
-}
+    a button {
+      color: #eeeeee;
+      background-color: #4a6fa5ff;
+      border-radius: 10px;
+      width: 200px;
+      height: 35px;
+      cursor: pointer;
+    }
+  }
+  .menu__nav {
+    width: 110%;
+    a {
+      margin-left: 2em;
+      padding: 5px 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+      color: #495b86;
+      &:hover {
+        background-color: #c0d6df !important;
+        border-radius: 10px !important;
+        padding: 5px 5px;
+        text-decoration: none;
+        display: inline-block;
+        width: 100px;
+        height: 30px;
+        text-align: center;
+      }
+      &.bold {
+        font-weight: bold;
+      }
 
-.calendar {
-  opacity: 0;
-  transition: opacity 5s ease;
-}
+      &:visited {
+        color: #495b86;
+        border-radius: 10px !important;
+        padding: 5px 5px;
+        text-decoration: none;
+        display: inline-block;
+        width: 100px;
+        height: 30px;
+        text-align: center;
+      }
+    }
+  }
+  header {
+    font-size: 25px;
+    color: #274690;
+    margin-top: 20px;
+    height: 10%;
+    width: 90%;
+  }
+  h3 {
+    color: #274690;
+  }
 
-.calendar.visible {
-  opacity: 1;
-}
+  .help {
+    margin-left: 2em;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    color: #495b86;
+    border-radius: 10px !important;
+    &:hover {
+      background-color: #c0d6df !important;
+      border-radius: 10px !important;
+      padding: 5px 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+    &:visited {
+      color: #495b86;
+      border-radius: 10px !important;
+      padding: 5px 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+  }
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.logo {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+  .header-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-text {
+    text-align: center;
+    flex-grow: 1;
+    margin-right: 3%;
+  }
+
+  @media (max-width: 600px) {
+    .header-container {
+      flex-direction: column;
+    }
+
+    .header-text {
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+  .rdrMonthsVertical,
+  .rdrMonthAndYearWrapper,
+  .rdrDateDisplayWrapper,
+  .rdrNextPrevButton {
+    background-color: #dbe9ee !important;
+  }
+
+  .rdrDateDisplayWrapper {
+    display: none;
+  }
+
+  .calendar {
+    opacity: 0;
+    transition: opacity 5s ease;
+  }
+
+  .calendar.visible {
+    opacity: 1;
+  }
+
+  .logo {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
 }
