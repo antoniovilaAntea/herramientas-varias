@@ -3,10 +3,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 
 import "./index.css";
+import { StrictMode } from "react";
 
 const root = createRoot(document.getElementById("root")!);
 root.render(
-  <Router>
-    <App />
-  </Router>
+  <StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </StrictMode>
 );
