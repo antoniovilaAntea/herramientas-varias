@@ -182,6 +182,8 @@ function EmailGenerator() {
         row[3],
         row[4] !== "PK" && row[4] !== undefined ? formatNumber(row[4]) : row[4],
         row[5],
+        convertirFechaExcelANormal(row[11]),
+        convertirFechaExcelANormal(row[12]),
       ]);
       setExcelData(filteredData);
     };
@@ -199,6 +201,24 @@ function EmailGenerator() {
     }
   };
 
+  const convertirFechaExcelANormal = (numExcel: any) => {
+    console.log(typeof numExcel);
+    if (typeof numExcel === "number") {
+      const fechaUTC = new Date((numExcel - 25569) * 86400000);
+
+      const opciones: Intl.DateTimeFormatOptions = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      };
+
+      return fechaUTC.toLocaleDateString("es-ES", opciones);
+    } else {
+      return numExcel;
+    }
+  };
   const handleSendEmailOperarios = () => {
     const emailBody = createEmailBodyOperarios(datos);
     const emails = createEmailsOperarios();

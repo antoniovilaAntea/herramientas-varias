@@ -1,8 +1,9 @@
 const Ayuda = () => {
   return (
-    <div>
+    <div style={{ width: "60%" }}>
       <div>
-        <h3>Conversor de .txt a .af1</h3>
+        <h3 style={{ textAlign: "center" }}>Guía de uso</h3>
+        {/* <h3>Conversor de .txt a .af1</h3>
         <p>
           En esta página hay dos opciones, o <b>descargar el zip</b> o,{" "}
           <b>convertir el archivo online</b>.
@@ -117,7 +118,14 @@ const Ayuda = () => {
           proyecto y el presupuesto, y sacar el archivo xml directamente al
           pulsar en "Convertir"
         </p>
+  */}
       </div>
+      <iframe
+        src={`${window.location.origin}${process.env.PUBLIC_URL}/GuiaDeUsoDeLasHerramientas.pdf`}
+        title="Ayuda"
+        width="100%"
+        height="600px"
+      />
     </div>
   );
 };
