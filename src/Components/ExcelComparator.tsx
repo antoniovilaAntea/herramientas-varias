@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
-import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange, RangeKeyDict } from "react-date-range";
 import { utils, writeFile } from "xlsx";
 import * as XLSX from "xlsx";
 import { parse, isBefore, isAfter, isSameDay, format } from "date-fns";
-// Añade el locale si es necesario
 import { es } from "date-fns/locale";
 
 interface ProcessedData {
@@ -56,11 +55,11 @@ const ExcelComparator = () => {
 
           resolve(jsonData as any[][]);
         } catch (error) {
-          reject(error);
+          reject(new Error("Error on load file"));
         }
       };
 
-      reader.onerror = (error) => reject(error);
+      reader.onerror = (error) => reject(new Error("Error"));
       reader.readAsArrayBuffer(file);
     });
   };

@@ -188,7 +188,7 @@ function EmailGenerator() {
       setExcelData(filteredData);
     };
 
-    reader.readAsBinaryString(file as Blob);
+    reader.readAsArrayBuffer(file as Blob);
   };
 
   const handleRowClick = (row: any[]) => {
@@ -318,7 +318,7 @@ function EmailGenerator() {
     //MODIFICAR CADA AÑO
     // eslint-disable-next-line
 
-    gruposUnicos.sort().map((letra) => {
+    gruposUnicos.forEach((letra) => {
       if (letra === "A") {
         rutas.push(
           "Enlaces Maps grupo A: https://www.google.com/maps/d/edit?mid=1Lfngolsi8wiIsczQa6OnonYIxz8Guqg&usp=sharing"
@@ -352,11 +352,7 @@ function EmailGenerator() {
       if (letra === "I") {
         rutas.push("Enlaces Maps grupo I: ");
       }
-      // if (letra === "J") {
-      //   rutas.push(
-      //     "Enlaces Maps grupo J: "
-      //   );
-      // }
+      gruposUnicos.sort((a, b) => a.localeCompare(b));
     });
   };
   //EMAILS

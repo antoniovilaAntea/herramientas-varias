@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 const Inicio = () => {
   return (
     <div className="inicio">
@@ -57,7 +55,6 @@ const Inicio = () => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };
