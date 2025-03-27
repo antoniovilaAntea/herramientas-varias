@@ -11,6 +11,7 @@ import "./estilo.css";
 import Buscador from "../Pages/Buscador/Buscador";
 import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
 import Comparador from "../Pages/Comparador/Comparador";
+import { Tooltip } from "@mui/material";
 
 const Navigation = () => {
   let location = useLocation();
@@ -34,18 +35,20 @@ const Navigation = () => {
           </Link>
         </div>
         <div className="header-text">Herramientas</div>
-        <Link
-          to={"/ayuda"}
-          onClick={() => setActiveLink("")}
-          className="ayuda-icon"
-        >
-          <img
-            width={"35px"}
-            height={"35px"}
-            src={`${window.location.origin}${process.env.PUBLIC_URL}/help.webp`}
-            alt="Logo de ayuda"
-          />
-        </Link>
+        <Tooltip title="Ayuda">
+          <Link
+            to={"/ayuda"}
+            onClick={() => setActiveLink("")}
+            className="ayuda-icon"
+          >
+            <img
+              width={"35px"}
+              height={"35px"}
+              src={`${window.location.origin}${process.env.PUBLIC_URL}/help.webp`}
+              alt="Logo de ayuda"
+            />
+          </Link>
+        </Tooltip>
       </header>
       <div className="menu">
         <nav className="menu__nav">
