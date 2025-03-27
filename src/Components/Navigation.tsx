@@ -44,7 +44,7 @@ const Navigation = () => {
             <img
               width={"35px"}
               height={"35px"}
-              src={`${window.location.origin}${process.env.PUBLIC_URL}/help.webp`}
+              src={`${window.location.origin}${process.env.PUBLIC_URL}/help.svg`}
               alt="Logo de ayuda"
             />
           </Link>
