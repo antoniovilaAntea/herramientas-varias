@@ -192,7 +192,7 @@ const ExcelComparator = () => {
           ranges={state}
           showMonthAndYearPickers={false}
           weekStartsOn={1}
-          rangeColors={["#4a6fa5ff"]}
+          rangeColors={["#395983"]}
           locale={es}
         />
       </div>
