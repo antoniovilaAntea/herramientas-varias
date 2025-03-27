@@ -53,6 +53,7 @@ const Navigation = () => {
             to="/"
             onClick={() => setActiveLink("inicio")}
             className={activeLink === "inicio" ? "bold" : ""}
+            style={{ marginLeft: "0" }}
           >
             Inicio
           </Link>
