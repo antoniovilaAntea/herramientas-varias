@@ -57,11 +57,7 @@ const Inicio = () => {
           </div>
         </div>
       </div>
-      <footer>
-        <Link to={"/ayuda"} className="help">
-          Ayuda
-        </Link>
-      </footer>
+      
     </div>
   );
 };

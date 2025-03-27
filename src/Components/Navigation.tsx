@@ -34,6 +34,18 @@ const Navigation = () => {
           </Link>
         </div>
         <div className="header-text">Herramientas</div>
+        <Link
+          to={"/ayuda"}
+          onClick={() => setActiveLink("")}
+          className="ayuda-icon"
+        >
+          <img
+            width={"35px"}
+            height={"35px"}
+            src={`${window.location.origin}${process.env.PUBLIC_URL}/help.webp`}
+            alt="Logo de ayuda"
+          />
+        </Link>
       </header>
       <div className="menu">
         <nav className="menu__nav">
@@ -81,6 +93,7 @@ const Navigation = () => {
           </Link>
           <Link
             to="/expropiaciones"
+            style={{ width: "150px" }}
             onClick={() => setActiveLink("expropiaciones")}
             className={activeLink === "expropiaciones" ? "bold" : ""}
           >

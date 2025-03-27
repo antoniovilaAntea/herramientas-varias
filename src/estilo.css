@@ -3,18 +3,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80%;
+    height: fit-content;
     width: 100%;
   }
-  footer {
-    height: 25%;
-    color: #274690;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
-    width: 80%;
-  }
+
   .descripciones__lista {
     display: flex;
     flex-direction: column !important;
@@ -38,7 +30,7 @@
   .inicio {
     text-align: center;
     background-color: #dbe9ee;
-    height: 82vh;
+    height: fit-content;
     width: 207vh;
     display: flex;
     flex-direction: column;
@@ -54,16 +46,7 @@
     height: 80%;
     width: 40%;
   }
-  footer {
-    color: #274690;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
-    width: 80%;
-    position: fixed;
-    bottom: 5px;
-  }
+
   .descripciones__lista {
     display: flex;
     flex-direction: column !important;
