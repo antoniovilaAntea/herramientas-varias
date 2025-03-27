@@ -16,7 +16,7 @@ const Conversor = () => {
           <button>Descargar .zip</button>
         </a>
       </div>
-      <div>
+      <div className="online">
         <h3>Convertir un archivo .txt en un archivo de aforos (.af1)</h3>
         <FileConverter tipo="conversor"></FileConverter>
       </div>

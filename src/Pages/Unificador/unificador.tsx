@@ -16,9 +16,13 @@ const Unificador = () => {
           <button>Descargar .zip</button>
         </a>
       </div>
-      <h3>Unir archivos de espiras creciente y decreciente</h3>
-      <div className="unir">
-        <FileConverter tipo="unificador"></FileConverter>
+      <div className="online">
+        <h3 style={{ textAlign: "center" }}>
+          Unir archivos de espiras creciente y decreciente
+        </h3>
+        <div className="unir">
+          <FileConverter tipo="unificador"></FileConverter>
+        </div>
       </div>
     </div>
   );

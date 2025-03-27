@@ -54,3 +54,10 @@
   flex-direction: column;
   align-items: center;
 }
+.online {
+  text-align: center;
+  padding-top: 1.5em;
+}
+.botones {
+  height: 100px;
+}

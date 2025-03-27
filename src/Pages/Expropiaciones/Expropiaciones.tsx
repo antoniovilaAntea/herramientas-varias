@@ -14,7 +14,7 @@ const Expropiaciones = () => {
           <button>Descargar .zip</button>
         </a>
       </div>
-      <div>
+      <div className="online">
         <h3>Convertir un archivo .xlsx en un XML</h3>
         <ExpropiacionesConverter></ExpropiacionesConverter>
       </div>

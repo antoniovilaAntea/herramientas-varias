@@ -17,8 +17,10 @@ const Comparador = () => {
           <button>Descargar .zip</button>
         </a>
       </div>
-      <div className="texto">
-        <h3>Comparar dos excel y exportarlos en un mismo excel</h3>
+      <div className="online">
+        <h3 style={{ paddingBottom: "1em" }}>
+          Comparar dos excel y exportarlos en un mismo excel
+        </h3>
         <ExcelComparator></ExcelComparator>
       </div>
     </div>

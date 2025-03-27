@@ -28,6 +28,7 @@ const Emails = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          paddingTop: "2em",
         }}
       >
         <h3>Generar email - Dep. Pontevedra</h3>

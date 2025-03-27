@@ -44,3 +44,6 @@ input[type="file"] {
 .archivo :hover {
   cursor: pointer;
 }
+.online {
+  padding-top: 3em;
+}

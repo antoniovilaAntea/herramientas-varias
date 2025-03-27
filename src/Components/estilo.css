@@ -296,3 +296,18 @@
     cursor: pointer;
   }
 }
+.convertir {
+  padding-top: 1em;
+}
+.inputs__nombre {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 2em;
+}
+.inputs__presupuesto {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 2em;
+}
