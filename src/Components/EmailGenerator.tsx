@@ -103,7 +103,7 @@ function EmailGenerator() {
   };
   const abrirCorreoConcellos = (cuerpo: string, destinatarios: string) => {
     const subject = "Plan Aforos Deputación Pontevedra";
-    const mailtoUrl = `mailto:${destinatarios}?subject=${subject}`;
+    const mailtoUrl = `mailto:${destinatarios}?cc=laurarey@anteagroup.es,mariadelmar.gonzalez@depo.es?subject=${subject}`;
     window.open(mailtoUrl);
   };
 
