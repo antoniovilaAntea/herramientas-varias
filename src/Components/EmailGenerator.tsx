@@ -4,9 +4,8 @@ import isEqual from "lodash/isEqual";
 import emails from "../Data/emailData";
 import * as XLSX from "xlsx";
 import Modal from "@mui/material/Modal";
-
-import "./emailGenerator.css";
 import { Box } from "@mui/material";
+import "./emailGenerator.css";
 
 function EmailGenerator() {
   const [excelData, setExcelData] = useState<any[]>([]);
@@ -16,11 +15,12 @@ function EmailGenerator() {
   const [retirar, setRetirar] = useState(false);
   const [inicioSemana, setInicioSemana] = useState<string>("");
   const [finSemana, setFinSemana] = useState<string>("");
-  const [fecha, setFecha] = useState<string>("");
+  const [fecha, setFecha] = useState<string>("Luns");
   const [datos, setDatos] = useState<any[]>([]);
   const [isCopied, setIsCopied] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [emailContent, setEmailContent] = useState("");
+  const [numero, setNumero] = useState(1);
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenModal = () => setOpenModal(true);
 
@@ -124,7 +124,7 @@ function EmailGenerator() {
           const fecha = item.fecha;
           const dato = `${fila[1]}, aproximadamente no PK ${
             fila[2]
-          } (instalación prevista para o ${fecha.toLowerCase()})`;
+          } (instalación prevista para o ${fecha.toLowerCase()} ${numero})`;
 
           if (!concellosMap[concello]) {
             concellosMap[concello] = [];
@@ -202,7 +202,6 @@ function EmailGenerator() {
   };
 
   const convertirFechaExcelANormal = (numExcel: any) => {
-    console.log(typeof numExcel);
     if (typeof numExcel === "number") {
       const fechaUTC = new Date((numExcel - 25569) * 86400000);
 
@@ -251,7 +250,7 @@ function EmailGenerator() {
     Object.keys(groupedData).forEach((key, index) => {
       const [fecha, tipo] = key.split("-");
       if (fecha !== lastDate) {
-        contenido += `${fecha.toUpperCase()}\n\n`;
+        contenido += `${fecha.toUpperCase()} ${numero}\n\n`;
         lastDate = fecha;
       }
       contenido += `Gomas a ${tipo.toUpperCase()}:\n`;
@@ -390,13 +389,32 @@ function EmailGenerator() {
         </div>
         <div className="fecha">
           <label htmlFor="fecha">Fecha</label>
+          <select
+            defaultValue={"Luns"}
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
+            id="fecha"
+          >
+            <option value={"Luns"}>Luns</option>
+            <option value={"Martes"}>Martes</option>
+            <option value={"Mércores"}>Mércores</option>
+            <option value={"Xoves"}>Xoves</option>
+            <option value={"Venres"}>Venres</option>
+          </select>
           <input
+            type="number"
+            placeholder="0"
+            value={numero}
+            onChange={(e) => setNumero(parseInt(e.target.value))}
+            maxLength={2}
+          ></input>
+          {/* <input
             type="text"
             id="fecha"
             placeholder="Ej: Lunes 12"
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
-          />
+          /> */}
           <div className="checkboxes">
             <input
               type="checkbox"

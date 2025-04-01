@@ -106,14 +106,32 @@ input[type="file"] {
   }
 }
 .fecha {
+  width: 40%;
+  justify-content: center;
   margin-bottom: 2em;
   display: flex;
   align-items: center;
   flex-direction: row;
   input {
-    width: 48%;
+    width: 8%;
     padding: 8px 12px;
-    margin-bottom: 15px;
+    margin: 8px 12px;
+    border: 1px solid #495b86;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #274690;
+    background-color: #c0d6df;
+    background-image: none;
+    transition:
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+  }
+  select {
+    width: 25%;
+    padding: 8px 12px;
+    margin: 8px 12px;
+    /* margin-bottom: 15px; */
     border: 1px solid #495b86;
     border-radius: 4px;
     font-size: 14px;
