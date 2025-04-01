@@ -199,7 +199,7 @@ const ExcelComparator = () => {
       <div className="botones">
         <div className="archivo">
           <label className="input-group-text" htmlFor="inputGroupFile">
-            Examinar
+            Accidentes nuevos
           </label>
           <input
             type="file"
@@ -212,7 +212,7 @@ const ExcelComparator = () => {
 
         <div className="archivo2">
           <label className="input-group-text" htmlFor="inputGroupFile2">
-            Examinar
+            Accidentes anteriores
           </label>
           <input
             type="file"
