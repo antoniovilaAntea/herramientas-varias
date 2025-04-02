@@ -282,25 +282,62 @@ function EmailGenerator() {
   };
 
   const anadirDatos = () => {
-    const tipo = instalar ? "Instalar" : retirar ? "Retirar" : "No tipo";
-    const hayDuplicadosEnDatos = datos.some(
-      (obj) =>
-        obj.inicioSemana === inicioSemana &&
-        obj.finSemana === finSemana &&
-        obj.fecha === fecha &&
-        obj.tipo === tipo &&
-        JSON.stringify(obj.selectedRows) === JSON.stringify(selectedRows)
-    );
-    if (!hayDuplicadosEnDatos) {
-      setDatos([
-        ...datos,
-        { inicioSemana, finSemana, fecha, tipo, selectedRows },
-      ]);
+    let tipo: string;
+    if (instalar) {
+      tipo = "Instalar";
+    } else if (retirar) {
+      tipo = "Retirar";
     } else {
-      alert("Ya hay un elemento igual");
+      tipo = "No tipo";
     }
+    if (
+      selectedRows.length < 1 ||
+      inicioSemana.length < 1 ||
+      finSemana.length < 1 ||
+      fecha === undefined ||
+      numero <= 0 ||
+      tipo === "No tipo"
+    ) {
+      if (selectedRows.length < 1) {
+        alert("No has seleccionado ninguna fila");
+      }
+      if (inicioSemana.length < 1) {
+        alert("No has escrito inicio de la semana");
+      }
+      if (finSemana.length < 1) {
+        alert("No has escrito fin de la semana");
+      }
+      if (fecha === undefined) {
+        alert("No has seleccionado ningun día");
+      }
+      if (numero <= 0) {
+        alert("No has escrito número de día");
+      }
+      if (tipo === "No tipo") {
+        alert("No has seleccionado si es a instalar o a retirar");
+      }
 
-    return hayDuplicadosEnDatos;
+      return true;
+    } else {
+      const hayDuplicadosEnDatos = datos.some(
+        (obj) =>
+          obj.inicioSemana === inicioSemana &&
+          obj.finSemana === finSemana &&
+          obj.fecha === fecha &&
+          obj.tipo === tipo &&
+          JSON.stringify(obj.selectedRows) === JSON.stringify(selectedRows)
+      );
+      if (!hayDuplicadosEnDatos) {
+        setDatos([
+          ...datos,
+          { inicioSemana, finSemana, fecha, tipo, selectedRows },
+        ]);
+      } else {
+        alert("Ya hay un elemento igual");
+      }
+
+      return hayDuplicadosEnDatos;
+    }
   };
 
   let rutas: any[] = [];
@@ -405,16 +442,15 @@ function EmailGenerator() {
             type="number"
             placeholder="0"
             value={numero}
-            onChange={(e) => setNumero(parseInt(e.target.value))}
-            maxLength={2}
-          ></input>
-          {/* <input
-            type="text"
-            id="fecha"
-            placeholder="Ej: Lunes 12"
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
-          /> */}
+            onChange={(e) => {
+              const value = parseInt(e.target.value, 10);
+              if (!isNaN(value) && value >= 0 && value <= 31) {
+                setNumero(value);
+              }
+            }}
+            min={0}
+            max={31}
+          />
           <div className="checkboxes">
             <input
               type="checkbox"
