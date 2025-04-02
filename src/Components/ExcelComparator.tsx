@@ -52,7 +52,6 @@ const ExcelComparator = () => {
           const workbook = XLSX.read(data, { type: "array" });
           const worksheet = workbook.Sheets[workbook.SheetNames[0]];
           const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
           resolve(jsonData as any[][]);
         } catch (error) {
           reject(new Error("Error on load file"));
@@ -63,7 +62,19 @@ const ExcelComparator = () => {
       reader.readAsArrayBuffer(file);
     });
   };
+  const excelDateToJSDate = (excelDate: any) => {
+    const fechaJS = new Date((excelDate - 25569) * 86400 * 1000); // 25569 = días entre 1900 y 1970
+    return fechaJS;
+  };
+  const formatFecha = (fechaJS: Date) => {
+    const dia = String(fechaJS.getDate()).padStart(2, "0");
+    const mes = String(fechaJS.getMonth() + 1).padStart(2, "0"); // Meses van de 0 a 11
+    const anio = fechaJS.getFullYear();
+    const horas = String(fechaJS.getHours()).padStart(2, "0");
+    const minutos = String(fechaJS.getMinutes()).padStart(2, "0");
 
+    return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
+  };
   const procesarDatos = (data1: any[][], data2: any[][]): ProcessedData => {
     const result: ProcessedData = {
       datosConProvincial: [],
@@ -71,7 +82,6 @@ const ExcelComparator = () => {
       datosAnteriores: [],
       primeraFila: [],
     };
-
     if (data1.length === 0) return result;
 
     result.primeraFila = data1[0];
@@ -84,7 +94,7 @@ const ExcelComparator = () => {
     );
 
     for (let i = 1; i < data1.length; i++) {
-      const row = data1[i];
+      const row = [...data1[i]];
       const celda11 = row[11]?.toString();
       const celda12 = row[12]?.toString();
       const contieneProvincial = [celda11, celda12].some((c) =>
@@ -94,17 +104,23 @@ const ExcelComparator = () => {
       if (!contieneProvincial) continue;
 
       const fechaStr = row[1];
-      const fecha = parse(fechaStr, "dd/MM/yyyy HH:mm", new Date());
+      const fechaJS = excelDateToJSDate(fechaStr);
+      const fechaFormateada = formatFecha(fechaJS);
+
+      row[1] = fechaFormateada;
+
+      const fecha = parse(fechaFormateada, "dd/MM/yyyy HH:mm", new Date());
+
       if (
-        isSameDay(fecha, fechaMinima) ||
-        (isAfter(fecha, fechaMinima) &&
-          (isSameDay(fecha, fechaMaxima) || isBefore(fecha, fechaMaxima)))
+        (isSameDay(fecha, fechaMinima) || isAfter(fecha, fechaMinima)) &&
+        (isSameDay(fecha, fechaMaxima) || isBefore(fecha, fechaMaxima))
       ) {
         const clave = String(row[0]).trim();
         if (!clavesArchivo2.has(clave)) {
           result.datosCoincidentes.push(row);
         }
       }
+
       if (isBefore(fecha, fechaMinima)) {
         const clave = String(row[0]).trim();
         if (!clavesArchivo2.has(clave)) {
@@ -114,15 +130,14 @@ const ExcelComparator = () => {
 
       result.datosConProvincial.push(row);
     }
-
     return result;
   };
 
   const btnExportarClick = async () => {
     if (!file1.current || !file2.current) return;
 
-    const data1 = await readExcelFile(file2.current);
     const data2 = await readExcelFile(file1.current);
+    const data1 = await readExcelFile(file2.current);
 
     const {
       datosConProvincial,
@@ -199,7 +214,7 @@ const ExcelComparator = () => {
       <div className="botones">
         <div className="archivo">
           <label className="input-group-text" htmlFor="inputGroupFile">
-            Examinar
+            Accidentes anteriores
           </label>
           <input
             type="file"
@@ -212,7 +227,7 @@ const ExcelComparator = () => {
 
         <div className="archivo2">
           <label className="input-group-text" htmlFor="inputGroupFile2">
-            Examinar
+            Accidentes nuevos
           </label>
           <input
             type="file"
