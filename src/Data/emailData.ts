@@ -54,7 +54,7 @@ const emails: Concello[] = [
   },
   {
     concello: "Caldas de Reis",
-    email: "concello@caldasdereis.com",
+    email: "concello@caldasdereis.gal",
   },
   {
     concello: "Cambados",
