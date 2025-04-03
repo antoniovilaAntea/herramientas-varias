@@ -18,7 +18,6 @@ function EmailGenerator() {
   const [finSemana, setFinSemana] = useState<string>("");
   const [fecha, setFecha] = useState<string>("Luns");
   const [datos, setDatos] = useState<any[]>([]);
-  const [isCopied, setIsCopied] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [emailContent, setEmailContent] = useState("");
   const [numero, setNumero] = useState(1);
@@ -42,10 +41,7 @@ function EmailGenerator() {
   const handleCopyClick = async (texto: string) => {
     try {
       await navigator.clipboard.writeText(texto);
-      setIsCopied(true);
       alert("El cuerpo del mensaje se ha copiado en el portapapeles");
-
-      setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
       console.error("Error al copiar:", err);
     }
