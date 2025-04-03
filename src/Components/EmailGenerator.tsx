@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { Box } from "@mui/material";
+import Modal from "@mui/material/Modal";
+import * as XLSX from "xlsx";
 import isEqual from "lodash/isEqual";
 //VIGILAR CADA AÑO
 import emails from "../Data/emailData";
-import * as XLSX from "xlsx";
-import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material";
+
 import "./emailGenerator.css";
 
 function EmailGenerator() {

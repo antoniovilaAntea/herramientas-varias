@@ -1,7 +1,7 @@
 import React from "react";
+import ExcelComparator from "../../Components/ExcelComparator";
 
 import "./comparador.css";
-import ExcelComparator from "../../Components/ExcelComparator";
 
 const Comparador = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
+import CellBrowser from "../../Components/CellBrowser";
 
 import "./buscador.css";
-import CellBrowser from "../../Components/CellBrowser";
 
 const Buscador = () => {
   return (

@@ -1,5 +1,5 @@
-import "./Expropiaciones.css";
 import ExpropiacionesConverter from "../../Components/ExpropiacionesConverter";
+import "./Expropiaciones.css";
 const Expropiaciones = () => {
   return (
     <div className="conversor">

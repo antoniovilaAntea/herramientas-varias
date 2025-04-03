@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 import { DateRange, RangeKeyDict } from "react-date-range";
 import { utils, writeFile } from "xlsx";
 import * as XLSX from "xlsx";
 import { parse, isBefore, isAfter, isSameDay, format } from "date-fns";
 import { es } from "date-fns/locale";
+
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 interface ProcessedData {
   datosConProvincial: any[][];
