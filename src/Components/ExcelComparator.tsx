@@ -64,12 +64,12 @@ const ExcelComparator = () => {
     });
   };
   const excelDateToJSDate = (excelDate: any) => {
-    const fechaJS = new Date((excelDate - 25569) * 86400 * 1000); // 25569 = días entre 1900 y 1970
+    const fechaJS = new Date((excelDate - 25569) * 86400 * 1000);
     return fechaJS;
   };
   const formatFecha = (fechaJS: Date) => {
     const dia = String(fechaJS.getDate()).padStart(2, "0");
-    const mes = String(fechaJS.getMonth() + 1).padStart(2, "0"); // Meses van de 0 a 11
+    const mes = String(fechaJS.getMonth() + 1).padStart(2, "0");
     const anio = fechaJS.getFullYear();
     const horas = String(fechaJS.getHours()).padStart(2, "0");
     const minutos = String(fechaJS.getMinutes()).padStart(2, "0");
@@ -215,7 +215,7 @@ const ExcelComparator = () => {
               {
                 startDate: selection.startDate ?? new Date(),
                 endDate: selection.endDate ?? new Date(),
-                key: "selection", // Usar una clave fija
+                key: "selection",
               },
             ]);
           }}
