@@ -135,21 +135,13 @@ const ExcelComparator = () => {
   };
 
   const btnExportarClick = async () => {
-    if (
-      !file1.current ||
-      !file2.current ||
-      state[0].startDate.toString === state[0].endDate.toString
-    ) {
+    if (!file1.current || !file2.current) {
       if (!file1.current) {
         alert("No has seleccionado ningún archivo de accidentes anteriores");
       }
       if (!file2.current) {
         alert("No has seleccionado ningún archivo de accidentes nuevos");
       }
-      if (state[0].startDate.toString === state[0].endDate.toString) {
-        alert("No has seleccionado rango de fecha");
-      }
-
       return;
     }
 
