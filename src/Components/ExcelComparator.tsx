@@ -67,6 +67,18 @@ const ExcelComparator = () => {
     const fechaJS = new Date((excelDate - 25569) * 86400 * 1000);
     return fechaJS;
   };
+
+  const excelHourToJSHour = (excelTime: any) => {
+    const milliseconds = excelTime * 86400000; // 24 * 60 * 60 * 1000
+    const fechaJS = new Date(milliseconds);
+    return fechaJS;
+  };
+  const formatHora = (fechaJS: Date) => {
+    const horas = String(fechaJS.getHours()).padStart(2, "0");
+    const minutos = String(fechaJS.getMinutes()).padStart(2, "0");
+
+    return `${horas}:${minutos}`;
+  };
   const formatFecha = (fechaJS: Date) => {
     const dia = String(fechaJS.getDate()).padStart(2, "0");
     const mes = String(fechaJS.getMonth() + 1).padStart(2, "0");
@@ -103,7 +115,10 @@ const ExcelComparator = () => {
       );
 
       if (!contieneProvincial) continue;
-
+      const horaStr = row[5];
+      const horaJS = excelHourToJSHour(horaStr);
+      const horaFormateada = formatHora(horaJS);
+      row[5] = horaFormateada;
       const fechaStr = row[1];
       const fechaJS = excelDateToJSDate(fechaStr);
       const fechaFormateada = formatFecha(fechaJS);
