@@ -311,3 +311,17 @@
   align-items: center;
   padding-bottom: 2em;
 }
+
+.gomasPacheco {
+  input[type="file"] {
+    padding: 5px 0 0 15px;
+    font-size: 13px;
+    cursor: pointer;
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+    &::file-selector-button {
+      display: none;
+    }
+  }
+}

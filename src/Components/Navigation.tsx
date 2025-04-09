@@ -10,6 +10,8 @@ import logoAntea from "../logoAntea.webp";
 import Buscador from "../Pages/Buscador/Buscador";
 import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
 import Comparador from "../Pages/Comparador/Comparador";
+// import Festivos from "../Pages/Festivos/Festivos";
+import GomasPacheco from "../Pages/GomasPacheco/gomasPacheco";
 
 import "./estilo.css";
 
@@ -95,6 +97,20 @@ const Navigation = () => {
           >
             Comparador
           </Link>
+          {/* <Link
+            to="/festivos"
+            onClick={() => setActiveLink("festivos")}
+            className={activeLink === "festivos" ? "bold" : ""}
+          >
+            Festivos
+          </Link> */}
+          <Link
+            to="/gomasPacheco"
+            onClick={() => setActiveLink("gomasPacheco")}
+            className={activeLink === "gomasPacheco" ? "bold" : ""}
+          >
+            Gomas Pacheco
+          </Link>
           <Link
             to="/expropiaciones"
             style={{ width: "150px" }}
@@ -111,6 +127,8 @@ const Navigation = () => {
           <Route path="/email" element={<Emails />} />
           <Route path="/buscador" element={<Buscador />} />
           <Route path="/comparador" element={<Comparador />} />
+          {/* <Route path="/festivos" element={<Festivos />} /> */}
+          <Route path="/gomasPacheco" element={<GomasPacheco />} />
           <Route path="/expropiaciones" element={<Expropiaciones />} />
           <Route path="/ayuda" element={<Ayuda />} />
         </Routes>
