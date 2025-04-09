@@ -368,7 +368,9 @@ function EmailGenerator() {
         );
       }
       if (letra === "D") {
-        rutas.push("Enlaces Maps grupo D: ");
+        rutas.push(
+          "Enlaces Maps grupo D: https://www.google.com/maps/d/edit?mid=1DMQkj7jjlOuiHEJfK_U1eYQ34UoP07c&usp=sharing"
+        );
       }
       if (letra === "E") {
         rutas.push("Enlaces Maps grupo E: ");
