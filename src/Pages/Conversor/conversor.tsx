@@ -18,6 +18,13 @@ const Conversor = () => {
       </div>
       <div className="online">
         <h3>Convertir un archivo .txt en un archivo de aforos (.af1)</h3>
+        <h5
+          style={{ fontStyle: "italic", color: "#495B86", fontWeight: "600" }}
+        >
+          Esta herramienta consiste en un conversor de un archivo.txt de espiras
+          "por pasadas" obtenido desde AfoAnalisis y devuelve un archivo de
+          gomas "por pasadas" para cargar en XesAforos gomas
+        </h5>
         <FileConverter tipo="conversor"></FileConverter>
       </div>
     </div>

@@ -81,6 +81,7 @@ const Navigation = () => {
             to="/email"
             onClick={() => setActiveLink("email")}
             className={activeLink === "email" ? "bold-depo" : "depo"}
+            style={{ width: "120px" }}
           >
             Generador Emails DEPO
           </Link>

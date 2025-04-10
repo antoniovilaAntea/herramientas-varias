@@ -55,9 +55,13 @@
   align-items: center;
 }
 .online {
-  text-align: center;
   padding-top: 1.5em;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 .botones {
   height: 100px;
+  width: 40vh;
 }
