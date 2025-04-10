@@ -65,37 +65,38 @@ const Navigation = () => {
           <Link
             to="/conversor"
             onClick={() => setActiveLink("conversor")}
-            className={activeLink === "conversor" ? "bold" : ""}
+            className={activeLink === "conversor" ? "bold-xunta" : "xunta"}
+            style={{ width: "120px" }}
           >
-            Conversor
+            Conversor Espiras-Gomas
           </Link>
           <Link
             to="/unificador"
             onClick={() => setActiveLink("unificador")}
-            className={activeLink === "unificador" ? "bold" : ""}
+            className={activeLink === "unificador" ? "bold-xunta" : "xunta"}
           >
-            Unificador
+            Unificador sentidos
           </Link>
           <Link
             to="/email"
             onClick={() => setActiveLink("email")}
-            className={activeLink === "email" ? "bold" : ""}
+            className={activeLink === "email" ? "bold-depo" : "depo"}
           >
-            Email
+            Generador Emails DEPO
           </Link>
           <Link
             to="/buscador"
             onClick={() => setActiveLink("buscador")}
             className={activeLink === "buscador" ? "bold" : ""}
           >
-            Buscador
+            Buscador de celdas
           </Link>
           <Link
-            to="/comparador"
-            onClick={() => setActiveLink("comparador")}
-            className={activeLink === "comparador" ? "bold" : ""}
+            to="/accidentes"
+            onClick={() => setActiveLink("accidentes")}
+            className={activeLink === "accidentes" ? "bold-depo" : "depo"}
           >
-            Comparador
+            Accidentes DEPO
           </Link>
           {/* <Link
             to="/festivos"
@@ -105,11 +106,11 @@ const Navigation = () => {
             Festivos
           </Link> */}
           <Link
-            to="/gomasPacheco"
-            onClick={() => setActiveLink("gomasPacheco")}
-            className={activeLink === "gomasPacheco" ? "bold" : ""}
+            to="/listadorGomas"
+            onClick={() => setActiveLink("listadorGomas")}
+            className={activeLink === "listadorGomas" ? "bold-xunta" : "xunta"}
           >
-            Gomas Pacheco
+            Listador de gomas
           </Link>
           <Link
             to="/expropiaciones"
@@ -126,9 +127,9 @@ const Navigation = () => {
           <Route path="/unificador" element={<Unificador />} />
           <Route path="/email" element={<Emails />} />
           <Route path="/buscador" element={<Buscador />} />
-          <Route path="/comparador" element={<Comparador />} />
+          <Route path="/accidentes" element={<Comparador />} />
           {/* <Route path="/festivos" element={<Festivos />} /> */}
-          <Route path="/gomasPacheco" element={<GomasPacheco />} />
+          <Route path="/listadorGomas" element={<GomasPacheco />} />
           <Route path="/expropiaciones" element={<Expropiaciones />} />
           <Route path="/ayuda" element={<Ayuda />} />
         </Routes>
