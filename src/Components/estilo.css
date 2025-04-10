@@ -41,7 +41,7 @@
       text-align: center;
     }
     &.xunta:hover {
-      background-color: #007bc4 !important;
+      background-color: #007bc4b5 !important;
       border-radius: 10px !important;
       padding: 5px 5px;
       text-decoration: none;
@@ -234,7 +234,7 @@
         font-weight: bold;
       }
       &.xunta:hover {
-        background-color: #007bc4 !important;
+        background-color: #007bc4b5 !important;
         border-radius: 10px !important;
         padding: 5px 5px;
         text-decoration: none;
