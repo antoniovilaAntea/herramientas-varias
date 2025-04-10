@@ -78,12 +78,11 @@ const Navigation = () => {
             Unificador sentidos
           </Link>
           <Link
-            to="/email"
-            onClick={() => setActiveLink("email")}
-            className={activeLink === "email" ? "bold-depo" : "depo"}
-            style={{ width: "120px" }}
+            to="/listadorGomas"
+            onClick={() => setActiveLink("listadorGomas")}
+            className={activeLink === "listadorGomas" ? "bold-xunta" : "xunta"}
           >
-            Generador Emails DEPO
+            Listador de gomas
           </Link>
           <Link
             to="/buscador"
@@ -99,6 +98,14 @@ const Navigation = () => {
           >
             Accidentes DEPO
           </Link>
+          <Link
+            to="/email"
+            onClick={() => setActiveLink("email")}
+            className={activeLink === "email" ? "bold-depo" : "depo"}
+            style={{ width: "120px" }}
+          >
+            Generador Emails DEPO
+          </Link>
           {/* <Link
             to="/festivos"
             onClick={() => setActiveLink("festivos")}
@@ -106,13 +113,7 @@ const Navigation = () => {
           >
             Festivos
           </Link> */}
-          <Link
-            to="/listadorGomas"
-            onClick={() => setActiveLink("listadorGomas")}
-            className={activeLink === "listadorGomas" ? "bold-xunta" : "xunta"}
-          >
-            Listador de gomas
-          </Link>
+
           <Link
             to="/expropiaciones"
             style={{ width: "150px" }}
