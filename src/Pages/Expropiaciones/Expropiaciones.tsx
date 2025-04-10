@@ -6,7 +6,7 @@ const Expropiaciones = () => {
       <div className="descarga">
         <h3>Descargar Conversor - Expropiaciones - </h3>
         <a
-          href="https://iceacsaconsultores-my.sharepoint.com/:u:/g/personal/antoniovila_anteagroup_es/ETRVgFlWBS5Jqq44Khz28gABVngccGbNVARipowEl4kkqg?e=DAJdYi"
+          href="https://iceacsaconsultores-my.sharepoint.com/:u:/g/personal/antoniovila_anteagroup_es/EZCQXmTe7D9BuVUlprTWkwwBRxCJwmPHJI2uWJpPNM-1lA?e=uFGCwY"
           download={"Conversor .xlsx en xml"}
           target="_blank"
           rel="noreferrer"
