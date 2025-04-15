@@ -52,8 +52,8 @@
   color: #eeeeee !important;
 }
 .css-b62m3t-container {
-  min-width: max-content;
-  width: 250px;
+  max-width: 500px;
+  text-overflow: ellipsis;
 }
 .festivos {
   width: 90%;
@@ -64,4 +64,8 @@
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
   justify-items: center;
+}
+.css-tj5bde-Svg,
+.css-v7duua {
+  cursor: pointer;
 }
