@@ -10,7 +10,7 @@ import logoAntea from "../logoAntea.webp";
 import Buscador from "../Pages/Buscador/Buscador";
 import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
 import Comparador from "../Pages/Comparador/Comparador";
-// import Festivos from "../Pages/Festivos/Festivos";
+import Festivos from "../Pages/Festivos/Festivos";
 import GomasPacheco from "../Pages/GomasPacheco/gomasPacheco";
 
 import "./estilo.css";
@@ -106,13 +106,13 @@ const Navigation = () => {
           >
             Generador Emails DEPO
           </Link>
-          {/* <Link
+          <Link
             to="/festivos"
             onClick={() => setActiveLink("festivos")}
             className={activeLink === "festivos" ? "bold" : ""}
           >
             Festivos
-          </Link> */}
+          </Link>
 
           <Link
             to="/expropiaciones"
@@ -130,7 +130,7 @@ const Navigation = () => {
           <Route path="/email" element={<Emails />} />
           <Route path="/buscador" element={<Buscador />} />
           <Route path="/accidentes" element={<Comparador />} />
-          {/* <Route path="/festivos" element={<Festivos />} /> */}
+          <Route path="/festivos" element={<Festivos />} />
           <Route path="/listadorGomas" element={<GomasPacheco />} />
           <Route path="/expropiaciones" element={<Expropiaciones />} />
           <Route path="/ayuda" element={<Ayuda />} />

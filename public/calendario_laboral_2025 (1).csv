@@ -1,0 +1,639 @@
+fecha,descripcion,ambito,id_municipio,lugar
+2025-01-01,Aninovo,estatal,,
+2025-01-06,Epifan�a do Se�or (D�a de Reis),estatal,,
+2025-04-17,Xoves Santo,auton�mico,,
+2025-04-18,Venres Santo,estatal,,
+2025-05-01,D�a do Traballo,estatal,,
+2025-05-17,D�a das Letras Galegas,auton�mico,,
+2025-07-25,D�a Nacional de Galicia,auton�mico,,
+2025-08-15,Asunci�n da Virxe,estatal,,
+2025-11-01,Todos os Santos,estatal,,
+2025-12-06,D�a da Constituci�n Espa�ola,estatal,,
+2025-12-06,Inmaculada Concepci�n,estatal,,
+2025-12-25,Natividade do Se�or,estatal,,
+2025-03-04,Martes de Entroido,municipal,15001,Abegondo
+2025-04-25,festa de San Marcos,municipal,15001,Abegondo
+2025-05-29,festa da Ascensi�n,municipal,15002,Ames
+2025-06-24,festa de San Xo�n,municipal,15002,Ames
+2025-03-04,Martes de Entroido,municipal,15003,Aranga
+2025-06-24,festa de San Xo�n,municipal,15003,Aranga
+2025-06-10,Voto de Chanteiro,municipal,15004,Ares
+2025-06-24,festa de San Xo�n,municipal,15004,Ares
+2025-03-04,Martes de Entroido,municipal,15005,Arteixo
+2025-06-24,festa de San Xo�n,municipal,15005,Arteixo
+2025-06-24,festa de San Xo�n,municipal,15006,Arzúa
+2025-07-16,festa local de Arzúa,municipal,15006,Arzúa
+2025-01-22,festa de San Vicente,municipal,15007,A Baña
+2025-09-09,Virxe das Dores,municipal,15007,A Baña
+2025-03-04,Martes de Entroido,municipal,15008,Bergondo
+2025-06-24,festa de San Xo�n,municipal,15008,Bergondo
+2025-03-04,Martes de Entroido,municipal,15009,Betanzos
+2025-08-16,festa de San Roque,municipal,15009,Betanzos
+2025-03-04,Martes de Entroido,municipal,15010,Boimorto
+2025-09-08,festas do Rosario,municipal,15010,Boimorto
+2025-06-24,festividade de San Xo�n,municipal,15011,Boiro
+2025-07-16,festividade do Carme,municipal,15011,Boiro
+2025-01-22,festa de San Vicente,municipal,15012,Boqueixón
+2025-05-29,d�a da Ascensi�n,municipal,15012,Boqueixón
+2025-05-29,d�a da Ascensi�n,municipal,15013,Brión
+2025-06-24,festa de San Xo�n,municipal,15013,Brión
+2025-03-04,Martes de Entroido,municipal,15014,Cabana de Bergantiños
+2025-08-01,festa de San Fins,municipal,15014,Cabana de Bergantiños
+2025-03-04,Martes de Entroido,municipal,15015,Cabanas
+2025-11-11,festa de San Marti�o,municipal,15015,Cabanas
+2025-06-24,festividade de San Xo�n,municipal,15016,Camariñas
+2025-07-16,festas da Virxe do Carme,municipal,15016,Camariñas
+2025-03-04,Martes de Entroido,municipal,15017,Cambre
+2025-06-24,festa de San Xo�n,municipal,15017,Cambre
+2025-03-04,Martes de Entroido,municipal,15018,A Capela
+2025-08-05,festa patronal da Capela,municipal,15018,A Capela
+2025-06-24,festas patronais de San Xo�n Bautista,municipal,15019,Carballo
+2025-06-25,festas patronais de San Xo�n Bautista,municipal,15019,Carballo
+2025-05-02,festa local de Carnota,municipal,15020,Carnota
+2025-10-31,festa local de Carnota,municipal,15020,Carnota
+2025-03-04,Martes de Entroido,municipal,15021,Carral
+2025-09-08,Virxe do Socorro,municipal,15021,Carral
+2025-03-04,Martes de Entroido,municipal,15022,Cedeira
+2025-06-13,festa de Santo Antonio,municipal,15022,Cedeira
+2025-06-16,festa de Santo Adri�n,municipal,15023,Cee
+2025-06-24,festa de San Xo�n,municipal,15023,Cee
+2025-03-04,Martes de Entroido,municipal,15024,Cerceda
+2025-06-24,festa de San Xo�n,municipal,15024,Cerceda
+2025-03-04,Martes de Entroido,municipal,15025,Cerdido
+2025-06-16,festa local de Cerdido,municipal,15025,Cerdido
+2025-03-04,Martes de Entroido,municipal,15027,Coirós
+2025-06-24,festa de San Xo�n,municipal,15027,Coirós
+2025-04-25,festa de San Marcos,municipal,15028,Corcubión
+2025-07-16,festa do Carme,municipal,15028,Corcubión
+2025-03-04,Martes de Entroido,municipal,15029,Coristanco
+2025-06-09,A Saleta (Silv�n),municipal,15029,Coristanco
+2025-03-04,Martes de Entroido,municipal,15030,A Coruña
+2025-06-24,festividade de San Xo�n,municipal,15030,A Coruña
+2025-03-04,Martes de Entroido,municipal,15031,Culleredo
+2025-06-24,festa de San Xo�n,municipal,15031,Culleredo
+2025-03-04,Martes de Entroido,municipal,15032,Curtis
+2025-09-08,d�a da Virxe dos Remedios,municipal,15032,Curtis
+2025-04-21,Luns de Pascua,municipal,15033,Dodro
+2025-09-01,festividade dos Aflixidos,municipal,15033,Dodro
+2025-09-08,Virxe das Neves,municipal,15034,Dumbría
+2025-12-10,festa de Santa Baia de Dumbr�a,municipal,15034,Dumbría
+2025-03-05,M�rcores de Cinza,municipal,15035,Fene
+2025-08-06,festa de San Salvador,municipal,15035,Fene
+2025-01-07,festividade de San Xiao,municipal,15036,Ferrol
+2025-04-21,Nosa Se�ora de Chamorro,municipal,15036,Ferrol
+2025-04-21,Luns de Pascua,municipal,15037,Fisterra
+2025-09-08,festa local de Fisterra,municipal,15037,Fisterra
+2025-03-04,Martes de Entroido,municipal,15038,Frades
+2025-09-29,festa de San Miguel,municipal,15038,Frades
+2025-03-03,Luns de Entroido,municipal,15039,Irixoa
+2025-03-04,Martes de Entroido,municipal,15039,Irixoa
+2025-06-09,d�a do Pe��n,municipal,15040,Laxe
+2025-07-21,festividade de Santa Cruz da Rosa,municipal,15040,Laxe
+2025-03-04,Martes de Entroido,municipal,15041,A Laracha
+2025-09-08,Virxe dos Milagres de Cai�n,municipal,15041,A Laracha
+2025-04-25,festa de San Marcos,municipal,15042,Lousame
+2025-10-03,festa de San Roqui�o,municipal,15042,Lousame
+2025-03-04,Martes de Entroido,municipal,15043,Malpica de Berganti�os
+2025-08-22,festa do Mar,municipal,15043,Malpica de Berganti�os
+2025-03-04,Martes de Entroido,municipal,15044,Mañón
+2025-09-08,festa da Patroa,municipal,15044,Mañón
+2025-03-04,Martes de Entroido,municipal,15045,Mazaricos
+2025-06-24,festa de San Xo�n,municipal,15045,Mazaricos
+2025-04-21,Luns de Pascua,municipal,15046,Melide
+2025-07-16,d�a do Carme,municipal,15046,Melide
+2025-03-04,Martes de Entroido,municipal,15047,Mesía
+2025-06-13,festa de Santo Ant�n,municipal,15047,Mesía
+2025-03-04,Martes de Entroido,municipal,15048,Miño
+2025-06-28,v�spera de San Pedro,municipal,15048,Miño
+2025-03-04,Martes de Entroido,municipal,15049,Moeche
+2025-04-23,festa de San Xurxo,municipal,15049,Moeche
+2025-03-03,Luns de Entroido,municipal,15050,Monfero
+2025-03-04,Martes de Entroido,municipal,15050,Monfero
+2025-01-07,festa de Mugardos,municipal,15051,Mugardos
+2025-06-10,Voto de Chanteiro,municipal,15051,Mugardos
+2025-04-21,Luns de Pascua,municipal,15052,Muxía
+2025-09-15,Luns da Barca,municipal,15052,Muxía
+2025-06-24,festa de San Xo�n,municipal,15053,Muros
+2025-07-16,festa do Carme,municipal,15053,Muros
+2025-03-04,Martes de Entroido,municipal,15054,Narón
+2025-06-24,festa de San Xo�n,municipal,15054,Narón
+2025-03-04,Martes de Entroido,municipal,15055,Neda
+2025-09-08,festa local de Neda,municipal,15055,Neda
+2025-07-11,festa de San Cristovo,municipal,15056,Negreira
+2025-09-22,festa de Santa Margarida,municipal,15056,Negreira
+2025-06-24,festa de San Xo�n,municipal,15057,Noia
+2025-07-16,festa da Virxe do Carme,municipal,15057,Noia
+2025-03-04,Martes de Entroido,municipal,15058,Oleiros
+2025-06-24,festa de San Xo�n,municipal,15058,Oleiros
+2025-03-04,Martes de Entroido,municipal,15059,Ordes
+2025-08-16,festa de San Roque,municipal,15059,Ordes
+2025-03-04,Martes de Entroido,municipal,15060,Oroso
+2025-09-16,festa de Santa Eufemia,municipal,15060,Oroso
+2025-03-04,Martes de Entroido,municipal,15061,Ortigueira
+2025-07-29,d�a de Santa Marta,municipal,15061,Ortigueira
+2025-03-05,M�rcores de Cinza,municipal,15062,Outes
+2025-09-29,festa de San Campio,municipal,15062,Outes
+2025-03-04,Martes de Entroido,municipal,15064,Paderne
+2025-08-18,festa local de Paderne,municipal,15064,Paderne
+2025-04-21,Luns de Pascua,municipal,15065,Padrón
+2025-05-06,festa de San Xo�n do Raio,municipal,15065,Padrón
+2025-05-29,Ascensi�n do Se�or,municipal,15066,O Pino
+2025-07-22,Santa Mar�a Magdalena,municipal,15066,O Pino
+2025-08-18,Luns do Carme dos Pincheiros,municipal,15067,A Pobra do Caramiñal
+2025-09-22,Luns do Nazareno,municipal,15067,A Pobra do Caramiñal
+2025-09-08,festa local de Ponteceso,municipal,15068,Ponteceso
+2025-09-15,festa local de Ponteceso,municipal,15068,Ponteceso
+2025-09-08,festa das Peras,municipal,15069,Pontedeume
+2025-09-10,festa das Peras,municipal,15069,Pontedeume
+2025-03-04,Martes de Entroido,municipal,15070,As Pontes de García Rodr�guez
+2025-07-21,festa do Carme,municipal,15070,As Pontes de García Rodr�guez
+2025-03-03,Luns de Entroido,municipal,15071,Porto do Son
+2025-09-09,festa local de Porto do Son,municipal,15071,Porto do Son
+2025-07-16,festas do Carme,municipal,15072,Rianxo
+2025-09-19,Venres de Guadalupe,municipal,15072,Rianxo
+2025-07-24,festividade da Dorna,municipal,15073,Ribeira
+2025-09-12,d�a de Santa Ux�a,municipal,15073,Ribeira
+2025-04-21,Luns de Pascua,municipal,15074,Rois
+2025-05-15,San Isidro Labrador,municipal,15074,Rois
+2025-03-04,Martes de Entroido,municipal,15075,Sada
+2025-06-24,festa de San Xo�n,municipal,15075,Sada
+2025-03-04,Martes de Entroido,municipal,15076,San Sadurniño
+2025-07-02,festividade de Santa Isabel,municipal,15076,San Sadurniño
+2025-06-24,festividade de San Xo�n,municipal,15077,Santa Comba
+2025-06-30,festividade de Santo Antonio,municipal,15077,Santa Comba
+2025-05-29,d�a da Ascensi�n,municipal,15078,Santiago de Compostela
+2025-08-16,d�a de San Roque,municipal,15078,Santiago de Compostela
+2025-06-24,festa de San Xo�n,municipal,15079,Santiso
+2025-09-15,festa local de Santiso,municipal,15079,Santiso
+2025-03-04,Martes de Entroido,municipal,15080,Sobrado
+2025-06-24,festa de San Xo�n,municipal,15080,Sobrado
+2025-06-24,festa de San Xo�n,municipal,15081,As Somozas
+2025-07-28,festa local das Somozas,municipal,15081,As Somozas
+2025-05-29,festa da Ascensi�n,municipal,15082,Teo
+2025-11-11,festa de San Marti�o,municipal,15082,Teo
+2025-05-15,d�a de San Cidre,municipal,15083,Toques
+2025-09-02,d�a de Santo Antol�n,municipal,15083,Toques
+2025-03-04,Martes de Entroido,municipal,15084,Tordoia
+2025-06-24,festa de San Xo�n,municipal,15084,Tordoia
+2025-04-21,Luns de Pascua,municipal,15085,Touro
+2025-06-24,festa de San Xo�n,municipal,15085,Touro
+2025-03-04,Martes de Entroido,municipal,15086,Trazo
+2025-09-16,festividade de Santa Eufemia,municipal,15086,Trazo
+2025-03-04,Martes de Entroido,municipal,15087,Valdoviño
+2025-06-24,festa de San Xo�n,municipal,15087,Valdoviño
+2025-05-29,d�a da Ascensi�n,municipal,15088,Val do Dubra
+2025-08-01,festa do Emigrante,municipal,15088,Val do Dubra
+2025-09-22,d�a do Patio,municipal,15089,Vedra
+2025-12-10,festa de Santa Baia,municipal,15089,Vedra
+2025-03-04,Martes de Entroido,municipal,15090,Vilasantar
+2025-06-24,festa de San Xo�n,municipal,15090,Vilasantar
+2025-03-03,Luns de Entroido,municipal,15091,Vilarmaior
+2025-03-04,Martes de Entroido,municipal,15091,Vilarmaior
+2025-01-22,festa de San Vicente,municipal,15092,Vimianzo
+2025-08-11,festas do Ver�n,municipal,15092,Vimianzo
+2025-07-10,festa de San Cristovo,municipal,15093,Zas
+2025-07-16,festa da Virxe do Carme,municipal,15093,Zas
+2025-03-04,Martes de Entroido,municipal,15901,Cariño
+2025-07-16,festa do Carme,municipal,15901,Cariño
+2025-03-04,Martes de Entroido,municipal,15902,Oza-Cesuras
+2025-06-24,d�a de San Xo�n,municipal,15902,Oza-Cesuras
+2025-03-04,Martes de Entroido,municipal,27001,Abadín
+2025-09-26,San Cosme da Monta�a,municipal,27001,Abadín
+2025-03-04,Martes de Entroido,municipal,27002,Alfoz
+2025-08-04,festa dos Choferes,municipal,27002,Alfoz
+2025-06-24,San Xo�n,municipal,27003,Antas de Ulla
+2025-09-08,Virxe dos Remedios,municipal,27003,Antas de Ulla
+2025-03-04,Martes de Entroido,municipal,27004,Baleira
+2025-08-12,San Cristovo,municipal,27004,Baleira
+2025-03-04,Martes de Entroido,municipal,27005,Barreiros
+2025-09-26,San Cosme,municipal,27005,Barreiros
+2025-03-04,Martes de Entroido,municipal,27006,Becerreá
+2025-06-24,San Xo�n,municipal,27006,Becerreá
+2025-03-04,Martes de Entroido,municipal,27007,Begonte
+2025-06-27,San Pedro,municipal,27007,Begonte
+2025-09-01,San Xil,municipal,27008,Bóveda
+2025-09-15,Divino Ecce-Homo,municipal,27008,Bóveda
+2025-03-04,festivo local,municipal,27009,Carballedo
+2025-06-13,festivo local,municipal,27009,Carballedo
+2025-03-04,Martes de Entroido,municipal,27010,Castro de Rei
+2025-08-11,San Roque e Doce Nome de Mar�a,municipal,27010,Castro de Rei
+2025-03-04,Martes de Entroido,municipal,27011,Castroverde
+2025-07-24,d�a anterior ao Santiago Ap�stolo,municipal,27011,Castroverde
+2025-05-20,festivo local,municipal,27012,Cervantes
+2025-12-26,festivo local,municipal,27012,Cervantes
+2025-03-04,Martes de Entroido,municipal,27013,Cervo
+2025-07-16,Nosa Se�ora do Carme,municipal,27013,Cervo
+2025-03-04,Martes de Entroido,municipal,27014,O Corgo
+2025-06-24,San Xo�n,municipal,27014,O Corgo
+2025-03-04,Martes de Entroido,municipal,27015,Cospeito
+2025-09-08,Nosa Se�ora Virxe do Monte,municipal,27015,Cospeito
+2025-08-26,festa da Empanada,municipal,27016,Chantada
+2025-09-08,Virxe do Faro,municipal,27016,Chantada
+2025-08-19,festivo local,municipal,27017,Folgoso do Courel
+2025-12-05,festivo local,municipal,27017,Folgoso do Courel
+2025-03-04,Martes de Entroido,municipal,27018,A Fonsagrada
+2025-09-08,festas patronais da Fonsagrada,municipal,27018,A Fonsagrada
+2025-03-04,Martes de Entroido,municipal,27019,Foz
+2025-07-16,O Carme,municipal,27019,Foz
+2025-03-04,Martes de Entroido,municipal,27020,Friol
+2025-07-14,Luns de Santa Isabel,municipal,27020,Friol
+2025-03-04,Martes de Entroido,municipal,27021,Xermade
+2025-08-11,Luns de Santa Mar�a,municipal,27021,Xermade
+2025-03-04,Martes de Entroido,municipal,27022,Guitiriz
+2025-06-24,San Xo�n,municipal,27022,Guitiriz
+2025-03-04,Martes de Entroido,municipal,27023,Guntín
+2025-07-07,luns da festa,municipal,27023,Guntín
+2025-03-04,Martes de Entroido,municipal,27024,O Incio
+2025-05-15,San Eufrasio,municipal,27024,O Incio
+2025-06-13,Santo Antonio,municipal,27025,Xove
+2025-09-01,festa patronal,municipal,27025,Xove
+2025-03-04,Martes de Entroido,municipal,27026,Láncara
+2025-08-18,Luns de San Roque,municipal,27026,Láncara
+2025-03-04,Martes de Entroido,municipal,27027,Lourenzá
+2025-09-01,Luns do Conde Santo,municipal,27027,Lourenzá
+2025-03-04,Martes de Entroido,municipal,27028,Lugo
+2025-10-06,San Froil�n,municipal,27028,Lugo
+2025-03-04,Martes de Entroido,municipal,27029,Meira
+2025-08-16,festas patronais,municipal,27029,Meira
+2025-09-15,Nosa Se�ora dos Remedios,municipal,27030,Mondoñedo
+2025-10-18,San Lucas,municipal,27030,Mondoñedo
+2025-04-22,Martes de Pascua,municipal,27031,Monforte de Lemos
+2025-06-13,Santo Ant�n,municipal,27031,Monforte de Lemos
+2025-07-10,San Cristovo,municipal,27032,Monterroso
+2025-09-29,San Miguel,municipal,27032,Monterroso
+2025-03-04,Martes de Entroido,municipal,27033,Muras
+2025-06-30,San Pedro de Muras,municipal,27033,Muras
+2025-03-04,Martes de Entroido,municipal,27034,Navia de Suarna
+2025-09-22,Virxe das Dores,municipal,27034,Navia de Suarna
+2025-03-04,Martes de Entroido,municipal,27035,Negueira de Muñiz
+2025-08-18,Virxe da Veiga,municipal,27035,Negueira de Muñiz
+2025-03-04,Martes de Entroido,municipal,27037,As Nogais
+2025-08-01,festa do Emigrante,municipal,27037,As Nogais
+2025-05-13,Nosa Se�ora de F�tima,municipal,27038,Ourol
+2025-08-25,Luns de Naseiro,municipal,27038,Ourol
+2025-03-04,Martes de Entroido,municipal,27039,Outeiro de Rei
+2025-07-07,Luns de Santa Isabel,municipal,27039,Outeiro de Rei
+2025-01-28,San Tirso,municipal,27040,Palas de Rei
+2025-03-04,Martes de Entroido,municipal,27040,Palas de Rei
+2025-03-04,Martes de Entroido,municipal,27041,Pantón
+2025-08-18,festas locais,municipal,27041,Pantón
+2025-03-04,Martes de Entroido,municipal,27042,Paradela
+2025-09-29,San Miguel,municipal,27042,Paradela
+2025-03-04,Martes de Entroido,municipal,27043,O Páramo
+2025-06-06,festas da Primavera,municipal,27043,O Páramo
+2025-03-04,Martes de Entroido,municipal,27044,A Pastoriza
+2025-10-18,San Lucas,municipal,27044,A Pastoriza
+2025-06-13,Santo Ant�n,municipal,27045,Pedrafita do Cebreiro
+2025-09-09,romar�a do Santo Milagre do Cebreiro,municipal,27045,Pedrafita do Cebreiro
+2025-03-04,Martes de Entroido,municipal,27046,Pol
+2025-08-25,festa do Emigrante,municipal,27046,Pol
+2025-03-04,Martes de Entroido,municipal,27047,A Pobra do Brollón
+2025-08-27,San Vitorio,municipal,27047,A Pobra do Brollón
+2025-03-04,Martes de Entroido,municipal,27048,A Pontenova
+2025-10-06,Luns das Feiras,municipal,27048,A Pontenova
+2025-03-04,Martes de Entroido,municipal,27049,Portomarín
+2025-09-08,Santo Cristo das Vitorias,municipal,27049,Portomarín
+2025-04-21,Luns de Pascua,municipal,27050,Quiroga
+2025-11-11,San Marti�o,municipal,27050,Quiroga
+2025-03-04,Martes de Entroido,municipal,27051,Ribadeo
+2025-09-08,Santa Mar�a do Campo (patroa de Ribadeo),municipal,27051,Ribadeo
+2025-08-18,festas patronais,municipal,27052,Ribas de Sil
+2025-10-31,San Claudio,municipal,27052,Ribas de Sil
+2025-03-04,Martes de Entroido,municipal,27053,Ribeira de Piquín
+2025-04-23,San Xurxo,municipal,27053,Ribeira de Piquín
+2025-03-04,Martes de Entroido,municipal,27054,Riotorto
+2025-05-02,festivo local,municipal,27054,Riotorto
+2025-03-04,Martes de Entroido,municipal,27055,Samos
+2025-07-14,San Bieito,municipal,27055,Samos
+2025-03-04,Martes de Entroido,municipal,27056,Rábade
+2025-05-28,aniversario do Concello de R�bade,municipal,27056,Rábade
+2025-06-24,San Xo�n,municipal,27057,Sarria
+2025-09-08,Virxe dos Remedios,municipal,27057,Sarria
+2025-03-04,Martes de Entroido,municipal,27058,O Saviñao
+2025-08-05,festas patronais de Escair�n,municipal,27058,O Saviñao
+2025-09-08,romar�a de Cadeiras,municipal,27059,Sober
+2025-09-22,festa do Carme de Sober,municipal,27059,Sober
+2025-03-04,Martes de Entroido,municipal,27060,Taboada
+2025-08-11,festas da vila,municipal,27060,Taboada
+2025-03-04,Martes de Entroido,municipal,27061,Trabada
+2025-04-25,San Marcos,municipal,27061,Trabada
+2025-03-04,Martes de Entroido,municipal,27062,Triacastela
+2025-09-09,Santo Milagre do Cebreiro,municipal,27062,Triacastela
+2025-03-04,Martes de Entroido,municipal,27063,O Valadouro
+2025-09-09,festa do Oito,municipal,27063,O Valadouro
+2025-03-04,Martes de Entroido,municipal,27064,O Vicedo
+2025-08-04,Santo Estevo,municipal,27064,O Vicedo
+2025-03-04,Martes de Entroido,municipal,27065,Vilalba
+2025-09-01,Santa Mar�a (d�a da patroa de Vilalba),municipal,27065,Vilalba
+2025-03-04,Martes de Entroido,municipal,27066,Viveiro
+2025-06-24,San Xo�n,municipal,27066,Viveiro
+2025-08-27,festas de San Vitorio,municipal,27901,Baralla
+2025-08-28,festas de San Vitorio,municipal,27901,Baralla
+2025-03-04,Martes de Entroido,municipal,27902,Burela
+2025-06-02,luns das festas patronais,municipal,27902,Burela
+2025-03-04,Martes de Entroido,municipal,32001,Allariz
+2025-06-20,Venres do Boi,municipal,32001,Allariz
+2025-03-04,Martes de Entroido,municipal,32002,Amoeiro
+2025-11-11,San Marti�o,municipal,32002,Amoeiro
+2025-05-22,Santa Rita,municipal,32003,A Arnoia
+2025-08-01,festa do Pemento,municipal,32003,A Arnoia
+2025-03-04,Martes de Entroido,municipal,32004,Avión
+2025-08-04,Luns de San Roque,municipal,32004,Avión
+2025-03-04,Martes de Entroido,municipal,32005,Baltar
+2025-03-19,San Xos�,municipal,32005,Baltar
+2025-03-04,Martes de Entroido,municipal,32006,Bande
+2025-08-25,festas de San Roque,municipal,32006,Bande
+2025-08-06,San Salvador,municipal,32007,Baños de Molgas
+2025-09-08,Virxe dos Milagres,municipal,32007,Baños de Molgas
+2025-03-04,Martes de Entroido,municipal,32008,Barbadás
+2025-11-11,San Marti�o,municipal,32008,Barbadás
+2025-05-22,Santa Rita,municipal,32009,O Barco de Valdeorras
+2025-09-15,d�a h�bil posterior ao d�a do Cristo,municipal,32009,O Barco de Valdeorras
+2025-02-03,San Brais,municipal,32010,Beade
+2025-07-02,Santa Isabel,municipal,32010,Beade
+2025-06-13,Santo Ant�n,municipal,32011,Beariz
+2025-08-04,Santo Domingo de G�zman,municipal,32011,Beariz
+2025-03-04,Martes de Entroido,municipal,32012,Os Blancos
+2025-09-15,d�a da Virxe das Dores,municipal,32012,Os Blancos
+2025-06-13,Santo Ant�n,municipal,32013,Boborás
+2025-09-19,festa da Saleta,municipal,32013,Boborás
+2025-03-04,Martes de Entroido,municipal,32014,A Bola
+2025-05-02,Santa Cruz en Veiga,municipal,32014,A Bola
+2025-03-04,Martes de Entroido,municipal,32015,O Bolo
+2025-12-13,,municipal,32015,O Bolo
+2025-03-04,Martes de Entroido,municipal,32016,Calvos de Rand�n
+2025-08-04,festas de Calvos,municipal,32016,Calvos de Rand�n
+2025-03-04,Martes de Entroido,municipal,32017,Carballeda de Valdeorras
+2025-04-28,Nosa Se�ora da Encarnaci�n,municipal,32017,Carballeda de Valdeorras
+2025-03-04,Martes de Entroido,municipal,32018,Carballeda de Avia
+2025-06-09,Luns de Lodairo,municipal,32018,Carballeda de Avia
+2025-03-04,Martes de Entroido,municipal,32019,O Carballiño
+2025-09-17,d�a do patr�n San Cibr�n,municipal,32019,O Carballiño
+2025-03-21,San Bieito,municipal,32020,Cartelle
+2025-08-22,Nosa Se�ora do Mundil,municipal,32020,Cartelle
+2025-01-17,Santo Ant�n,municipal,32021,Castrelo do Val
+2025-03-05,M�rcores de Cinza,municipal,32021,Castrelo do Val
+2025-03-04,Martes de Entroido,municipal,32022,Castrelo de Miño
+2025-08-05,Virxe das Neves,municipal,32022,Castrelo de Miño
+2025-01-20,San Sebasti�n,municipal,32023,Castro Caldelas
+2025-09-08,festa da Virxe dos Remedios,municipal,32023,Castro Caldelas
+2025-03-04,Martes de Entroido,municipal,32024,Celanova
+2025-09-15,festa da Virxe do Cristal,municipal,32024,Celanova
+2025-03-04,Martes de Entroido,municipal,32025,Cenlle
+2025-07-11,San Bieito,municipal,32025,Cenlle
+2025-03-04,Martes de Entroido,municipal,32026,Coles
+2025-11-11,San Marti�o,municipal,32026,Coles
+2025-07-11,San Bieito,municipal,32027,Cortegada
+2025-07-24,festas de Cortegada,municipal,32027,Cortegada
+2025-03-05,M�rcores de Cinza,municipal,32028,Cualedro
+2025-06-13,Santo Ant�n,municipal,32028,Cualedro
+2025-03-04,Martes de Entroido,municipal,32029,Chandrexa de Queixa
+2025-09-08,luns posterior � festa do Cordeiro,municipal,32029,Chandrexa de Queixa
+2025-02-28,,municipal,32030,Entrimo
+2025-06-24,,municipal,32030,Entrimo
+2025-03-04,Martes de Entroido,municipal,32031,Esgos
+2025-11-11,San Marti�o,municipal,32031,Esgos
+2025-03-04,Martes de Entroido,municipal,32032,Xinzo de Limia
+2025-07-18,festas de Santa Mari�a,municipal,32032,Xinzo de Limia
+2025-01-17,Santo Ant�n Abad,municipal,32033,Gomesende
+2025-06-13,Santo Ant�n de Padua,municipal,32033,Gomesende
+2025-02-25,,municipal,32034,A Gudiña
+2025-08-25,,municipal,32034,A Gudiña
+2025-03-04,Martes de Entroido,municipal,32035,O Irixo
+2025-05-13,Virxe de F�tima,municipal,32035,O Irixo
+2025-02-03,San Brais,municipal,32036,Xunqueira de Amb�a
+2025-04-29,San Pedro,municipal,32036,Xunqueira de Amb�a
+2025-03-04,Martes de Entroido,municipal,32037,Xunqueira de Espadanedo
+2025-07-07,luns das festas patronais na honra de Santa Isabel,municipal,32037,Xunqueira de Espadanedo
+2025-03-04,Martes de Entroido,municipal,32038,Larouco
+2025-09-08,,municipal,32038,Larouco
+2025-03-05,M�rcores de Cinza,municipal,32039,Laza
+2025-05-02,,municipal,32039,Laza
+2025-03-04,Martes de Entroido,municipal,32040,Leiro
+2025-11-11,San Marti�o,municipal,32040,Leiro
+2025-01-22,San Vicente,municipal,32041,Lobeira
+2025-03-04,Martes de Entroido,municipal,32041,Lobeira
+2025-03-04,Martes de Entroido,municipal,32042,Lobios
+2025-08-12,festa do Ver�n,municipal,32042,Lobios
+2025-03-04,Martes de Entroido,municipal,32043,Maceda
+2025-08-12,festas patronais de Maceda,municipal,32043,Maceda
+2025-03-04,Martes de Entroido,municipal,32044,Manzaneda
+2025-08-11,Virxe das Neves,municipal,32044,Manzaneda
+2025-03-04,Martes de Entroido,municipal,32045,Maside
+2025-08-27,festa do San Vitorio,municipal,32045,Maside
+2025-06-13,Santo Ant�n,municipal,32046,Melón
+2025-07-11,San Bieito,municipal,32046,Melón
+2025-06-16,Esp�rito Santo,municipal,32047,A Merca
+2025-11-11,San Marti�o,municipal,32047,A Merca
+2025-08-05,Virxe das Neves,municipal,32048,A Mezquita
+2025-11-11,San Marti�o,municipal,32048,A Mezquita
+2025-03-04,Martes de Entroido,municipal,32049,Montederramo
+2025-08-16,,municipal,32049,Montederramo
+2025-03-05,M�rcores de Cinza,municipal,32050,Monterrei
+2025-06-09,Virxe da Caridade,municipal,32050,Monterrei
+2025-03-04,Martes de Entroido,municipal,32051,Muíños
+2025-11-11,San Marti�o,municipal,32051,Muíños
+2025-03-04,Martes de Entroido,municipal,32052,Nogueira de Ramu�n
+2025-11-11,San Marti�o,municipal,32052,Nogueira de Ramu�n
+2025-03-05,M�rcores de Cinza,municipal,32053,Oímbra
+2025-09-08,festa dos Milagres e dos Remedios,municipal,32053,Oímbra
+2025-03-04,Martes de Entroido,municipal,32054,Ourense
+2025-11-11,San Marti�o,municipal,32054,Ourense
+2025-03-04,Martes de Entroido,municipal,32055,Paderne de Allariz
+2025-11-11,San Marti�o,municipal,32055,Paderne de Allariz
+2025-06-24,San Xo�n,municipal,32056,Padrenda
+2025-09-29,San Miguel de Desteriz,municipal,32056,Padrenda
+2025-03-04,Martes de Entroido,municipal,32057,Parada de Sil
+2025-11-11,,municipal,32057,Parada de Sil
+2025-03-04,Martes de Entroido,municipal,32058,O Pereiro de Aguiar
+2025-11-11,San Marti�o,municipal,32058,O Pereiro de Aguiar
+2025-03-04,Martes de Entroido,municipal,32059,A Peroxa
+2025-11-11,San Marti�o,municipal,32059,A Peroxa
+2025-01-17,,municipal,32060,Petín
+2025-07-24,,municipal,32060,Petín
+2025-03-04,Martes de Entroido,municipal,32061,Piñor
+2025-11-11,San Marti�o,municipal,32061,Piñor
+2025-03-04,Martes de Entroido,municipal,32062,Porqueira
+2025-07-16,d�a do Carme,municipal,32062,Porqueira
+2025-08-25,San Bartolomeu,municipal,32063,A Pobra de Trives
+2025-09-15,Santo Cristo da Misericordia,municipal,32063,A Pobra de Trives
+2025-03-04,Martes de Entroido,municipal,32064,Pontedeva
+2025-10-01,San Breixo,municipal,32064,Pontedeva
+2025-03-04,Martes de Entroido,municipal,32065,Punxín
+2025-04-28,San Wintila,municipal,32065,Punxín
+2025-03-04,Martes de Entroido,municipal,32066,Quintela de Leirado
+2025-09-08,Virxe dos Remedios,municipal,32066,Quintela de Leirado
+2025-06-24,,municipal,32067,Rairiz de Veiga
+2025-09-24,,municipal,32067,Rairiz de Veiga
+2025-03-04,Martes de Entroido,municipal,32068,Ramirás
+2025-11-11,San Marti�o,municipal,32068,Ramirás
+2025-03-04,Martes de Entroido,municipal,32069,Ribadavia
+2025-09-08,luns seguinte � Virxe do Portal,municipal,32069,Ribadavia
+2025-03-04,Martes de Entroido,municipal,32070,San Xoán de Río
+2025-06-24,San Xo�n,municipal,32070,San Xoán de Río
+2025-03-04,Martes de Entroido,municipal,32071,Riós
+2025-09-15,,municipal,32071,Riós
+2025-03-04,Martes de Entroido,municipal,32072,A Rúa
+2025-08-25,,municipal,32072,A Rúa
+2025-05-29,A Ascensi�n,municipal,32073,Rubiá
+2025-08-25,San Bartolomeu,municipal,32073,Rubiá
+2025-03-04,Martes de Entroido,municipal,32074,San Amaro
+2025-07-15,,municipal,32074,San Amaro
+2025-03-04,Martes de Entroido,municipal,32075,San Cibrao das Viñas
+2025-11-11,San Marti�o,municipal,32075,San Cibrao das Viñas
+2025-07-10,San Cristovo,municipal,32076,San Cristovo de Cea
+2025-09-22,festas da Saleta,municipal,32076,San Cristovo de Cea
+2025-03-04,Martes de Entroido,municipal,32077,Sandiás
+2025-04-21,Luns de Pascua,municipal,32077,Sandiás
+2025-03-03,Luns de Entroido,municipal,32078,Sarreaus
+2025-09-15,festas patronais,municipal,32078,Sarreaus
+2025-03-04,Martes de Entroido,municipal,32079,Taboadela
+2025-11-11,,municipal,32079,Taboadela
+2025-03-04,Martes de Entroido,municipal,32080,A Teixeira
+2025-11-25,d�a de Santa Catuxa,municipal,32080,A Teixeira
+2025-03-04,Martes de Entroido,municipal,32081,Toén
+2025-11-11,San Marti�o,municipal,32081,Toén
+2025-03-04,Martes de Entroido,municipal,32082,Trasmiras
+2025-06-24,San Xo�n,municipal,32082,Trasmiras
+2025-03-04,Martes de Entroido,municipal,32083,A Veiga
+2025-09-08,,municipal,32083,A Veiga
+2025-03-04,Martes de Entroido,municipal,32084,Verea
+2025-11-11,San Marti�o,municipal,32084,Verea
+2025-01-17,Santo Ant�n,municipal,32085,Verín
+2025-03-05,M�rcores de Cinza,municipal,32085,Verín
+2025-02-28,,municipal,32086,Viana do Bolo
+2025-03-05,M�rcores de Cinza,municipal,32086,Viana do Bolo
+2025-03-04,Martes de Entroido,municipal,32087,Vilamarín
+2025-11-11,San Marti�o,municipal,32087,Vilamarín
+2025-04-23,San Xurxo,municipal,32088,Vilamartín de Valdeorras
+2025-07-22,Santa Mar�a Madalena,municipal,32088,Vilamartín de Valdeorras
+2025-06-13,,municipal,32089,Vilar de Barrio
+2025-08-01,,municipal,32089,Vilar de Barrio
+2025-04-21,Luns de Pascua,municipal,32090,Vilar de Santos
+2025-08-05,Virxe das Neves,municipal,32090,Vilar de Santos
+2025-03-05,M�rcores de Cinza,municipal,32091,Vilardevós
+2025-08-14,,municipal,32091,Vilardevós
+2025-03-03,Luns de Entroido,municipal,32092,Vilariño de Conso
+2025-11-11,San Marti�o,municipal,32092,Vilariño de Conso
+2025-02-03,San Brais,municipal,36001,Arbo
+2025-07-11,San Bieito,municipal,36001,Arbo
+2025-06-13,festa do Vi�o,municipal,36002,Barro
+2025-10-03,romar�a de San Breixo,municipal,36002,Barro
+2025-07-16,d�a da festividade da Virxe do Carmen,municipal,36003,Baiona
+2025-09-26,festividade San Cosme e San Dami�n,municipal,36003,Baiona
+2025-07-16,d�a da festividade da Virxe do Carmen,municipal,36004,Bueu
+2025-11-11,festividade de San Marti�o,municipal,36004,Bueu
+2025-06-24,San Xo�n,municipal,36005,Caldas de Reis
+2025-08-14,,municipal,36005,Caldas de Reis
+2025-07-11,San Bieito,municipal,36006,Cambados
+2025-07-18,Santa Mari�a,municipal,36006,Cambados
+2025-06-13,Santo Antonio,municipal,36007,Campo Lameiro
+2025-09-29,San Miguel,municipal,36007,Campo Lameiro
+2025-04-11,Venres das Dores,municipal,36008,Cangas
+2025-09-01,Luns do Cristo,municipal,36008,Cangas
+2025-06-09,romar�a das Pascuillas,municipal,36009,A Cañiza
+2025-10-15,Santa Teresa,municipal,36009,A Cañiza
+2025-07-14,,municipal,36010,Catoira
+2025-08-04,,municipal,36010,Catoira
+2025-05-02,seguinte � festa do traballo,municipal,36013,Covelo
+2025-06-09,festa das Pascuillas,municipal,36013,Covelo
+2025-05-13,,municipal,36014,Crecente
+2025-06-26,,municipal,36014,Crecente
+2025-07-11,San Bieito,municipal,36015,Cuntis
+2025-08-18,Santo Ant�n,municipal,36015,Cuntis
+2025-07-21,Luns da Virxe do Carme,municipal,36016,Dozón
+2025-09-08,Luns da Pena de Francia,municipal,36016,Dozón
+2025-06-26,festas patronais San Paio,municipal,36017,A Estrada
+2025-06-27,festas patronais San Paio,municipal,36017,A Estrada
+2025-06-24,San Xo�n,municipal,36018,Forcarei
+2025-09-01,Luns dos Dolores,municipal,36018,Forcarei
+2025-04-21,Luns de Pascua,municipal,36019,Fornelos de Montes
+2025-08-12,festas de San Lourenzo,municipal,36019,Fornelos de Montes
+2025-05-02,,municipal,36020,Agolada
+2025-06-30,,municipal,36020,Agolada
+2025-03-04,Martes de Entroido,municipal,36021,Gondomar
+2025-07-11,San Bieito,municipal,36021,Gondomar
+2025-07-16,festividade do Carme,municipal,36022,O Grove
+2025-11-11,San Marti�o,municipal,36022,O Grove
+2025-07-16,Virxe do Carme,municipal,36023,A Guarda
+2025-09-23,Santa Tegra,municipal,36023,A Guarda
+2025-09-22,festas patronais Virxe das Dores,municipal,36024,Lalín
+2025-09-23,festa patronais Virxe das Dores,municipal,36024,Lalín
+2025-07-28,San Xoaqu�n e Santa Ana,municipal,36025,A Lama
+2025-08-05,festa das Ermidas,municipal,36025,A Lama
+2025-07-16,festividade da Virxe do Carme,municipal,36026,Marín
+2025-09-08,festividade da Virxe do Porto,municipal,36026,Marín
+2025-07-11,San Bieito,municipal,36027,Meaño
+2025-12-13,Santa Luc�a,municipal,36027,Meaño
+2025-04-21,Luns de Pascua (Nosa Se�ora das Cabezas),municipal,36028,Meis
+2025-07-11,San Bieito,municipal,36028,Meis
+2025-07-16,festividade do Carme,municipal,36029,Moaña
+2025-11-11,San Marti�o,municipal,36029,Moaña
+2025-06-09,Luns de Pentecostes e festividade da Franqueira,municipal,36030,Mondariz
+2025-08-16,San Roque,municipal,36030,Mondariz
+2025-06-09,d�a da festividade da Franqueira,municipal,36031,Mondariz-Balneario
+2025-07-16,festividade da Virxe do Carme,municipal,36031,Mondariz-Balneario
+2025-07-19,Santa Xusta,municipal,36032,Moraña
+2025-12-13,Santa Luc�a,municipal,36032,Moraña
+2025-06-13,festa da Rosa,municipal,36033,Mos
+2025-08-07,San Mamede,municipal,36033,Mos
+2025-07-29,festividade de Santa Marta,municipal,36034,As Neves
+2025-08-05,festividade da Nosa Se�ora das Neves,municipal,36034,As Neves
+2025-06-24,San Xo�n,municipal,36035,Nigrán
+2025-08-01,San Fiz,municipal,36035,Nigrán
+2025-06-09,festividade da Virxe do Mar,municipal,36036,Oia
+2025-08-07,festividade de San Mamede,municipal,36036,Oia
+2025-03-03,Entroido,municipal,36037,Pazos de Borbén
+2025-06-24,San Xo�n,municipal,36037,Pazos de Borbén
+2025-03-05,M�rcores de Cinza,municipal,36038,Pontevedra
+2025-07-11,San Bieito,municipal,36038,Pontevedra
+2025-07-11,San Bieito,municipal,36039,O Porriño
+2025-09-29,d�a do Cristo,municipal,36039,O Porriño
+2025-03-21,San Bieito,municipal,36040,Portas
+2025-04-21,Luns de Pascua,municipal,36040,Portas
+2025-06-24,San Xo�n,municipal,36041,Poio
+2025-09-24,d�a da Virxe da Merc�,municipal,36041,Poio
+2025-06-23,luns seguinte � festividade do Corpus Christi,municipal,36042,Ponteareas
+2025-09-29,luns seguinte � festividade de San Miguel,municipal,36042,Ponteareas
+2025-04-21,Luns de Pascua,municipal,36043,Ponte Caldelas
+2025-09-03,m�rcores da festa das Dores,municipal,36043,Ponte Caldelas
+2025-01-07,festa de San Xuli�n,municipal,36044,Pontecesures
+2025-07-07,festa do Carme,municipal,36044,Pontecesures
+2025-04-28,Luns do Cristo,municipal,36045,Redondela
+2025-06-19,Xoves da Coca,municipal,36045,Redondela
+2025-04-21,Luns de Pascua,municipal,36046,Ribadumia
+2025-06-06,festa do Vi�o Tinto,municipal,36046,Ribadumia
+2025-06-16,Santo Antonio,municipal,36047,Rodeiro
+2025-09-08,Nosa Se�ora do Faro,municipal,36047,Rodeiro
+2025-03-04,Martes de Entroido,municipal,36048,O Rosal
+2025-07-18,festividade de Santa Mari�a,municipal,36048,O Rosal
+2025-03-04,Martes de Entroido,municipal,36049,Salceda de Caselas
+2025-07-21,Luns do Cristo,municipal,36049,Salceda de Caselas
+2025-05-13,festividade da Virxe de F�tima,municipal,36050,Salvaterra de Mi�o
+2025-06-09,festividade Sant�simo Cristo da Vitoria,municipal,36050,Salvaterra de Mi�o
+2025-04-21,romar�a do Con,municipal,36051,Sanxenxo
+2025-09-04,Santa Rosal�a,municipal,36051,Sanxenxo
+2025-07-11,festa do Lac�n,municipal,36052,Silleda
+2025-08-25,festa da Empanada,municipal,36052,Silleda
+2025-04-21,Luns de Pascua,municipal,36053,Soutomaior
+2025-08-06,festa do Patr�n,municipal,36053,Soutomaior
+2025-03-04,Martes de Entroido,municipal,36054,Tomiño
+2025-09-15,Luns do Alivio,municipal,36054,Tomiño
+2025-03-04,Martes de Entroido,municipal,36055,Tui
+2025-04-28,Luns de San Telmo,municipal,36055,Tui
+2025-02-03,festividade de San Blas,municipal,36056,Valga
+2025-07-24,festividade de Santa Cristina,municipal,36056,Valga
+2025-03-04,Martes de Entroido,municipal,36057,Vigo
+2025-03-28,festa da Reconquista,municipal,36057,Vigo
+2025-03-04,Martes de Entroido,municipal,36058,Vilaboa
+2025-11-11,San Marti�o,municipal,36058,Vilaboa
+2025-08-11,festividade da Nosa Sra. da Piedade,municipal,36059,Vila de Cruces
+2025-08-12,festividade da Nosa Sra. da Piedade,municipal,36059,Vila de Cruces
+2025-05-22,festividade de Santa Rita,municipal,36060,Vilagarcía de Arousa
+2025-08-16,festividade de San Roque,municipal,36060,Vilagarcía de Arousa
+2025-01-15,San Mauro,municipal,36061,Vilanova de Arousa
+2025-09-16,San Cibr�n,municipal,36061,Vilanova de Arousa
+2025-01-07,,municipal,36901,A Illa de Arousa
+2025-03-04,Martes de Entroido,municipal,36901,A Illa de Arousa
+2025-07-28,festividade do Ecce-Homo,municipal,36902,Cerdedo-Cotobade
+2025-08-18,San Roque,municipal,36902,Cerdedo-Cotobade
