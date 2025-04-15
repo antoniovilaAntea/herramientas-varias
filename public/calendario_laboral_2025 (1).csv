@@ -93,8 +93,8 @@ fecha,descripcion,ambito,id_municipio,lugar
 2025-09-08,Virxe dos Milagres de Cai�n,municipal,15041,A Laracha
 2025-04-25,festa de San Marcos,municipal,15042,Lousame
 2025-10-03,festa de San Roqui�o,municipal,15042,Lousame
-2025-03-04,Martes de Entroido,municipal,15043,Malpica de Berganti�os
-2025-08-22,festa do Mar,municipal,15043,Malpica de Berganti�os
+2025-03-04,Martes de Entroido,municipal,15043,Malpica de Bergantiños
+2025-08-22,festa do Mar,municipal,15043,Malpica de Bergantiños
 2025-03-04,Martes de Entroido,municipal,15044,Mañón
 2025-09-08,festa da Patroa,municipal,15044,Mañón
 2025-03-04,Martes de Entroido,municipal,15045,Mazaricos
@@ -145,8 +145,8 @@ fecha,descripcion,ambito,id_municipio,lugar
 2025-09-15,festa local de Ponteceso,municipal,15068,Ponteceso
 2025-09-08,festa das Peras,municipal,15069,Pontedeume
 2025-09-10,festa das Peras,municipal,15069,Pontedeume
-2025-03-04,Martes de Entroido,municipal,15070,As Pontes de García Rodr�guez
-2025-07-21,festa do Carme,municipal,15070,As Pontes de García Rodr�guez
+2025-03-04,Martes de Entroido,municipal,15070,As Pontes de García Rodríguez
+2025-07-21,festa do Carme,municipal,15070,As Pontes de García Rodríguez
 2025-03-03,Luns de Entroido,municipal,15071,Porto do Son
 2025-09-09,festa local de Porto do Son,municipal,15071,Porto do Son
 2025-07-16,festas do Carme,municipal,15072,Rianxo
@@ -361,8 +361,8 @@ fecha,descripcion,ambito,id_municipio,lugar
 2025-05-02,Santa Cruz en Veiga,municipal,32014,A Bola
 2025-03-04,Martes de Entroido,municipal,32015,O Bolo
 2025-12-13,,municipal,32015,O Bolo
-2025-03-04,Martes de Entroido,municipal,32016,Calvos de Rand�n
-2025-08-04,festas de Calvos,municipal,32016,Calvos de Rand�n
+2025-03-04,Martes de Entroido,municipal,32016,Calvos de Randín
+2025-08-04,festas de Calvos,municipal,32016,Calvos de Randín
 2025-03-04,Martes de Entroido,municipal,32017,Carballeda de Valdeorras
 2025-04-28,Nosa Se�ora da Encarnaci�n,municipal,32017,Carballeda de Valdeorras
 2025-03-04,Martes de Entroido,municipal,32018,Carballeda de Avia
@@ -401,8 +401,8 @@ fecha,descripcion,ambito,id_municipio,lugar
 2025-08-25,,municipal,32034,A Gudiña
 2025-03-04,Martes de Entroido,municipal,32035,O Irixo
 2025-05-13,Virxe de F�tima,municipal,32035,O Irixo
-2025-02-03,San Brais,municipal,32036,Xunqueira de Amb�a
-2025-04-29,San Pedro,municipal,32036,Xunqueira de Amb�a
+2025-02-03,San Brais,municipal,32036,Xunqueira de Ambía
+2025-04-29,San Pedro,municipal,32036,Xunqueira de Ambía
 2025-03-04,Martes de Entroido,municipal,32037,Xunqueira de Espadanedo
 2025-07-07,luns das festas patronais na honra de Santa Isabel,municipal,32037,Xunqueira de Espadanedo
 2025-03-04,Martes de Entroido,municipal,32038,Larouco
@@ -433,8 +433,8 @@ fecha,descripcion,ambito,id_municipio,lugar
 2025-06-09,Virxe da Caridade,municipal,32050,Monterrei
 2025-03-04,Martes de Entroido,municipal,32051,Muíños
 2025-11-11,San Marti�o,municipal,32051,Muíños
-2025-03-04,Martes de Entroido,municipal,32052,Nogueira de Ramu�n
-2025-11-11,San Marti�o,municipal,32052,Nogueira de Ramu�n
+2025-03-04,Martes de Entroido,municipal,32052,Nogueira de Ramuín
+2025-11-11,San Marti�o,municipal,32052,Nogueira de Ramuín
 2025-03-05,M�rcores de Cinza,municipal,32053,Oímbra
 2025-09-08,festa dos Milagres e dos Remedios,municipal,32053,Oímbra
 2025-03-04,Martes de Entroido,municipal,32054,Ourense
@@ -609,8 +609,8 @@ fecha,descripcion,ambito,id_municipio,lugar
 2025-07-18,festividade de Santa Mari�a,municipal,36048,O Rosal
 2025-03-04,Martes de Entroido,municipal,36049,Salceda de Caselas
 2025-07-21,Luns do Cristo,municipal,36049,Salceda de Caselas
-2025-05-13,festividade da Virxe de F�tima,municipal,36050,Salvaterra de Mi�o
-2025-06-09,festividade Sant�simo Cristo da Vitoria,municipal,36050,Salvaterra de Mi�o
+2025-05-13,festividade da Virxe de F�tima,municipal,36050,Salvaterra de Miño
+2025-06-09,festividade Sant�simo Cristo da Vitoria,municipal,36050,Salvaterra de Miño
 2025-04-21,romar�a do Con,municipal,36051,Sanxenxo
 2025-09-04,Santa Rosal�a,municipal,36051,Sanxenxo
 2025-07-11,festa do Lac�n,municipal,36052,Silleda
