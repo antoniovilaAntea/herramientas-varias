@@ -24,21 +24,36 @@ const Festivos = () => {
   >([]);
   const [filteredData, setFilteredData] = useState<HolidayData[]>([]);
 
+  function formatDate(date: Date) {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
   const obtenerDatosFiltrados = useCallback(() => {
     const lugaresSeleccionados = selectedOptions.map((opt) => opt.value);
+    const start = fecha[0].startDate;
+    const end = fecha[0].endDate;
 
-    return allData.filter(
-      (item) =>
+    return allData.filter((item) => {
+      const [year, month, day] = item.fecha.split("-");
+      const itemDate = new Date(+year, +month - 1, +day);
+
+      const inDateRange = itemDate >= start && itemDate <= end;
+      const inSelectedLugar =
         lugaresSeleccionados.length === 0 ||
         lugaresSeleccionados.includes(item.lugar.trim()) ||
-        item.ambito === "auton�mico" ||
-        item.ambito === "estatal"
-    );
-  }, [selectedOptions, allData]);
+        item.ambito === "autonómico" ||
+        item.ambito === "estatal" ||
+        item.ambito === "auton�mico";
+      return inDateRange && inSelectedLugar;
+    });
+  }, [selectedOptions, allData, fecha]);
 
   useEffect(() => {
     setFilteredData(obtenerDatosFiltrados());
-  }, [selectedOptions, allData, obtenerDatosFiltrados]);
+  }, [selectedOptions, allData, obtenerDatosFiltrados, fecha]);
 
   const sortedData = [...filteredData].sort((a, b) =>
     a.fecha.localeCompare(b.fecha)
@@ -90,7 +105,10 @@ const Festivos = () => {
             }));
 
             setAllData(datosCompletos);
-            setOptions(opciones);
+            const opcionesOrdenadas = opciones.sort((a, b) =>
+              a.label.localeCompare(b.label, "es", { sensitivity: "base" })
+            );
+            setOptions(opcionesOrdenadas);
             setLoading(false);
           },
         });
@@ -107,7 +125,6 @@ const Festivos = () => {
   };
 
   const handleMostrar = () => {
-    console.log(fecha);
     setMostrar(true);
   };
 
@@ -147,9 +164,9 @@ const Festivos = () => {
               );
               setMostrar(false);
             }}
-            options={options}
+            options={options.sort((a, b) => a.value - b.value)}
             isLoading={loading}
-            placeholder="Selecciona un lugar..."
+            placeholder="Selecciona un municipio..."
             noOptionsMessage={() => "No hay opciones disponibles"}
             isClearable
             isSearchable
@@ -157,7 +174,7 @@ const Festivos = () => {
             closeMenuOnSelect={false}
           />
         </div>
-        {/* <div className="boton-unir">
+        <div className="boton-unir">
           <button onClick={handleButtonClick}>
             {fecha[0].startDate &&
             fecha[0].endDate &&
@@ -170,8 +187,8 @@ const Festivos = () => {
                   .replaceAll("/", ".")}`
               : "Selecciona un rango de fecha"}
           </button>
-        </div> */}
-        {/* <div
+        </div>
+        <div
           className="festivos__form-fecha"
           style={{
             display: calendarOpacity === 0 ? "none" : "block",
@@ -182,7 +199,6 @@ const Festivos = () => {
             editableDateInputs={true}
             onChange={(item: RangeKeyDict) => {
               const selection = item.selection;
-              console.log(item.selection);
               setFecha([
                 {
                   startDate: selection.startDate ?? new Date(),
@@ -190,6 +206,7 @@ const Festivos = () => {
                   key: "selection",
                 },
               ]);
+              formatDate(fecha[0].startDate);
             }}
             moveRangeOnFirstSelection={false}
             ranges={fecha}
@@ -198,7 +215,7 @@ const Festivos = () => {
             rangeColors={["#395983"]}
             locale={es}
           />
-        </div> */}
+        </div>
         <div className="festivos__form-boton">
           <button onClick={handleMostrar}>Mostrar festivos</button>
         </div>
@@ -210,7 +227,7 @@ const Festivos = () => {
             {filteredData.map(
               (item) =>
                 item.ambito === "estatal" && (
-                  <div key={item.descripcion}>
+                  <div key={item.descripcion + item.lugar}>
                     <p>{item.fecha.split("-").reverse().join("/")} </p>
                   </div>
                 )
@@ -221,7 +238,7 @@ const Festivos = () => {
             {filteredData.map(
               (item) =>
                 item.ambito === "auton�mico" && (
-                  <div key={item.descripcion}>
+                  <div key={item.descripcion + item.lugar}>
                     <p>{item.fecha.split("-").reverse().join("/")} </p>
                   </div>
                 )
@@ -233,10 +250,10 @@ const Festivos = () => {
               //si no quiere tener ordenado por ayto poner sortedData
               (item) =>
                 item.ambito === "municipal" && (
-                  <div key={item.descripcion}>
+                  <div key={item.descripcion + item.lugar}>
                     <p>
                       {item.fecha.split("-").reverse().join("/")}{" "}
-                      {item.lugar && item.lugar}
+                      {item.lugar ?? item.lugar}
                     </p>
                   </div>
                 )
