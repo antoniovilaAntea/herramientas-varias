@@ -20,7 +20,8 @@ function EmailGenerator() {
   const [datos, setDatos] = useState<any[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [emailContent, setEmailContent] = useState("");
-  const [numero, setNumero] = useState(1);
+  const [numero, setNumero] = useState<number>();
+
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenModal = () => setOpenModal(true);
 
@@ -119,9 +120,10 @@ function EmailGenerator() {
         item.selectedRows.forEach((fila: any) => {
           const concello = fila[3];
           const fecha = item.fecha;
+          const dia = item.numero;
           const dato = `${fila[1]}, aproximadamente no PK ${
             fila[2]
-          } (instalación prevista para o ${fecha.toLowerCase()} ${numero})`;
+          } (instalación prevista para o ${fecha.toLowerCase()} ${dia})`;
 
           if (!concellosMap[concello]) {
             concellosMap[concello] = [];
@@ -235,19 +237,18 @@ function EmailGenerator() {
 
   const createEmailBodyOperarios = (data: any[]): string => {
     let contenido = "";
-
     const groupedData: { [key: string]: any[][] } = {};
     data.forEach((item) => {
-      const key = `${item.fecha}-${item.tipo}`;
+      const key = `${item.fecha}-${item.tipo}-${item.numero}`;
       groupedData[key] = groupedData[key] || [];
       groupedData[key].push(...item.selectedRows);
     });
 
     let lastDate = "";
     Object.keys(groupedData).forEach((key, index) => {
-      const [fecha, tipo] = key.split("-");
+      const [fecha, tipo, dia] = key.split("-");
       if (fecha !== lastDate) {
-        contenido += `${fecha.toUpperCase()} ${numero}\n\n`;
+        contenido += `${fecha.toUpperCase()} ${dia}\n\n`;
         lastDate = fecha;
       }
       contenido += `Gomas a ${tipo.toUpperCase()}:\n`;
@@ -292,7 +293,8 @@ function EmailGenerator() {
       inicioSemana.length < 1 ||
       finSemana.length < 1 ||
       fecha === undefined ||
-      numero <= 0 ||
+      numero === 0 ||
+      numero === undefined ||
       tipo === "No tipo"
     ) {
       if (selectedRows.length < 1) {
@@ -307,7 +309,7 @@ function EmailGenerator() {
       if (fecha === undefined) {
         alert("No has seleccionado ningun día");
       }
-      if (numero <= 0) {
+      if (numero === 0 || numero === undefined) {
         alert("No has escrito número de día");
       }
       if (tipo === "No tipo") {
@@ -322,12 +324,14 @@ function EmailGenerator() {
           obj.finSemana === finSemana &&
           obj.fecha === fecha &&
           obj.tipo === tipo &&
+          obj.numero === numero &&
           JSON.stringify(obj.selectedRows) === JSON.stringify(selectedRows)
       );
       if (!hayDuplicadosEnDatos) {
+        console.log(datos);
         setDatos([
           ...datos,
-          { inicioSemana, finSemana, fecha, tipo, selectedRows },
+          { inicioSemana, finSemana, fecha, numero, tipo, selectedRows },
         ]);
       } else {
         alert("Ya hay un elemento igual");
@@ -445,7 +449,7 @@ function EmailGenerator() {
             value={numero}
             onChange={(e) => {
               const value = parseInt(e.target.value, 10);
-              if (!isNaN(value) && value >= 0 && value <= 31) {
+              if (value >= 0 && value <= 31) {
                 setNumero(value);
               }
             }}
