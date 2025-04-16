@@ -69,3 +69,12 @@
 .css-v7duua {
   cursor: pointer;
 }
+.css-gn0oko-MuiButtonBase-root-MuiToggleButton-root.Mui-selected {
+  background-color: #395983 !important;
+}
+.imgFiltro:hover {
+  img {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+}

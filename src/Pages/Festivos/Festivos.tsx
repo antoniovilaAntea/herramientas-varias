@@ -5,6 +5,7 @@ import Select from "react-select";
 
 import "./Festivos.css";
 import Papa from "papaparse";
+import { ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
 
 const Festivos = () => {
   const [calendarOpacity, setCalendarOpacity] = useState(0);
@@ -22,7 +23,11 @@ const Festivos = () => {
   const [selectedOptions, setSelectedOptions] = useState<
     Array<{ value: string; label: string }>
   >([]);
+  const [selectedProvincias, setSelectedProvincias] = useState<
+    Array<{ value: string; label: string }>
+  >([]);
   const [filteredData, setFilteredData] = useState<HolidayData[]>([]);
+  const [filtro, setFiltro] = useState("Municipio");
 
   function formatDate(date: Date) {
     const day = String(date.getDate()).padStart(2, "0");
@@ -51,9 +56,56 @@ const Festivos = () => {
     });
   }, [selectedOptions, allData, fecha]);
 
+  const obtenerMunicipiosdeProvincia = useCallback(() => {
+    // 1. Obtener los rangos seleccionados
+    const lugaresSeleccionados = selectedProvincias.map((opt) => opt.value);
+
+    // 2. Procesar los rangos a números
+    const minMaxRanges = lugaresSeleccionados.map((item) => {
+      const [minStr, maxStr] = item.split("-");
+      return {
+        min: parseInt(minStr, 10),
+        max: parseInt(maxStr, 10),
+      };
+    });
+
+    // 3. Filtrar los datos
+    const filtered = allData.filter((item) => {
+      // Verificar si el municipio está en algún rango
+      const enRango = minMaxRanges.some(
+        (range) =>
+          (item.id_municipio !== null &&
+            Number(item.id_municipio) >= range.min &&
+            Number(item.id_municipio) <= range.max) ||
+          item.ambito === "autonómico" ||
+          item.ambito === "estatal" ||
+          item.ambito === "auton�mico"
+      );
+
+      // Verificar fechas (asumiendo formato ISO)
+      const fechaItem = new Date(item.fecha);
+      const fechaInicio = new Date(fecha[0].startDate);
+      const fechaFin = new Date(fecha[0].endDate);
+
+      return enRango && fechaItem >= fechaInicio && fechaItem <= fechaFin;
+    });
+
+    return filtered;
+  }, [selectedProvincias, allData, fecha]);
   useEffect(() => {
-    setFilteredData(obtenerDatosFiltrados());
-  }, [selectedOptions, allData, obtenerDatosFiltrados, fecha]);
+    if (filtro === "Municipio") {
+      setFilteredData(obtenerDatosFiltrados());
+    } else {
+      setFilteredData(obtenerMunicipiosdeProvincia());
+    }
+  }, [
+    selectedOptions,
+    selectedProvincias,
+    allData,
+    obtenerDatosFiltrados,
+    obtenerMunicipiosdeProvincia,
+    fecha,
+  ]);
 
   const sortedData = [...filteredData].sort((a, b) =>
     a.fecha.localeCompare(b.fecha)
@@ -62,7 +114,7 @@ const Festivos = () => {
     fecha: string;
     descripcion: string;
     ambito: string;
-    id_municipio: number | null | "";
+    id_municipio: number | "";
     lugar: string;
   }
 
@@ -98,9 +150,7 @@ const Festivos = () => {
               fecha: String(item.fecha),
               descripcion: String(item.descripcion),
               ambito: String(item.ambito),
-              id_municipio: item.id_municipio
-                ? Number(item.id_municipio)
-                : null,
+              id_municipio: item.id_municipio ?? Number(item.id_municipio),
               lugar: String(item.lugar).trim(),
             }));
 
@@ -127,52 +177,112 @@ const Festivos = () => {
   const handleMostrar = () => {
     setMostrar(true);
   };
-
+  const handleChangeFiltro = (
+    event: React.MouseEvent<HTMLElement>,
+    newFiltro: string
+  ) => {
+    console.log(newFiltro);
+    setFiltro(newFiltro);
+    setSelectedOptions([]);
+    setSelectedProvincias([]);
+  };
+  const control = {
+    value: filtro,
+    onChange: handleChangeFiltro,
+    exclusive: true,
+  };
+  const provOmun = [
+    <Tooltip title="Provincia" key="p">
+      <ToggleButton className="imgFiltro" value={"Provincia"} key="prov">
+        <img
+          height={"40px"}
+          width={"40px"}
+          src={`${window.location.origin}${process.env.PUBLIC_URL}/ProvinciasGZ.png`}
+          alt="Icono de provincias"
+        ></img>
+      </ToggleButton>
+    </Tooltip>,
+    <Tooltip title="Municipio" key="m">
+      <ToggleButton className="imgFiltro" value={"Municipio"} key="mun">
+        <img
+          height={"40px"}
+          width={"40px"}
+          src={`${window.location.origin}${process.env.PUBLIC_URL}/ComarcasGZ.png`}
+          alt="Icono de provincias"
+        ></img>
+      </ToggleButton>
+    </Tooltip>,
+  ];
   const provincias = [
     {
-      min: 15000,
-      max: 15905,
-      provincia: "A Coruña",
+      value: "15000-15905",
+      label: "A Coruña",
     },
     {
-      min: 27000,
-      max: 27905,
-      provincia: "Lugo",
+      value: "27000-27905",
+      label: "Lugo",
     },
     {
-      min: 32000,
-      max: 32100,
-      provincia: "Ourense",
+      value: "32000-32100",
+      label: "Ourense",
     },
     {
-      min: 36000,
-      max: 36905,
-      provincia: "Pontevedra",
+      value: "36000-36905",
+      label: "Pontevedra",
     },
   ];
   return (
     <div className="festivos">
       <div className="festivos__form">
         <h3>Festivos locales</h3>
+        <div>
+          <ToggleButtonGroup {...control}>{provOmun}</ToggleButtonGroup>
+        </div>
         <div className="festivos__form-selector">
-          <label htmlFor="prov_mun">Municipio</label>
-          <Select
-            value={selectedOptions}
-            onChange={(newValue) => {
-              setSelectedOptions(
-                newValue as Array<{ value: string; label: string }>
-              );
-              setMostrar(false);
-            }}
-            options={options.sort((a, b) => a.value - b.value)}
-            isLoading={loading}
-            placeholder="Selecciona un municipio..."
-            noOptionsMessage={() => "No hay opciones disponibles"}
-            isClearable
-            isSearchable
-            isMulti
-            closeMenuOnSelect={false}
-          />
+          {filtro === "Municipio" && (
+            <>
+              <label htmlFor="prov_mun">Municipio</label>
+              <Select
+                value={selectedOptions}
+                onChange={(newValue) => {
+                  setSelectedOptions(
+                    newValue as Array<{ value: string; label: string }>
+                  );
+                  setMostrar(false);
+                }}
+                options={options.sort((a, b) => a.value - b.value)}
+                isLoading={loading}
+                placeholder="Selecciona un municipio..."
+                noOptionsMessage={() => "No hay opciones disponibles"}
+                isClearable
+                isSearchable
+                isMulti
+                closeMenuOnSelect={false}
+              />
+            </>
+          )}
+          {filtro === "Provincia" && (
+            <>
+              <label htmlFor="prov_mun">Provincia</label>
+              <Select
+                value={selectedProvincias}
+                onChange={(newValue) => {
+                  setSelectedProvincias(
+                    newValue as Array<{ value: string; label: string }>
+                  );
+                  setMostrar(false);
+                }}
+                options={provincias}
+                isLoading={loading}
+                placeholder="Selecciona una provincia..."
+                noOptionsMessage={() => "No hay opciones disponibles"}
+                isClearable
+                isSearchable
+                isMulti
+                closeMenuOnSelect={false}
+              />
+            </>
+          )}
         </div>
         <div className="boton-unir">
           <button onClick={handleButtonClick}>
@@ -206,7 +316,6 @@ const Festivos = () => {
                   key: "selection",
                 },
               ]);
-              formatDate(fecha[0].startDate);
             }}
             moveRangeOnFirstSelection={false}
             ranges={fecha}
@@ -227,7 +336,14 @@ const Festivos = () => {
             {filteredData.map(
               (item) =>
                 item.ambito === "estatal" && (
-                  <div key={item.descripcion + item.lugar}>
+                  <div
+                    key={
+                      item.descripcion +
+                      item.lugar +
+                      item.fecha +
+                      item.id_municipio
+                    }
+                  >
                     <p>{item.fecha.split("-").reverse().join("/")} </p>
                   </div>
                 )
@@ -238,7 +354,14 @@ const Festivos = () => {
             {filteredData.map(
               (item) =>
                 item.ambito === "auton�mico" && (
-                  <div key={item.descripcion + item.lugar}>
+                  <div
+                    key={
+                      item.descripcion +
+                      item.lugar +
+                      item.fecha +
+                      item.id_municipio
+                    }
+                  >
                     <p>{item.fecha.split("-").reverse().join("/")} </p>
                   </div>
                 )
@@ -250,7 +373,14 @@ const Festivos = () => {
               //si no quiere tener ordenado por ayto poner sortedData
               (item) =>
                 item.ambito === "municipal" && (
-                  <div key={item.descripcion + item.lugar}>
+                  <div
+                    key={
+                      item.descripcion +
+                      item.lugar +
+                      item.fecha +
+                      item.id_municipio
+                    }
+                  >
                     <p>
                       {item.fecha.split("-").reverse().join("/")}{" "}
                       {item.lugar ?? item.lugar}
