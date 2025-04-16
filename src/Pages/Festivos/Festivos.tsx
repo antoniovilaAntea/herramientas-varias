@@ -241,8 +241,9 @@ const Festivos = () => {
         <div className="festivos__form-selector">
           {filtro === "Municipio" && (
             <>
-              <label htmlFor="prov_mun">Municipio</label>
+              <label htmlFor="mun">Municipio</label>
               <Select
+                id="mun"
                 value={selectedOptions}
                 onChange={(newValue) => {
                   setSelectedOptions(
@@ -263,8 +264,9 @@ const Festivos = () => {
           )}
           {filtro === "Provincia" && (
             <>
-              <label htmlFor="prov_mun">Provincia</label>
+              <label htmlFor="prov">Provincia</label>
               <Select
+                id="prov"
                 value={selectedProvincias}
                 onChange={(newValue) => {
                   setSelectedProvincias(
