@@ -82,6 +82,11 @@
         color: #eeeeee !important;
       }
     }
+    &.bold {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+    }
 
     &:visited {
       color: #495b86;
