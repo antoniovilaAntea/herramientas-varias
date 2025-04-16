@@ -385,7 +385,9 @@ function EmailGenerator() {
         rutas.push("Enlaces Maps grupo H: ");
       }
       if (letra === "I") {
-        rutas.push("Enlaces Maps grupo I: ");
+        rutas.push(
+          "Enlaces Maps grupo I: https://www.google.com/maps/d/edit?mid=1dMh9U7unXndHyhOvoJzmOcSV77hGiQc&usp=sharing "
+        );
       }
       gruposUnicos.sort((a, b) => a.localeCompare(b));
     });
