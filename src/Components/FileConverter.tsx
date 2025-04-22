@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { saveAs } from "file-saver";
+import Notification from "./Notification";
 
 type Props = {
   tipo: string;
@@ -8,58 +9,86 @@ type Props = {
 const FileConverter = ({ tipo }: Props) => {
   const [archivoUno, setArchivoUno] = useState<File>();
   const [archivoDos, setArchivoDos] = useState<File>();
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error" | "warning" | "info",
+  });
+
+  const showNotification = (
+    message: string,
+    severity: "success" | "error" | "warning" | "info"
+  ) => {
+    setNotification({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, open: false }));
+  };
 
   const seleccionarArchivo1 = (event: any) => {
     const archivo = event.target.files[0];
     setArchivoUno(archivo);
+    showNotification("Archivo 1 seleccionado correctamente", "success");
   };
+
   const seleccionarArchivo2 = (event: any) => {
     const archivo = event.target.files[0];
     setArchivoDos(archivo);
+    showNotification("Archivo 2 seleccionado correctamente", "success");
   };
 
   const convertirDatos = (inputFile: File, outputFile: string) => {
     const reader = new FileReader();
     reader.onload = (event) => {
       if (event.target) {
-        const result = event.target.result as string;
-        const lines = result.split("\n");
-        const dataLines = lines.slice(1);
-        const writer = [
-          "Veh. No.;Date;Time;Lane;Axles;Spec;Class;Length (In Meters);Speed (In KPH);Gap (In Seconds);Follow (In Meters);Axle 1-2;Axle 2-3;Axle 3-4;Axle 4-5;Axle 5-6;Axle 6-7;Axle 7-8;Axle 8-9;Axle 9-10;Axle 10-11;Axle 11-12;Axle 12-13;Axle 13-14;Axle 14-15;Axle 15-16;;",
-        ];
-        let vehicleNumber = 1;
-        dataLines.forEach((line) => {
-          if (line.includes(";")) {
-            const parts = line.split(",");
-            if (parts.length === 6) {
-              const fechaHora = parts[0].trim();
-              let carril = parseInt(parts[2].trim(), 10);
-              if (carril === 1 || carril === 2) {
-                carril = 1;
+        try {
+          const result = event.target.result as string;
+          const lines = result.split("\n");
+          const dataLines = lines.slice(1);
+          const writer = [
+            "Veh. No.;Date;Time;Lane;Axles;Spec;Class;Length (In Meters);Speed (In KPH);Gap (In Seconds);Follow (In Meters);Axle 1-2;Axle 2-3;Axle 3-4;Axle 4-5;Axle 5-6;Axle 6-7;Axle 7-8;Axle 8-9;Axle 9-10;Axle 10-11;Axle 11-12;Axle 12-13;Axle 13-14;Axle 14-15;Axle 15-16;;",
+          ];
+          let vehicleNumber = 1;
+          dataLines.forEach((line) => {
+            if (line.includes(";")) {
+              const parts = line.split(",");
+              if (parts.length === 6) {
+                const fechaHora = parts[0].trim();
+                let carril = parseInt(parts[2].trim(), 10);
+                if (carril === 1 || carril === 2) {
+                  carril = 1;
+                }
+                if (carril === 3 || carril === 4) {
+                  carril = 2;
+                }
+                const velocidad = parseInt(parts[3].trim(), 10);
+                const longitud = (parseFloat(parts[4].trim()) / 100) * 0.696;
+                const fechaHoraArray = fechaHora.split(" ");
+                const fecha = fechaHoraArray[0];
+                const hora = fechaHoraArray[1];
+                writer.push(
+                  `${vehicleNumber};${fecha};${hora};${carril};0;0;0;${longitud.toFixed(
+                    5
+                  )};${velocidad};0;0,00;;;;;;;;;;;;;;;`
+                );
+                vehicleNumber++;
               }
-              if (carril === 3 || carril === 4) {
-                carril = 2;
-              }
-              const velocidad = parseInt(parts[3].trim(), 10);
-              const longitud = (parseFloat(parts[4].trim()) / 100) * 0.696;
-              const fechaHoraArray = fechaHora.split(" ");
-              const fecha = fechaHoraArray[0];
-              const hora = fechaHoraArray[1];
-              writer.push(
-                `${vehicleNumber};${fecha};${hora};${carril};0;0;0;${longitud.toFixed(
-                  5
-                )};${velocidad};0;0,00;;;;;;;;;;;;;;;`
-              );
-              vehicleNumber++;
             }
-          }
-        });
+          });
 
-        const blob = new Blob([writer.join("\n")], {
-          type: "text/plain;charset=utf-8",
-        });
-        saveAs(blob, "ArchivoConvertidoDesdeTXT.af1");
+          const blob = new Blob([writer.join("\n")], {
+            type: "text/plain;charset=utf-8",
+          });
+          saveAs(blob, "ArchivoConvertidoDesdeTXT.af1");
+          showNotification("Archivo convertido exitosamente", "success");
+        } catch (error) {
+          showNotification("Error al convertir el archivo", "error");
+        }
       }
     };
     reader.readAsText(inputFile);
@@ -79,22 +108,28 @@ const FileConverter = ({ tipo }: Props) => {
       leerArchivo(archivoEntrada1, archivoEntrada2);
 
       if (error) {
-        alert(errorFechaMsg);
+        showNotification(errorFechaMsg, "error");
       }
       if (errorVelocidad) {
-        alert(errorVelocidadMsg);
+        showNotification(errorVelocidadMsg, "error");
       }
     } catch (e: any) {
-      console.log(e);
+      showNotification("Error al unificar los archivos", "error");
     }
   };
 
   const handleFileChange = (e: any) => {
-    tipo === "conversor"
-      ? convertirDatos(e.target.files[0], "outputFile")
-      : archivoUno
-        ? archivoDos && unificarDatos(archivoUno, archivoDos)
-        : alert("Falta el archivo creciente");
+    if (tipo === "conversor") {
+      convertirDatos(e.target.files[0], "outputFile");
+    } else if (archivoUno) {
+      if (archivoDos) {
+        unificarDatos(archivoUno, archivoDos);
+      } else {
+        showNotification("Falta el archivo decreciente", "warning");
+      }
+    } else {
+      showNotification("Falta el archivo creciente", "warning");
+    }
   };
 
   const leerArchivo = (archivo1: File, archivo2: File) => {
@@ -183,16 +218,17 @@ const FileConverter = ({ tipo }: Props) => {
           type: "text/plain;charset=utf-8",
         });
         saveAs(blob, "ArchivoUnido.af1");
+        showNotification("Archivos unidos exitosamente", "success");
       };
 
       reader2.onerror = function (e) {
-        console.error("Error al leer el segundo archivo:", e);
+        showNotification("Error al leer el segundo archivo", "error");
       };
       reader2.readAsText(archivo2);
     };
 
     reader1.onerror = function (e) {
-      console.error("Error al leer el primer archivo:", e);
+      showNotification("Error al leer el primer archivo", "error");
     };
     reader1.readAsText(archivo1);
   };
@@ -236,6 +272,12 @@ const FileConverter = ({ tipo }: Props) => {
           <button onClick={handleFileChange}>Unir los dos archivos</button>
         </div>
       )}
+      <Notification
+        open={notification.open}
+        message={notification.message}
+        severity={notification.severity}
+        onClose={handleCloseNotification}
+      />
     </>
   );
 };

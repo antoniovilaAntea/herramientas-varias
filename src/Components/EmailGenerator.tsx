@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import * as XLSX from "xlsx";
 import isEqual from "lodash/isEqual";
+import Notification from "./Notification";
 //VIGILAR CADA AÑO
 import emails from "../Data/emailData";
 
@@ -21,6 +22,26 @@ function EmailGenerator() {
   const [openModal, setOpenModal] = useState(false);
   const [emailContent, setEmailContent] = useState("");
   const [numero, setNumero] = useState<number>();
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error" | "warning" | "info",
+  });
+
+  const showNotification = (
+    message: string,
+    severity: "success" | "error" | "warning" | "info"
+  ) => {
+    setNotification({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, open: false }));
+  };
 
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenModal = () => setOpenModal(true);
@@ -42,9 +63,12 @@ function EmailGenerator() {
   const handleCopyClick = async (texto: string) => {
     try {
       await navigator.clipboard.writeText(texto);
-      alert("El cuerpo del mensaje se ha copiado en el portapapeles");
+      showNotification(
+        "El cuerpo del mensaje se ha copiado en el portapapeles",
+        "success"
+      );
     } catch (err) {
-      console.error("Error al copiar:", err);
+      showNotification("Error al copiar el texto", "error");
     }
   };
 
@@ -92,7 +116,10 @@ function EmailGenerator() {
               emailsAgregados[coincidencia.extra] = true;
             }
           } else {
-            console.log("NO HAY CONCELLOS");
+            showNotification(
+              "No se encontró el concello en la base de datos",
+              "warning"
+            );
           }
         });
       }
@@ -169,22 +196,29 @@ function EmailGenerator() {
     const reader = new FileReader();
 
     reader.onload = (event) => {
-      const workbook = XLSX.read(event.target?.result as string, {
-        type: "binary",
-      });
-      const sheetName = workbook.SheetNames[1];
-      const sheet = workbook.Sheets[sheetName];
-      const data: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      try {
+        const workbook = XLSX.read(event.target?.result as string, {
+          type: "binary",
+        });
+        const sheetName = workbook.SheetNames[1];
+        const sheet = workbook.Sheets[sheetName];
+        const data: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-      const filteredData = data.map((row: any[]) => [
-        row[0],
-        row[3],
-        row[4] !== "PK" && row[4] !== undefined ? formatNumber(row[4]) : row[4],
-        row[5],
-        convertirFechaExcelANormal(row[11]),
-        convertirFechaExcelANormal(row[12]),
-      ]);
-      setExcelData(filteredData);
+        const filteredData = data.map((row: any[]) => [
+          row[0],
+          row[3],
+          row[4] !== "PK" && row[4] !== undefined
+            ? formatNumber(row[4])
+            : row[4],
+          row[5],
+          convertirFechaExcelANormal(row[11]),
+          convertirFechaExcelANormal(row[12]),
+        ]);
+        setExcelData(filteredData);
+        showNotification("Archivo Excel cargado correctamente", "success");
+      } catch (error) {
+        showNotification("Error al cargar el archivo Excel", "error");
+      }
     };
 
     reader.readAsArrayBuffer(file as Blob);
@@ -277,6 +311,7 @@ function EmailGenerator() {
 
   const unselectAll = () => {
     setSelectedRows([]);
+    showNotification("Todas las filas han sido deseleccionadas", "info");
   };
 
   const anadirDatos = () => {
@@ -298,22 +333,25 @@ function EmailGenerator() {
       tipo === "No tipo"
     ) {
       if (selectedRows.length < 1) {
-        alert("No has seleccionado ninguna fila");
+        showNotification("No has seleccionado ninguna fila", "warning");
       }
       if (inicioSemana.length < 1) {
-        alert("No has escrito inicio de la semana");
+        showNotification("No has escrito inicio de la semana", "warning");
       }
       if (finSemana.length < 1) {
-        alert("No has escrito fin de la semana");
+        showNotification("No has escrito fin de la semana", "warning");
       }
       if (fecha === undefined) {
-        alert("No has seleccionado ningun día");
+        showNotification("No has seleccionado ningun día", "warning");
       }
       if (numero === 0 || numero === undefined) {
-        alert("No has escrito número de día");
+        showNotification("No has escrito número de día", "warning");
       }
       if (tipo === "No tipo") {
-        alert("No has seleccionado si es a instalar o a retirar");
+        showNotification(
+          "No has seleccionado si es a instalar o a retirar",
+          "warning"
+        );
       }
 
       return true;
@@ -328,13 +366,16 @@ function EmailGenerator() {
           JSON.stringify(obj.selectedRows) === JSON.stringify(selectedRows)
       );
       if (!hayDuplicadosEnDatos) {
-        console.log(datos);
         setDatos([
           ...datos,
           { inicioSemana, finSemana, fecha, numero, tipo, selectedRows },
         ]);
+        showNotification(
+          `Se han añadido ${selectedRows.length} datos correctamente`,
+          "success"
+        );
       } else {
-        alert("Ya hay un elemento igual");
+        showNotification("Ya existe un elemento igual", "warning");
       }
 
       return hayDuplicadosEnDatos;
@@ -486,7 +527,7 @@ function EmailGenerator() {
             onClick={() => {
               anadirDatos()
                 ? console.log("")
-                : alert("Añadidos " + selectedRows.length + " datos");
+                : showNotification("Datos añadidos correctamente", "success");
             }}
           >
             Añadir
@@ -548,6 +589,12 @@ function EmailGenerator() {
           })}
         </tbody>
       </table>
+      <Notification
+        open={notification.open}
+        message={notification.message}
+        severity={notification.severity}
+        onClose={handleCloseNotification}
+      />
     </div>
   );
 }

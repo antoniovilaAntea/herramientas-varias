@@ -1,15 +1,37 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
+import Notification from "./Notification";
 
 import "./cellBrowser.css";
 
 const CellBrowser = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [cellInput, setCellInput] = useState("");
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error" | "warning" | "info",
+  });
+
+  const showNotification = (
+    message: string,
+    severity: "success" | "error" | "warning" | "info"
+  ) => {
+    setNotification({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, open: false }));
+  };
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setSelectedFiles(Array.from(e.target.files));
+      showNotification("Archivos seleccionados correctamente", "success");
     }
   };
 
@@ -27,6 +49,7 @@ const CellBrowser = () => {
     }
     return { c: columna, r: numeros };
   };
+
   const exportToExcel = async () => {
     const cellReferences = cellInput
       .toUpperCase()
@@ -34,7 +57,10 @@ const CellBrowser = () => {
       .map((cell) => `Celda ${cell.trim()}`);
 
     if (selectedFiles.length === 0 || cellInput.trim() === "") {
-      alert("Por favor seleccione archivos y/o ingrese celdas.");
+      showNotification(
+        "Por favor seleccione archivos y/o ingrese celdas",
+        "warning"
+      );
       return;
     }
 
@@ -45,27 +71,31 @@ const CellBrowser = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
           if (e.target?.result) {
-            const workbook = XLSX.read(e.target.result as string, {
-              type: "binary",
-            });
-            const sheetName = workbook.SheetNames[0];
-            const sheet = workbook.Sheets[sheetName];
-            const jsonData = XLSX.utils.sheet_to_json(sheet, {
-              header: 1,
-            }) as any[][];
+            try {
+              const workbook = XLSX.read(e.target.result as string, {
+                type: "binary",
+              });
+              const sheetName = workbook.SheetNames[0];
+              const sheet = workbook.Sheets[sheetName];
+              const jsonData = XLSX.utils.sheet_to_json(sheet, {
+                header: 1,
+              }) as any[][];
 
-            const row = [file.name];
-            cellReferences.forEach((cellRef) => {
-              const cellAddress = convertirDesignacionCelda(
-                cellRef.replace("Celda ", "")
-              );
-              const cellValue =
-                jsonData[cellAddress.r - 1]?.[cellAddress.c - 1];
-              row.push(cellValue || "");
-            });
+              const row = [file.name];
+              cellReferences.forEach((cellRef) => {
+                const cellAddress = convertirDesignacionCelda(
+                  cellRef.replace("Celda ", "")
+                );
+                const cellValue =
+                  jsonData[cellAddress.r - 1]?.[cellAddress.c - 1];
+                row.push(cellValue || "");
+              });
 
-            newData.push(row);
-            resolve();
+              newData.push(row);
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
           }
         };
         reader.onerror = (error) => reject(error);
@@ -83,9 +113,10 @@ const CellBrowser = () => {
       ]);
       XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Datos");
       XLSX.writeFile(newWorkbook, "SALIDA.xlsx");
+      showNotification("Archivo exportado exitosamente", "success");
     } catch (error) {
       console.error("Error procesando archivos:", error);
-      alert("Ocurrió un error al procesar los archivos.");
+      showNotification("Ocurrió un error al procesar los archivos", "error");
     }
   };
 
@@ -118,6 +149,12 @@ const CellBrowser = () => {
       <div className="boton">
         <button onClick={exportToExcel}>Exportar a nuevo archivo Excel</button>
       </div>
+      <Notification
+        open={notification.open}
+        message={notification.message}
+        severity={notification.severity}
+        onClose={handleCloseNotification}
+      />
     </div>
   );
 };

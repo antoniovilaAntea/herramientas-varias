@@ -4,6 +4,7 @@ import { utils, writeFile } from "xlsx";
 import * as XLSX from "xlsx";
 import { parse, isBefore, isAfter, isSameDay, format } from "date-fns";
 import { es } from "date-fns/locale";
+import Notification from "./Notification";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -24,6 +25,27 @@ const ExcelComparator = () => {
       key: "selection",
     },
   ]);
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error" | "warning" | "info",
+  });
+
+  const showNotification = (
+    message: string,
+    severity: "success" | "error" | "warning" | "info"
+  ) => {
+    setNotification({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, open: false }));
+  };
+
   const file1 = useRef<File | null>(null);
   const file2 = useRef<File | null>(null);
 
@@ -32,11 +54,17 @@ const ExcelComparator = () => {
   };
 
   const seleccionarArchivo1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) file1.current = e.target.files[0];
+    if (e.target.files) {
+      file1.current = e.target.files[0];
+      showNotification("Archivo 1 seleccionado correctamente", "success");
+    }
   };
 
   const seleccionarArchivo2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) file2.current = e.target.files[0];
+    if (e.target.files) {
+      file2.current = e.target.files[0];
+      showNotification("Archivo 2 seleccionado correctamente", "success");
+    }
   };
 
   const readExcelFile = async (file: File): Promise<any[][]> => {
@@ -55,14 +83,15 @@ const ExcelComparator = () => {
           const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
           resolve(jsonData as any[][]);
         } catch (error) {
-          reject(new Error("Error on load file"));
+          reject(new Error("Error al cargar el archivo"));
         }
       };
 
-      reader.onerror = (error) => reject(new Error("Error"));
+      reader.onerror = (error) => reject(new Error("Error al leer el archivo"));
       reader.readAsArrayBuffer(file);
     });
   };
+
   const excelDateToJSDate = (excelDate: any) => {
     const fechaJS = new Date((excelDate - 25569) * 86400 * 1000);
     return fechaJS;
@@ -73,12 +102,14 @@ const ExcelComparator = () => {
     const fechaJS = new Date(milliseconds);
     return fechaJS;
   };
+
   const formatHora = (fechaJS: Date) => {
     const horas = String(fechaJS.getHours()).padStart(2, "0");
     const minutos = String(fechaJS.getMinutes()).padStart(2, "0");
 
     return `${horas}:${minutos}`;
   };
+
   const formatFecha = (fechaJS: Date) => {
     const dia = String(fechaJS.getDate()).padStart(2, "0");
     const mes = String(fechaJS.getMonth() + 1).padStart(2, "0");
@@ -88,6 +119,7 @@ const ExcelComparator = () => {
 
     return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
   };
+
   const procesarDatos = (data1: any[][], data2: any[][]): ProcessedData => {
     const result: ProcessedData = {
       datosConProvincial: [],
@@ -152,42 +184,53 @@ const ExcelComparator = () => {
   const btnExportarClick = async () => {
     if (!file1.current || !file2.current) {
       if (!file1.current) {
-        alert("No has seleccionado ningún archivo de accidentes anteriores");
+        showNotification(
+          "No has seleccionado ningún archivo de accidentes anteriores",
+          "warning"
+        );
       }
       if (!file2.current) {
-        alert("No has seleccionado ningún archivo de accidentes nuevos");
+        showNotification(
+          "No has seleccionado ningún archivo de accidentes nuevos",
+          "warning"
+        );
       }
       return;
     }
 
-    const data2 = await readExcelFile(file1.current);
-    const data1 = await readExcelFile(file2.current);
+    try {
+      const data2 = await readExcelFile(file1.current);
+      const data1 = await readExcelFile(file2.current);
 
-    const {
-      datosConProvincial,
-      datosCoincidentes,
-      datosAnteriores,
-      primeraFila,
-    } = procesarDatos(data1, data2);
+      const {
+        datosConProvincial,
+        datosCoincidentes,
+        datosAnteriores,
+        primeraFila,
+      } = procesarDatos(data1, data2);
 
-    const wb = utils.book_new();
+      const wb = utils.book_new();
 
-    const crearHoja = (datos: any[][], nombreHoja: string) => {
-      const ws = utils.aoa_to_sheet([primeraFila, ...datos]);
-      utils.book_append_sheet(wb, ws, nombreHoja);
-    };
+      const crearHoja = (datos: any[][], nombreHoja: string) => {
+        const ws = utils.aoa_to_sheet([primeraFila, ...datos]);
+        utils.book_append_sheet(wb, ws, nombreHoja);
+      };
 
-    crearHoja(datosConProvincial, "Todos");
-    crearHoja(
-      datosCoincidentes,
-      `${format(state[0].startDate, "dd.MM.yy")} - ${format(state[0].endDate, "dd.MM.yy")}`
-    );
-    crearHoja(
-      datosAnteriores,
-      `Anteriores al ${format(state[0].startDate, "dd.MM.yy")}`
-    );
+      crearHoja(datosConProvincial, "Todos");
+      crearHoja(
+        datosCoincidentes,
+        `${format(state[0].startDate, "dd.MM.yy")} - ${format(state[0].endDate, "dd.MM.yy")}`
+      );
+      crearHoja(
+        datosAnteriores,
+        `Anteriores al ${format(state[0].startDate, "dd.MM.yy")}`
+      );
 
-    writeFile(wb, "resultado.xlsx");
+      writeFile(wb, "resultado.xlsx");
+      showNotification("Archivo exportado exitosamente", "success");
+    } catch (error) {
+      showNotification("Error al procesar los archivos", "error");
+    }
   };
 
   return (
@@ -265,6 +308,12 @@ const ExcelComparator = () => {
       <div className="boton-unir">
         <button onClick={btnExportarClick}>Exportar Excel</button>
       </div>
+      <Notification
+        open={notification.open}
+        message={notification.message}
+        severity={notification.severity}
+        onClose={handleCloseNotification}
+      />
     </div>
   );
 };
