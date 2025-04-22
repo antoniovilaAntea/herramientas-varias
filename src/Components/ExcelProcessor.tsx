@@ -12,6 +12,7 @@ interface Registro {
   Observacións: string;
   "Aforado en": string;
   Afín: string;
+  Código: string;
 }
 const ExcelProcessor = () => {
   const [error, setError] = useState("");
@@ -33,6 +34,7 @@ const ExcelProcessor = () => {
       Observacións: "",
       "Aforado en": "",
       Afín: "",
+      Código: "",
     };
 
     dataRows.forEach((row: any) => {
@@ -49,7 +51,9 @@ const ExcelProcessor = () => {
           Observacións: "",
           "Aforado en": "",
           Afín: "",
+          Código: row[4],
         };
+        console.log(row);
       } else if (cellValue.trim() === "Treito:") registroActual.Treito = row[2];
       else if (cellValue.trim() === "Provincia:")
         registroActual.Provincia = row[2];
