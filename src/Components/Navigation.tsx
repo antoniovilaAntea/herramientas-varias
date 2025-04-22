@@ -85,13 +85,6 @@ const Navigation = () => {
             Listador de gomas
           </Link>
           <Link
-            to="/buscador"
-            onClick={() => setActiveLink("buscador")}
-            className={activeLink === "buscador" ? "bold" : ""}
-          >
-            Buscador de celdas
-          </Link>
-          <Link
             to="/accidentes"
             onClick={() => setActiveLink("accidentes")}
             className={activeLink === "accidentes" ? "bold-depo" : "depo"}
@@ -105,6 +98,13 @@ const Navigation = () => {
             style={{ width: "120px" }}
           >
             Generador Emails DEPO
+          </Link>
+          <Link
+            to="/buscador"
+            onClick={() => setActiveLink("buscador")}
+            className={activeLink === "buscador" ? "bold" : ""}
+          >
+            Buscador de celdas
           </Link>
           <Link
             to="/festivos"
