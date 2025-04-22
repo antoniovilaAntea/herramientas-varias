@@ -74,7 +74,7 @@ const ExcelProcessor = () => {
 
         const aforos: string[] = [];
         const aforoRegex =
-          /Aforado en\s*([a-z]+[\s-]*\d{4}).*?pk\s*([\d,]+).*?(?:con\s*([\d,.]+))? veh\/día/gi;
+          /Aforado en\s*([a-záéíóúñ]+[\s-]*\d{4}).*?pk\s*([\d,]+).*?(?:con\s*([\d,.]+))?\s*veh\/día/gi;
         let match;
         while ((match = aforoRegex.exec(texto)) !== null) {
           aforos.push(
