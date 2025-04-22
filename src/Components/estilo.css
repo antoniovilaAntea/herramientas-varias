@@ -100,56 +100,70 @@
   text-align: center;
   color: #495b86;
   transition: all 0.3s ease;
+  border-radius: 10px;
+  background-color: transparent;
 }
 
 .menu__nav a:hover {
-  background-color: #c0d6df !important;
-  border-radius: 10px !important;
-  padding: 5px 5px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  width: 80px;
-  height: 50px;
-  text-align: center;
+  background-color: #dff2fa !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #274690 !important;
+  font-weight: bold;
 }
 
 .menu__nav a.xunta:hover {
-  background-color: #007bc4b5 !important;
-  color: #eeeeee !important;
+  background-color: #dff2fa !important;
+  color: #007cc4 !important;
+  font-weight: bold;
 }
 
 .menu__nav a.depo:hover {
-  background-color: #4a5a4bc9 !important;
-  color: #eeeeee !important;
+  background-color: #dff2fa !important;
+  color: #4a5a4b !important;
+  font-weight: bold;
 }
 
 .menu__nav a.bold-xunta {
   display: flex;
   align-items: center;
   font-weight: bold;
+  color: #007cc4;
 }
 
 .menu__nav a.bold-xunta:hover {
-  background-color: #007cc4 !important;
-  color: #eeeeee !important;
+  background-color: #dff2fa !important;
+  color: #007cc4 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .menu__nav a.bold-depo {
   display: flex;
   align-items: center;
   font-weight: bold;
+  color: #4a5a4b;
 }
 
 .menu__nav a.bold-depo:hover {
-  background-color: #4a5a4b !important;
-  color: #eeeeee !important;
+  background-color: #dff2fa !important;
+  color: #4a5a4b !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .menu__nav a.bold {
   display: flex;
   align-items: center;
   font-weight: bold;
+  color: #274690;
+}
+
+.menu__nav a.bold:hover {
+  background-color: #dff2fa !important;
+  color: #274690 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
@@ -157,7 +171,9 @@
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  margin: 20px auto;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header-content {
@@ -185,10 +201,14 @@ h3 {
   color: #495b86;
   border-radius: 10px !important;
   transition: all 0.3s ease;
+  background-color: transparent;
 }
 
 .help:hover {
-  background-color: #c0d6df !important;
+  background-color: #dff2fa !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #274690 !important;
 }
 
 /* Media Queries para Responsive */
