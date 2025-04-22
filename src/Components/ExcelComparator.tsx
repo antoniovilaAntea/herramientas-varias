@@ -5,6 +5,7 @@ import * as XLSX from "xlsx";
 import { parse, isBefore, isAfter, isSameDay, format } from "date-fns";
 import { es } from "date-fns/locale";
 import Notification from "./Notification";
+import { CircularProgress, Box } from "@mui/material";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -30,6 +31,7 @@ const ExcelComparator = () => {
     message: "",
     severity: "success" as "success" | "error" | "warning" | "info",
   });
+  const [loading, setLoading] = useState(false);
 
   const showNotification = (
     message: string,
@@ -198,6 +200,7 @@ const ExcelComparator = () => {
       return;
     }
 
+    setLoading(true);
     try {
       const data2 = await readExcelFile(file1.current);
       const data1 = await readExcelFile(file2.current);
@@ -230,6 +233,8 @@ const ExcelComparator = () => {
       showNotification("Archivo exportado exitosamente", "success");
     } catch (error) {
       showNotification("Error al procesar los archivos", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -306,7 +311,22 @@ const ExcelComparator = () => {
         </div>
       </div>
       <div className="boton-unir">
-        <button onClick={btnExportarClick}>Exportar Excel</button>
+        <button onClick={btnExportarClick} disabled={loading}>
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress size={24} color="inherit" />
+              <span style={{ marginLeft: "8px" }}>Exportando...</span>
+            </Box>
+          ) : (
+            "Exportar Excel"
+          )}
+        </button>
       </div>
       <Notification
         open={notification.open}

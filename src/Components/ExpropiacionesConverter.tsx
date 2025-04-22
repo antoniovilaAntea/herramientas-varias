@@ -3,12 +3,14 @@ import * as XLSX from "xlsx";
 import { create } from "xmlbuilder2";
 import { saveAs } from "file-saver";
 import Notification from "./Notification";
+import { CircularProgress, Box } from "@mui/material";
 
 const ExpropiacionesConverter = () => {
   const [archivo, setArchivo] = useState<File>();
   const [nombre, setNombre] = useState<string>("");
   const [presupuesto, setPresupuesto] = useState<string>("");
   const [xmlOutput, setXmlOutput] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState({
     open: false,
     message: "",
@@ -71,7 +73,7 @@ const ExpropiacionesConverter = () => {
     return `${restoNumero}-${ultimoDigito}`;
   };
 
-  const excelToCustomXML = (excelFile: File) => {
+  const excelToCustomXML = async (excelFile: File) => {
     if (nombre.length < 1 || presupuesto.length < 1) {
       if (nombre.length < 1) {
         showNotification(
@@ -86,130 +88,151 @@ const ExpropiacionesConverter = () => {
         );
       }
     } else {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        try {
-          const data = new Uint8Array(e.target.result as ArrayBuffer);
-          const workbook = XLSX.read(data, { type: "array" });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
+      setLoading(true);
+      try {
+        const reader = new FileReader();
+        await new Promise((resolve, reject) => {
+          reader.onload = (e: any) => {
+            try {
+              const data = new Uint8Array(e.target.result as ArrayBuffer);
+              const workbook = XLSX.read(data, { type: "array" });
+              const sheetName = workbook.SheetNames[0];
+              const worksheet = workbook.Sheets[sheetName];
 
-          //@ts-ignore
-          const headerRow1: any[] = XLSX.utils.sheet_to_json(worksheet, {
-            header: 1,
-            defval: "",
-          })[0];
-          //@ts-ignore
-          const headers: any[] = XLSX.utils.sheet_to_json(worksheet, {
-            header: 1,
-            defval: "",
-          })[2];
+              //@ts-ignore
+              const headerRow1: any[] = XLSX.utils.sheet_to_json(worksheet, {
+                header: 1,
+                defval: "",
+              })[0];
+              //@ts-ignore
+              const headers: any[] = XLSX.utils.sheet_to_json(worksheet, {
+                header: 1,
+                defval: "",
+              })[2];
 
-          const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
-            header: 1,
-            defval: "",
-            range: 4,
-          });
-
-          const root = create({ version: "1.0" }).ele("Anejo", {
-            Nombre: nombre,
-            Presupuesto: presupuesto,
-            "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-            "xsi:noNamespaceSchemaLocation": "anejo.xsd",
-          });
-
-          jsonData.forEach((row: any) => {
-            if (!row[headers.indexOf("UnidadOrganizativa")]) return;
-            const finca = root.ele("Finca", {
-              UnidadOrganizativa: row[headers.indexOf("UnidadOrganizativa")],
-              N_orden: formatoPersonalizado(row[headers.indexOf("N_orden")]),
-              Poligono: toInteger(row[headers.indexOf("Poligono")]),
-              Parcela: toInteger(row[headers.indexOf("Parcela")]),
-              Calificacion: toDecimal(row[headers.indexOf("Calificacion")]),
-              Ref_catastral: row[headers.indexOf("Ref_catastral")],
-              Municipio: toInteger(row[headers.indexOf("Municipio")]),
-              Sup_catastral_total: row[headers.indexOf("Sup_catastral_total")],
-              Margen: row[headers.indexOf("Margen")],
-              Longitud_traza: toDecimal(row[headers.indexOf("Longitud_traza")]),
-              PK_DESDE: toDecimal(row[headers.indexOf("PK_DESDE")]),
-              PK_HASTA: toDecimal(row[headers.indexOf("PK_HASTA")]),
-            });
-
-            const codigoTipoIndex = headers.indexOf("CodigoTipoTerreno");
-            finca.ele("Terreno", {
-              CodigoTipoTerreno: toInteger(row[codigoTipoIndex]),
-              Calificacion: row[codigoTipoIndex + 1],
-              TipoOcupacion: toInteger(row[headers.indexOf("TipoOcupacion")]),
-              Superficie: toDecimal(row[headers.indexOf("Superficie")]),
-            });
-
-            let titularCount = 0;
-            let nombreColIndex = headers.findIndex((h) => h.includes("Nombre"));
-
-            while (nombreColIndex >= 0 && titularCount < 4) {
-              if (!row[nombreColIndex]) break;
-
-              const titular = finca.ele("Titular", {
-                Nombre: row[nombreColIndex],
-                Apellido1: row[nombreColIndex + 1] || "",
-                Apellido2: row[nombreColIndex + 2] || "",
+              const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
+                header: 1,
+                defval: "",
+                range: 4,
               });
 
-              const calleIndex = headers.findIndex(
-                (h, idx) => idx >= nombreColIndex && h.includes("Calle")
+              const root = create({ version: "1.0" }).ele("Anejo", {
+                Nombre: nombre,
+                Presupuesto: presupuesto,
+                "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+                "xsi:noNamespaceSchemaLocation": "anejo.xsd",
+              });
+
+              jsonData.forEach((row: any) => {
+                if (!row[headers.indexOf("UnidadOrganizativa")]) return;
+                const finca = root.ele("Finca", {
+                  UnidadOrganizativa:
+                    row[headers.indexOf("UnidadOrganizativa")],
+                  N_orden: formatoPersonalizado(
+                    row[headers.indexOf("N_orden")]
+                  ),
+                  Poligono: toInteger(row[headers.indexOf("Poligono")]),
+                  Parcela: toInteger(row[headers.indexOf("Parcela")]),
+                  Calificacion: toDecimal(row[headers.indexOf("Calificacion")]),
+                  Ref_catastral: row[headers.indexOf("Ref_catastral")],
+                  Municipio: toInteger(row[headers.indexOf("Municipio")]),
+                  Sup_catastral_total:
+                    row[headers.indexOf("Sup_catastral_total")],
+                  Margen: row[headers.indexOf("Margen")],
+                  Longitud_traza: toDecimal(
+                    row[headers.indexOf("Longitud_traza")]
+                  ),
+                  PK_DESDE: toDecimal(row[headers.indexOf("PK_DESDE")]),
+                  PK_HASTA: toDecimal(row[headers.indexOf("PK_HASTA")]),
+                });
+
+                const codigoTipoIndex = headers.indexOf("CodigoTipoTerreno");
+                finca.ele("Terreno", {
+                  CodigoTipoTerreno: toInteger(row[codigoTipoIndex]),
+                  Calificacion: row[codigoTipoIndex + 1],
+                  TipoOcupacion: toInteger(
+                    row[headers.indexOf("TipoOcupacion")]
+                  ),
+                  Superficie: toDecimal(row[headers.indexOf("Superficie")]),
+                });
+
+                let titularCount = 0;
+                let nombreColIndex = headers.findIndex((h) =>
+                  h.includes("Nombre")
+                );
+
+                while (nombreColIndex >= 0 && titularCount < 4) {
+                  if (!row[nombreColIndex]) break;
+
+                  const titular = finca.ele("Titular", {
+                    Nombre: row[nombreColIndex],
+                    Apellido1: row[nombreColIndex + 1] || "",
+                    Apellido2: row[nombreColIndex + 2] || "",
+                  });
+
+                  const calleIndex = headers.findIndex(
+                    (h, idx) => idx >= nombreColIndex && h.includes("Calle")
+                  );
+
+                  if (calleIndex >= 0) {
+                    titular.ele("Domicilio", {
+                      Calle: row[calleIndex],
+                      Numero: toInteger(row[calleIndex + 1]),
+                      Piso: toInteger(row[calleIndex + 2]),
+                      Puerta: toInteger(row[calleIndex + 3]),
+                      CP: toInteger(row[calleIndex + 4]),
+                      Localidad: toInteger(row[calleIndex + 5]),
+                      ComunidadAutonoma: toInteger(row[calleIndex + 6]),
+                      Parroquia: toInteger(row[calleIndex + 7]),
+                      Municipio: toInteger(row[calleIndex + 8]),
+                      Provincia: toInteger(row[calleIndex + 9]),
+                      Pais: toInteger(row[calleIndex + 10]),
+                    });
+                  }
+
+                  nombreColIndex += 14;
+                  titularCount++;
+                }
+
+                const bienHeaders = headerRow1
+                  .map((h, idx) => (h.includes("Bien") ? idx : -1))
+                  .filter((idx) => idx !== -1);
+
+                bienHeaders.forEach((bienIndex) => {
+                  const nombreBien = row[bienIndex];
+                  const cantidad = row[bienIndex + 1];
+                  const magnitud = row[bienIndex + 2];
+
+                  if (nombreBien || cantidad) {
+                    finca.ele("Bien", {
+                      Nombre: nombreBien,
+                      Cantidad: toInteger(cantidad),
+                      Magnitud: magnitud,
+                    });
+                  }
+                });
+              });
+
+              const xmlString = root.end({ prettyPrint: true });
+              setXmlOutput(xmlString);
+              saveAs(
+                new Blob([xmlString], { type: "application/xml" }),
+                "salida.xml"
               );
-
-              if (calleIndex >= 0) {
-                titular.ele("Domicilio", {
-                  Calle: row[calleIndex],
-                  Numero: toInteger(row[calleIndex + 1]),
-                  Piso: toInteger(row[calleIndex + 2]),
-                  Puerta: toInteger(row[calleIndex + 3]),
-                  CP: toInteger(row[calleIndex + 4]),
-                  Localidad: toInteger(row[calleIndex + 5]),
-                  ComunidadAutonoma: toInteger(row[calleIndex + 6]),
-                  Parroquia: toInteger(row[calleIndex + 7]),
-                  Municipio: toInteger(row[calleIndex + 8]),
-                  Provincia: toInteger(row[calleIndex + 9]),
-                  Pais: toInteger(row[calleIndex + 10]),
-                });
-              }
-
-              nombreColIndex += 14;
-              titularCount++;
+              resolve(true);
+            } catch (error) {
+              reject(error);
             }
-
-            const bienHeaders = headerRow1
-              .map((h, idx) => (h.includes("Bien") ? idx : -1))
-              .filter((idx) => idx !== -1);
-
-            bienHeaders.forEach((bienIndex) => {
-              const nombreBien = row[bienIndex];
-              const cantidad = row[bienIndex + 1];
-              const magnitud = row[bienIndex + 2];
-
-              if (nombreBien || cantidad) {
-                finca.ele("Bien", {
-                  Nombre: nombreBien,
-                  Cantidad: toInteger(cantidad),
-                  Magnitud: magnitud,
-                });
-              }
-            });
-          });
-
-          const xmlString = root.end({ prettyPrint: true });
-          setXmlOutput(xmlString);
-          saveAs(
-            new Blob([xmlString], { type: "application/xml" }),
-            "salida.xml"
-          );
-          showNotification("Archivo convertido exitosamente", "success");
-        } catch (error) {
-          showNotification("Error al convertir el archivo", "error");
-        }
-      };
-      reader.readAsArrayBuffer(excelFile);
+          };
+          reader.onerror = (error) => reject(error);
+          reader.readAsArrayBuffer(excelFile);
+        });
+        showNotification("Archivo convertido exitosamente", "success");
+      } catch (error) {
+        showNotification("Error al convertir el archivo", "error");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -257,8 +280,22 @@ const ExpropiacionesConverter = () => {
               ? excelToCustomXML(archivo)
               : showNotification("Selecciona un archivo", "warning")
           }
+          disabled={loading}
         >
-          Convertir
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress size={24} color="inherit" />
+              <span style={{ marginLeft: "8px" }}>Convirtiendo...</span>
+            </Box>
+          ) : (
+            "Convertir"
+          )}
         </button>
       </div>
       <Notification

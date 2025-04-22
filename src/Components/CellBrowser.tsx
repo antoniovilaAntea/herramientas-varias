@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 import Notification from "./Notification";
+import { CircularProgress, Box } from "@mui/material";
 
 import "./cellBrowser.css";
 
 const CellBrowser = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [cellInput, setCellInput] = useState("");
+  const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState({
     open: false,
     message: "",
@@ -64,47 +67,38 @@ const CellBrowser = () => {
       return;
     }
 
-    const newData: any[][] = [];
-
-    const processFile = (file: File): Promise<void> => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          if (e.target?.result) {
-            try {
-              const workbook = XLSX.read(e.target.result as string, {
-                type: "binary",
-              });
-              const sheetName = workbook.SheetNames[0];
-              const sheet = workbook.Sheets[sheetName];
-              const jsonData = XLSX.utils.sheet_to_json(sheet, {
-                header: 1,
-              }) as any[][];
-
-              const row = [file.name];
-              cellReferences.forEach((cellRef) => {
-                const cellAddress = convertirDesignacionCelda(
-                  cellRef.replace("Celda ", "")
-                );
-                const cellValue =
-                  jsonData[cellAddress.r - 1]?.[cellAddress.c - 1];
-                row.push(cellValue || "");
-              });
-
-              newData.push(row);
-              resolve();
-            } catch (error) {
-              reject(error);
-            }
-          }
-        };
-        reader.onerror = (error) => reject(error);
-        reader.readAsBinaryString(file);
-      });
-    };
-
+    setLoading(true);
     try {
-      await Promise.all(selectedFiles.map(processFile));
+      const newData: any[][] = [];
+
+      const processFile = async (file: File): Promise<void> => {
+        const reader = new FileReader();
+        const result = await new Promise((resolve, reject) => {
+          reader.onload = (e) => resolve(e.target?.result);
+          reader.onerror = reject;
+          reader.readAsBinaryString(file);
+        });
+
+        const workbook = XLSX.read(result, { type: "binary" });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+        }) as any[][];
+
+        const row = [file.name];
+        cellReferences.forEach((cellRef) => {
+          const cellAddress = convertirDesignacionCelda(
+            cellRef.replace("Celda ", "")
+          );
+          const cellValue = jsonData[cellAddress.r - 1]?.[cellAddress.c - 1];
+          row.push(cellValue || "");
+        });
+
+        newData.push(row);
+      };
+
+      const results = await Promise.all(selectedFiles.map(processFile));
 
       const newWorkbook = XLSX.utils.book_new();
       const newWorksheet = XLSX.utils.aoa_to_sheet([
@@ -112,11 +106,22 @@ const CellBrowser = () => {
         ...newData,
       ]);
       XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Datos");
-      XLSX.writeFile(newWorkbook, "SALIDA.xlsx");
+
+      const excelBuffer = XLSX.write(newWorkbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
+      saveAs(
+        new Blob([excelBuffer], { type: "application/octet-stream" }),
+        "SALIDA.xlsx"
+      );
+
       showNotification("Archivo exportado exitosamente", "success");
     } catch (error) {
       console.error("Error procesando archivos:", error);
       showNotification("Ocurrió un error al procesar los archivos", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -147,7 +152,22 @@ const CellBrowser = () => {
         </div>
       </div>
       <div className="boton">
-        <button onClick={exportToExcel}>Exportar a nuevo archivo Excel</button>
+        <button onClick={exportToExcel} disabled={loading}>
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress size={24} color="inherit" />
+              <span style={{ marginLeft: "8px" }}>Exportando...</span>
+            </Box>
+          ) : (
+            "Exportar a nuevo archivo Excel"
+          )}
+        </button>
       </div>
       <Notification
         open={notification.open}
