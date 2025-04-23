@@ -53,7 +53,6 @@ const ExcelProcessor = () => {
           Afín: "",
           Código: row[4],
         };
-        console.log(row);
       } else if (cellValue.trim() === "Treito:") registroActual.Treito = row[2];
       else if (cellValue.trim() === "Provincia:")
         registroActual.Provincia = row[2];

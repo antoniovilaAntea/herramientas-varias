@@ -327,6 +327,7 @@ input[type="file"] {
   padding: 10px;
   background-color: #dbe9ee;
   border-radius: 4px;
+  position: relative;
 }
 
 .link-info {
@@ -352,6 +353,7 @@ input[type="file"] {
   border-radius: 4px;
   cursor: pointer;
   margin-left: 10px;
+  height: 27px;
 }
 
 .edit-button:hover {
@@ -386,4 +388,39 @@ input[type="file"] {
 
 .dialog-actions .save-button:hover {
   background-color: #4a6fa5;
+}
+
+.buttonLimpiar {
+  margin-right: 1em;
+  background-color: #dbe9ee;
+  border: 1px solid #274690;
+  border-color: #274690;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  &:hover {
+    background-color: #cee1ff;
+  }
+}
+
+.deleteGroup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 4px;
+  margin-top: -5px;
+  margin-left: 1em;
+  button {
+    width: 5px;
+    height: 5px;
+    font-size: smaller;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      color: red;
+    }
+  }
 }

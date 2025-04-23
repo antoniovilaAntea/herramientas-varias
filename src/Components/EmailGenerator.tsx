@@ -33,6 +33,14 @@ function EmailGenerator() {
     id: string;
     link: string;
   }>({ id: "", link: "" });
+  const [cleanGroup, setCleanGroup] = useState<{
+    id: string;
+    link: string;
+  }>({ id: "", link: "" });
+  const [deleteGroup, setDeleteGroup] = useState<{
+    id: string;
+    link: string;
+  }>({ id: "", link: "" });
 
   const defaultMapsLinks: { [key: string]: string } = {
     A: "https://www.google.com/maps/d/edit?mid=1Lfngolsi8wiIsczQa6OnonYIxz8Guqg&usp=sharing",
@@ -56,7 +64,6 @@ function EmailGenerator() {
   }, [mapsLinks]);
 
   useEffect(() => {
-    console.log("Guardando en localStorage:", mapsLinks);
     localStorage.setItem("mapsLinks", JSON.stringify(mapsLinks));
   }, [mapsLinks]);
 
@@ -493,6 +500,23 @@ function EmailGenerator() {
     };
   }, [openMapsDialog]);
 
+  useEffect(() => {
+    if (cleanGroup.id) {
+      const groupId = cleanGroup.id.toUpperCase();
+      const newLinks = { ...mapsLinks, [groupId]: "Sin enlace" };
+      setMapsLinks(newLinks);
+      showNotification("Enlace eliminado correctamente", "success");
+    }
+  }, [cleanGroup]);
+
+  useEffect(() => {
+    if (deleteGroup.id) {
+      const { [deleteGroup.id]: deleted, ...remainingLinks } = mapsLinks;
+      setMapsLinks(remainingLinks);
+      showNotification("Grupo eliminado correctamente", "success");
+    }
+  }, [deleteGroup]);
+
   //EMAILS
   return (
     <div className="email">
@@ -711,6 +735,29 @@ function EmailGenerator() {
                       >
                         Editar
                       </button>
+                      <button
+                        className="buttonLimpiar"
+                        onClick={() => {
+                          setCleanGroup({ id, link });
+                        }}
+                      >
+                        <img
+                          className="imagenLimpiar"
+                          alt="limpiar enlace"
+                          height={"12px"}
+                          width={"12px"}
+                          src={`${window.location.origin}${process.env.PUBLIC_URL}/clean-svgrepo-com.svg`}
+                        />
+                      </button>
+                      <div className="deleteGroup">
+                        <button
+                          onClick={() => {
+                            setDeleteGroup({ id, link });
+                          }}
+                        >
+                          x
+                        </button>
+                      </div>
                     </div>
                   </li>
                 ))}

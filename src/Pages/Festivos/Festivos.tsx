@@ -181,7 +181,6 @@ const Festivos = () => {
     event: React.MouseEvent<HTMLElement>,
     newFiltro: string
   ) => {
-    console.log(newFiltro);
     setFiltro(newFiltro);
     setSelectedOptions([]);
     setSelectedProvincias([]);
