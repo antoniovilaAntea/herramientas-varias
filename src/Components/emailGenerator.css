@@ -30,7 +30,7 @@ td:first-child {
   border: 1px solid #495b86;
   border-radius: 10px;
   margin-top: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 input[type="file"] {
   background-color: transparent;
@@ -204,4 +204,186 @@ input[type="file"] {
 .modalMail__texto {
   color: white;
   width: 50%;
+}
+.linksmaps {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.maps-button {
+  background-color: #395983;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.maps-button:hover {
+  background-color: #436ca1;
+}
+
+.maps-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  ::-webkit-scrollbar {
+    background-color: #dbe9ee;
+    border-color: #395983;
+    width: 7px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #395983; /* Color del thumb */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+}
+
+.maps-dialog-content {
+  background-color: #dbe9ee;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  h2,
+  label,
+  strong {
+    color: #395983;
+  }
+}
+
+.maps-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 8px 12px;
+  margin: 8px 12px;
+  border: 1px solid #495b86;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #274690;
+  background-color: #c0d6df;
+  background-image: none;
+  &:focus {
+    outline: none;
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 0.2rem #4a6fa560;
+  }
+}
+
+.form-group small {
+  color: #666;
+  font-size: 12px;
+}
+
+.maps-list {
+  margin-top: 20px;
+}
+
+.maps-list h3 {
+  margin-bottom: 10px;
+}
+
+.maps-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.maps-list li {
+  margin-bottom: 10px;
+}
+
+.link-item {
+  border: 1px solid #395983;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #dbe9ee;
+  border-radius: 4px;
+}
+
+.link-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.link-url {
+  color: #666;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+.edit-button {
+  background-color: #395983;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.edit-button:hover {
+  background-color: #4a6fa5;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dialog-actions button {
+  padding: 8px 16px;
+  border: 1px solid #395983;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dialog-actions button:first-child {
+  background-color: #dbe9ee;
+  &:hover {
+    background-color: #cee1ff;
+  }
+}
+
+.dialog-actions .save-button {
+  background-color: #395983;
+  color: #fff;
+}
+
+.dialog-actions .save-button:hover {
+  background-color: #4a6fa5;
 }

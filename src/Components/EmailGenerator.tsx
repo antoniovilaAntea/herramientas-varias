@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import * as XLSX from "xlsx";
@@ -27,6 +27,38 @@ function EmailGenerator() {
     message: "",
     severity: "success" as "success" | "error" | "warning" | "info",
   });
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const [openMapsDialog, setOpenMapsDialog] = useState(false);
+  const [editingGroup, setEditingGroup] = useState<{
+    id: string;
+    link: string;
+  }>({ id: "", link: "" });
+
+  const defaultMapsLinks: { [key: string]: string } = {
+    A: "https://www.google.com/maps/d/edit?mid=1Lfngolsi8wiIsczQa6OnonYIxz8Guqg&usp=sharing",
+    B: "https://www.google.com/maps/d/edit?mid=1cMJNltX3wodTuX1juaEvjzjwBwoYbw4&usp=sharing",
+    C: "https://www.google.com/maps/d/edit?mid=1NFFq_30N-wrJJxjgjdqVcQVBXC8RTl8&usp=sharing",
+    D: "https://www.google.com/maps/d/edit?mid=1DMQkj7jjlOuiHEJfK_U1eYQ34UoP07c&usp=sharing",
+    E: "https://www.google.com/maps/d/edit?mid=19a8c3jai_gwTHhaM4zem-V1PZtq5Agw&usp=sharing",
+    F: "",
+    G: "",
+    H: "",
+    I: "https://www.google.com/maps/d/edit?mid=1dMh9U7unXndHyhOvoJzmOcSV77hGiQc&usp=sharing",
+  };
+
+  const [mapsLinks, setMapsLinks] = useState<{ [key: string]: string }>(() => {
+    const saved = localStorage.getItem("mapsLinks");
+    return saved ? JSON.parse(saved) : defaultMapsLinks;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("mapsLinks", JSON.stringify(mapsLinks));
+  }, [mapsLinks]);
+
+  useEffect(() => {
+    console.log("Guardando en localStorage:", mapsLinks);
+    localStorage.setItem("mapsLinks", JSON.stringify(mapsLinks));
+  }, [mapsLinks]);
 
   const showNotification = (
     message: string,
@@ -397,48 +429,70 @@ function EmailGenerator() {
     // eslint-disable-next-line
 
     gruposUnicos.forEach((letra) => {
-      if (letra === "A") {
-        rutas.push(
-          "Enlaces Maps grupo A: https://www.google.com/maps/d/edit?mid=1Lfngolsi8wiIsczQa6OnonYIxz8Guqg&usp=sharing"
-        );
+      const link = mapsLinks[letra];
+      if (link) {
+        rutas.push(`Enlaces Maps grupo ${letra}: ${link}`);
       }
-      if (letra === "B") {
-        rutas.push(
-          "Enlaces Maps grupo B: https://www.google.com/maps/d/edit?mid=1cMJNltX3wodTuX1juaEvjzjwBwoYbw4&usp=sharing"
-        );
-      }
-      if (letra === "C") {
-        rutas.push(
-          "Enlaces Maps grupo C: https://www.google.com/maps/d/edit?mid=1NFFq_30N-wrJJxjgjdqVcQVBXC8RTl8&usp=sharing"
-        );
-      }
-      if (letra === "D") {
-        rutas.push(
-          "Enlaces Maps grupo D: https://www.google.com/maps/d/edit?mid=1DMQkj7jjlOuiHEJfK_U1eYQ34UoP07c&usp=sharing"
-        );
-      }
-      if (letra === "E") {
-        rutas.push(
-          "Enlaces Maps grupo E: https://www.google.com/maps/d/edit?mid=19a8c3jai_gwTHhaM4zem-V1PZtq5Agw&usp=sharing"
-        );
-      }
-      if (letra === "F") {
-        rutas.push("Enlaces Maps grupo F: ");
-      }
-      if (letra === "G") {
-        rutas.push("Enlaces Maps grupo G: ");
-      }
-      if (letra === "H") {
-        rutas.push("Enlaces Maps grupo H: ");
-      }
-      if (letra === "I") {
-        rutas.push(
-          "Enlaces Maps grupo I: https://www.google.com/maps/d/edit?mid=1dMh9U7unXndHyhOvoJzmOcSV77hGiQc&usp=sharing "
-        );
-      }
-      gruposUnicos.sort((a, b) => a.localeCompare(b));
     });
   };
+
+  const handleOpenMapsDialog = () => {
+    setOpenMapsDialog(true);
+  };
+
+  const handleCloseMapsDialog = () => {
+    setOpenMapsDialog(false);
+    setEditingGroup({ id: "", link: "" });
+  };
+
+  const handleSaveMapsLink = () => {
+    if (!editingGroup.id || !editingGroup.link) {
+      showNotification("Todos los campos son obligatorios", "warning");
+      return;
+    }
+
+    const groupId = editingGroup.id.toUpperCase();
+
+    const newLinks = { ...mapsLinks, [groupId]: editingGroup.link };
+
+    setMapsLinks(newLinks);
+    showNotification("Enlace guardado correctamente", "success");
+    handleCloseMapsDialog();
+  };
+
+  const getSortedGroups = () => {
+    return Object.entries(mapsLinks)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([id, link]) => ({ id, link }));
+  };
+
+  const subirScroll = () => {
+    if (dialogRef.current) {
+      dialogRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dialogRef.current &&
+        !dialogRef.current.contains(event.target as Node)
+      ) {
+        handleCloseMapsDialog();
+      }
+    };
+
+    if (openMapsDialog) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openMapsDialog]);
+
   //EMAILS
   return (
     <div className="email">
@@ -450,6 +504,11 @@ function EmailGenerator() {
           accept=".xls, .xlsx, .xlsm"
           onChange={handleFileUpload}
         />
+      </div>
+      <div className="linksmaps">
+        <button className="maps-button" onClick={handleOpenMapsDialog}>
+          Gestionar Enlaces Maps
+        </button>
       </div>
       <div className="formulario">
         <div className="semana">
@@ -591,6 +650,82 @@ function EmailGenerator() {
           })}
         </tbody>
       </table>
+      {openMapsDialog && (
+        <div className="maps-dialog">
+          <div className="maps-dialog-content" ref={dialogRef}>
+            <h2>Gestionar Enlaces de Google Maps</h2>
+            <div className="maps-form">
+              <div className="form-group">
+                <label htmlFor="group-id">Grupo</label>
+                <input
+                  id="group-id"
+                  type="text"
+                  value={editingGroup.id}
+                  onChange={(e) =>
+                    setEditingGroup((prev) => ({
+                      ...prev,
+                      id: e.target.value.toUpperCase(),
+                    }))
+                  }
+                  placeholder="Ej: A, B, C..."
+                />
+                <small>Introduce la letra del grupo</small>
+              </div>
+              <div className="form-group">
+                <label htmlFor="maps-link">Enlace de Google Maps</label>
+                <input
+                  id="maps-link"
+                  type="text"
+                  value={editingGroup.link}
+                  onChange={(e) =>
+                    setEditingGroup((prev) => ({
+                      ...prev,
+                      link: e.target.value,
+                    }))
+                  }
+                  placeholder="https://www.google.com/maps/d/edit?..."
+                />
+                <small>Pega el enlace completo de Google Maps</small>
+              </div>
+            </div>
+
+            <div className="maps-list">
+              <h3>Enlaces Actuales</h3>
+              <ul>
+                {getSortedGroups().map(({ id, link }) => (
+                  <li key={id}>
+                    <div className="link-item">
+                      <div className="link-info">
+                        <strong>Grupo {id}</strong>
+                        <span className="link-url">{link || "Sin enlace"}</span>
+                      </div>
+                      <button
+                        className="edit-button"
+                        onClick={() => {
+                          setEditingGroup({ id, link });
+                          setOpenMapsDialog(true);
+                          setTimeout(() => {
+                            subirScroll();
+                          }, 50);
+                        }}
+                      >
+                        Editar
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="dialog-actions">
+              <button onClick={handleCloseMapsDialog}>Cancelar</button>
+              <button onClick={handleSaveMapsLink} className="save-button">
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <Notification
         open={notification.open}
         message={notification.message}
