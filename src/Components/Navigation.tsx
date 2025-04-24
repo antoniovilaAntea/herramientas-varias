@@ -12,6 +12,7 @@ import Expropiaciones from "../Pages/Expropiaciones/Expropiaciones";
 import Comparador from "../Pages/Comparador/Comparador";
 import Festivos from "../Pages/Festivos/Festivos";
 import GomasPacheco from "../Pages/GomasPacheco/gomasPacheco";
+import Admin from "../Pages/Admin/Admin";
 
 import "./estilo.css";
 
@@ -48,6 +49,20 @@ const Navigation = () => {
               height={"35px"}
               src={`${window.location.origin}${process.env.PUBLIC_URL}/help.svg`}
               alt="Logo de ayuda"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Administrar">
+          <Link
+            to={"/admin"}
+            onClick={() => setActiveLink("")}
+            className="admin-icon"
+          >
+            <img
+              width={"35px"}
+              height={"35px"}
+              src={`${window.location.origin}${process.env.PUBLIC_URL}/admin.svg`}
+              alt="Logo de administrador"
             />
           </Link>
         </Tooltip>
@@ -134,6 +149,7 @@ const Navigation = () => {
           <Route path="/listadorGomas" element={<GomasPacheco />} />
           <Route path="/expropiaciones" element={<Expropiaciones />} />
           <Route path="/ayuda" element={<Ayuda />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
     </>

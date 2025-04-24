@@ -1,0 +1,183 @@
+.maps-manager {
+  background-color: #dbe9ee;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.maps-manager h2,
+.maps-manager label,
+.maps-manager strong {
+  color: #395983;
+}
+
+.maps-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 8px 12px;
+  margin: 8px 12px;
+  border: 1px solid #495b86;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #274690;
+  background-color: #c0d6df;
+  background-image: none;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4a6fa5;
+  box-shadow: 0 0 0 0.2rem #4a6fa560;
+}
+
+.form-group small {
+  color: #666;
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+.maps-list {
+  margin-top: 20px;
+}
+
+.maps-list h3 {
+  margin-bottom: 10px;
+}
+
+.maps-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.maps-list li {
+  margin-bottom: 10px;
+}
+
+.link-item {
+  border: 1px solid #395983;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #dbe9ee;
+  border-radius: 4px;
+  position: relative;
+}
+
+.link-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.link-url {
+  color: #666;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+.edit-button {
+  background-color: #395983;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  height: 27px;
+}
+
+.edit-button:hover {
+  background-color: #4a6fa5;
+}
+
+.buttonLimpiar {
+  background: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.imagenLimpiar {
+  width: 12px;
+  height: 12px;
+}
+
+.deleteGroup {
+  margin-left: 5px;
+}
+
+.deleteGroup button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 16px;
+}
+
+.deleteGroup button:hover {
+  color: #ff0000;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dialog-actions button {
+  padding: 8px 16px;
+  border: 1px solid #395983;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dialog-actions button:first-child {
+  background-color: #dbe9ee;
+}
+
+.dialog-actions button:first-child:hover {
+  background-color: #cee1ff;
+}
+
+.dialog-actions .save-button {
+  background-color: #395983;
+  color: #fff;
+}
+
+.dialog-actions .save-button:hover {
+  background-color: #4a6fa5;
+}
+
+.mapsTitle {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -184,7 +184,6 @@
 .header-text {
   text-align: center;
   flex-grow: 1;
-  margin-right: 3%;
   font-size: 25px;
   color: #274690;
 }
@@ -316,4 +315,16 @@ h3 {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.admin-icon {
+  margin-left: 0.5em;
+}
+
+.admin-icon,
+.ayuda-icon {
+  img:hover {
+    filter: invert(47%) sepia(10%) saturate(2453%) hue-rotate(176deg)
+      brightness(86%) contrast(89%);
+  }
 }

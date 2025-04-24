@@ -5,11 +5,23 @@ import * as XLSX from "xlsx";
 import isEqual from "lodash/isEqual";
 import Notification from "./Notification";
 //VIGILAR CADA AÑO
-import emails from "../Data/emailData";
-
 import "./emailGenerator.css";
+import { useConcelloEmails } from "../Context/ConcelloEmailContext";
+
+interface Email {
+  id: string;
+  email: string;
+}
+
+interface ConcelloEmail {
+  concello: string;
+  email: string;
+  email2?: string;
+  extra?: string;
+}
 
 function EmailGenerator() {
+  const { concellosEmails, setConcellosEmails } = useConcelloEmails();
   const [excelData, setExcelData] = useState<any[]>([]);
   const [mostrarBotones, setMostrarBotones] = useState(false);
   const [selectedRows, setSelectedRows] = useState<any[]>([]);
@@ -59,9 +71,14 @@ function EmailGenerator() {
     return saved ? JSON.parse(saved) : defaultMapsLinks;
   });
 
-  useEffect(() => {
-    localStorage.setItem("mapsLinks", JSON.stringify(mapsLinks));
-  }, [mapsLinks]);
+  const [newConcelloEmail, setNewConcelloEmail] = useState<ConcelloEmail>({
+    concello: "",
+    email: "",
+    email2: "",
+    extra: "",
+  });
+  const [editingConcelloEmail, setEditingConcelloEmail] =
+    useState<ConcelloEmail | null>(null);
 
   useEffect(() => {
     localStorage.setItem("mapsLinks", JSON.stringify(mapsLinks));
@@ -121,14 +138,14 @@ function EmailGenerator() {
   };
   const handleMostrarEmails = () => {
     let contenido: string[] = [];
-    let emailsAgregados: any = {};
+    let emailsAgregados: { [key: string]: boolean } = {};
 
     datos.forEach((item) => {
       if (item.tipo === "Instalar") {
         item.selectedRows.forEach((selectedRow: any) => {
           const concello = selectedRow[3];
-          const coincidencia = emails.find(
-            (email) => email.concello.toUpperCase() === concello.toUpperCase()
+          const coincidencia = concellosEmails.find(
+            (email) => email.concello?.toUpperCase() === concello.toUpperCase()
           );
 
           if (coincidencia !== undefined) {
@@ -342,7 +359,9 @@ function EmailGenerator() {
   };
 
   const createEmailsOperarios = (): string => {
-    return "alfonsomosquera@anteagroup.es,juanguerra@anteagroup.es";
+    const saved = localStorage.getItem("operariosEmails");
+    const emails = saved ? JSON.parse(saved) : [];
+    return emails.map((email: Email) => email.email).join(",");
   };
   const manjearBotones = () => {
     setMostrarBotones(!mostrarBotones);
@@ -443,10 +462,6 @@ function EmailGenerator() {
     });
   };
 
-  const handleOpenMapsDialog = () => {
-    setOpenMapsDialog(true);
-  };
-
   const handleCloseMapsDialog = () => {
     setOpenMapsDialog(false);
     setEditingGroup({ id: "", link: "" });
@@ -481,6 +496,7 @@ function EmailGenerator() {
       });
     }
   };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -517,6 +533,62 @@ function EmailGenerator() {
     }
   }, [deleteGroup]);
 
+  const handleSaveConcelloEmail = () => {
+    if (!newConcelloEmail.concello || !newConcelloEmail.email) {
+      showNotification("El concello y el email son obligatorios", "warning");
+      return;
+    }
+
+    // Verificar si ya existe un concello con el mismo nombre
+    const concelloExists = concellosEmails.some(
+      (email) =>
+        email.concello.toLowerCase() === newConcelloEmail.concello.toLowerCase()
+    );
+
+    if (editingConcelloEmail) {
+      // Actualizar email existente
+      const updatedEmails = concellosEmails.map((email) =>
+        email.concello === editingConcelloEmail.concello
+          ? newConcelloEmail
+          : email
+      );
+      setConcellosEmails(updatedEmails);
+      localStorage.setItem("concellosEmails", JSON.stringify(updatedEmails));
+      setEditingConcelloEmail(null);
+      showNotification("Email actualizado correctamente", "success");
+    } else if (!concelloExists) {
+      // Añadir nuevo email
+      const updatedEmails = [...concellosEmails, newConcelloEmail];
+      setConcellosEmails(updatedEmails);
+      localStorage.setItem("concellosEmails", JSON.stringify(updatedEmails));
+      showNotification("Email añadido correctamente", "success");
+    } else {
+      showNotification("Ya existe un concello con ese nombre", "warning");
+      return;
+    }
+
+    // Resetear el formulario
+    setNewConcelloEmail({
+      concello: "",
+      email: "",
+      email2: "",
+      extra: "",
+    });
+  };
+
+  const handleDeleteConcelloEmail = (concello: string) => {
+    const updatedEmails = concellosEmails.filter(
+      (email) => email.concello !== concello
+    );
+    setConcellosEmails(updatedEmails);
+    localStorage.setItem("concellosEmails", JSON.stringify(updatedEmails));
+  };
+
+  const handleEditConcelloEmail = (email: ConcelloEmail) => {
+    setEditingConcelloEmail(email);
+    setNewConcelloEmail(email);
+  };
+
   //EMAILS
   return (
     <div className="email">
@@ -529,11 +601,11 @@ function EmailGenerator() {
           onChange={handleFileUpload}
         />
       </div>
-      <div className="linksmaps">
+      {/* <div className="linksmaps">
         <button className="maps-button" onClick={handleOpenMapsDialog}>
           Gestionar Enlaces Maps
         </button>
-      </div>
+      </div> */}
       <div className="formulario">
         <div className="semana">
           <label htmlFor="de">Semana de </label>
