@@ -12,6 +12,11 @@ interface Email {
   email: string;
 }
 
+interface CopyEmail {
+  id: string;
+  email: string;
+}
+
 const MapsGroupManager = () => {
   const [mapsLinks, setMapsLinks] = useState<{ [key: string]: string }>(() => {
     const saved = localStorage.getItem("mapsLinks");
@@ -28,6 +33,16 @@ const MapsGroupManager = () => {
         ];
   });
 
+  const [copyEmails, setCopyEmails] = useState<CopyEmail[]>(() => {
+    const saved = localStorage.getItem("copyEmails");
+    return saved
+      ? JSON.parse(saved)
+      : [
+          { id: "1", email: "laurarey@anteagroup.es" },
+          { id: "2", email: "mariadelmar.gonzalez@depo.es" },
+        ];
+  });
+
   const [openMaps, setOpenMaps] = useState(false);
   const toggleOpenMaps = () => {
     setOpenMaps(!openMaps);
@@ -40,12 +55,21 @@ const MapsGroupManager = () => {
   const toggleOpenEmailsConcello = () => {
     setOpenEmailsConcello(!openEmailsConcello);
   };
+  const [openEmailsCopias, setOpenEmailsCopias] = useState(false);
+  const toggleOpenEmailsCopias = () => {
+    setOpenEmailsCopias(!openEmailsCopias);
+  };
   const [editingGroup, setEditingGroup] = useState<MapsGroup>({
     id: "",
     link: "",
   });
 
   const [editingEmail, setEditingEmail] = useState<Email>({
+    id: "",
+    email: "",
+  });
+
+  const [editingCopyEmail, setEditingCopyEmail] = useState<CopyEmail>({
     id: "",
     email: "",
   });
@@ -57,6 +81,10 @@ const MapsGroupManager = () => {
   useEffect(() => {
     localStorage.setItem("operariosEmails", JSON.stringify(emails));
   }, [emails]);
+
+  useEffect(() => {
+    localStorage.setItem("copyEmails", JSON.stringify(copyEmails));
+  }, [copyEmails]);
 
   const handleSaveGroup = () => {
     if (!editingGroup.id || !editingGroup.link) {
@@ -87,14 +115,12 @@ const MapsGroupManager = () => {
     if (!editingEmail.email) return;
 
     if (editingEmail.id) {
-      // Actualizar email existente
       setEmails((prev) =>
         prev.map((email) =>
           email.id === editingEmail.id ? editingEmail : email
         )
       );
     } else {
-      // Añadir nuevo email
       setEmails((prev) => [
         ...prev,
         { ...editingEmail, id: Date.now().toString() },
@@ -105,6 +131,28 @@ const MapsGroupManager = () => {
 
   const handleDeleteEmail = (id: string) => {
     setEmails((prev) => prev.filter((email) => email.id !== id));
+  };
+
+  const handleSaveCopyEmail = () => {
+    if (!editingCopyEmail.email) return;
+
+    if (editingCopyEmail.id) {
+      setCopyEmails((prev) =>
+        prev.map((email) =>
+          email.id === editingCopyEmail.id ? editingCopyEmail : email
+        )
+      );
+    } else {
+      setCopyEmails((prev) => [
+        ...prev,
+        { ...editingCopyEmail, id: Date.now().toString() },
+      ]);
+    }
+    setEditingCopyEmail({ id: "", email: "" });
+  };
+
+  const handleDeleteCopyEmail = (id: string) => {
+    setCopyEmails((prev) => prev.filter((email) => email.id !== id));
   };
 
   return (
@@ -315,6 +363,85 @@ const MapsGroupManager = () => {
         <h2 style={{ marginLeft: "1em" }}>Gestionar Emails de Ayuntamientos</h2>
       </div>
       {openEmailsConcello && <ConcelloEmailManager />}
+      <div onClick={() => toggleOpenEmailsCopias()} className="mapsTitle">
+        {!openEmailsCopias && (
+          <img
+            alt="expandir"
+            width={"15px"}
+            height={"15px"}
+            src={`${window.location.origin}${process.env.PUBLIC_URL}/flechaabajo.svg`}
+          />
+        )}
+        {openEmailsCopias && (
+          <img
+            style={{ transform: "rotate(180deg)" }}
+            alt="contraer"
+            width={"15px"}
+            height={"15px"}
+            src={`${window.location.origin}${process.env.PUBLIC_URL}/flechaabajo.svg`}
+          />
+        )}
+        <h2 style={{ marginLeft: "1em" }}>Gestionar Emails en Copia</h2>
+      </div>
+      {openEmailsCopias && (
+        <>
+          <div className="maps-form">
+            <div className="form-group">
+              <label htmlFor="copy-email">Email en Copia</label>
+              <input
+                id="copy-email"
+                type="email"
+                value={editingCopyEmail.email}
+                onChange={(e) =>
+                  setEditingCopyEmail((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }))
+                }
+                placeholder="ejemplo@anteagroup.es"
+              />
+              <small>Introduce el email que recibirá copia</small>
+            </div>
+
+            <div className="dialog-actions">
+              <button
+                onClick={() => setEditingCopyEmail({ id: "", email: "" })}
+              >
+                Cancelar
+              </button>
+              <button onClick={handleSaveCopyEmail} className="save-button">
+                {editingCopyEmail.id ? "Actualizar" : "Añadir"} Email
+              </button>
+            </div>
+          </div>
+
+          <div className="maps-list">
+            <h3>Emails en Copia Actuales</h3>
+            <ul>
+              {copyEmails.map((email) => (
+                <li key={email.id}>
+                  <div className="link-item">
+                    <div className="link-info">
+                      <span className="link-url">{email.email}</span>
+                    </div>
+                    <button
+                      className="edit-button"
+                      onClick={() => setEditingCopyEmail(email)}
+                    >
+                      Editar
+                    </button>
+                    <div className="deleteGroup">
+                      <button onClick={() => handleDeleteCopyEmail(email.id)}>
+                        x
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </div>
   );
 };
