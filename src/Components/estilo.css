@@ -328,3 +328,10 @@ h3 {
       brightness(86%) contrast(89%);
   }
 }
+
+h6 {
+  color: #395983;
+}
+label {
+  color: #395983;
+}
