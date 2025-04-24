@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MapsGroupManager.css";
 import ConcelloEmailManager from "./ConcelloEmailManager";
+import Notification from "./Notification";
 
 interface MapsGroup {
   id: string;
@@ -59,6 +60,10 @@ const MapsGroupManager = () => {
   const toggleOpenEmailsCopias = () => {
     setOpenEmailsCopias(!openEmailsCopias);
   };
+  const [openFestivos, setOpenFestivos] = useState(false);
+  const toggleOpenFestivos = () => {
+    setOpenFestivos(!openFestivos);
+  };
   const [editingGroup, setEditingGroup] = useState<MapsGroup>({
     id: "",
     link: "",
@@ -72,6 +77,14 @@ const MapsGroupManager = () => {
   const [editingCopyEmail, setEditingCopyEmail] = useState<CopyEmail>({
     id: "",
     email: "",
+  });
+
+  const [festivosFile, setFestivosFile] = useState<File | null>(null);
+
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error" | "warning" | "info",
   });
 
   useEffect(() => {
@@ -153,6 +166,53 @@ const MapsGroupManager = () => {
 
   const handleDeleteCopyEmail = (id: string) => {
     setCopyEmails((prev) => prev.filter((email) => email.id !== id));
+  };
+
+  const handleFestivosFileChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setFestivosFile(file);
+    }
+  };
+
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, open: false }));
+  };
+
+  const handleUploadFestivos = async () => {
+    if (!festivosFile) {
+      setNotification({
+        open: true,
+        message: "Por favor, selecciona un archivo CSV",
+        severity: "warning",
+      });
+      return;
+    }
+
+    try {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+
+        localStorage.setItem("festivosData", content);
+
+        setNotification({
+          open: true,
+          message: "Archivo de festivos actualizado correctamente",
+          severity: "success",
+        });
+      };
+      reader.readAsText(festivosFile);
+    } catch (error) {
+      console.error("Error al procesar el archivo:", error);
+      setNotification({
+        open: true,
+        message: "Error al procesar el archivo",
+        severity: "error",
+      });
+    }
   };
 
   return (
@@ -442,6 +502,82 @@ const MapsGroupManager = () => {
           </div>
         </>
       )}
+      <div onClick={() => toggleOpenFestivos()} className="mapsTitle">
+        {!openFestivos && (
+          <img
+            alt="expandir"
+            width={"15px"}
+            height={"15px"}
+            src={`${window.location.origin}${process.env.PUBLIC_URL}/flechaabajo.svg`}
+          />
+        )}
+        {openFestivos && (
+          <img
+            style={{ transform: "rotate(180deg)" }}
+            alt="contraer"
+            width={"15px"}
+            height={"15px"}
+            src={`${window.location.origin}${process.env.PUBLIC_URL}/flechaabajo.svg`}
+          />
+        )}
+        <h2 style={{ marginLeft: "1em" }}>Gestionar Festivos</h2>
+      </div>
+      {openFestivos && (
+        <>
+          <div className="festivos-gestion">
+            <div className="festivos-gestion-item">
+              <h3>Formato necesario:</h3>
+              <a
+                href={`${window.location.origin}${process.env.PUBLIC_URL}/calendario_laboral_2025 (1).csv`}
+                download
+              >
+                Calendario Laboral con el formato correcto
+              </a>
+              <h6>Formato de CSV que utilizamos ahora mismo</h6>
+            </div>
+            <div className="festivos-gestion-item">
+              <h3>Descarga del csv de festivos:</h3>
+              <a
+                href={`https://www.xunta.gal/resultados-da-busca?termo=calendario+laboral&orden=1&num=10`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Búsqueda en la Xunta "Calendario laboral"
+              </a>
+              <h6>Seleccionar el deseado y descargar el CSV</h6>
+            </div>
+          </div>
+          <div className="archivo">
+            <label className="input-group-text" htmlFor="inputGroupFile">
+              Examinar
+            </label>
+            <input
+              type="file"
+              id="inputGroupFile"
+              accept=".csv"
+              onChange={handleFestivosFileChange}
+            />
+          </div>
+          <div>
+            {festivosFile && (
+              <div className="file-actions">
+                <button
+                  onClick={handleUploadFestivos}
+                  className="upload-button"
+                >
+                  Subir Archivo
+                </button>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+      <Notification
+        open={notification.open}
+        message={notification.message}
+        severity={notification.severity}
+        onClose={handleCloseNotification}
+      />
     </div>
   );
 };

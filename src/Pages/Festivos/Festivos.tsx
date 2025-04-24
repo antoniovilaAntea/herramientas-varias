@@ -121,6 +121,18 @@ const Festivos = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const savedData = localStorage.getItem("festivosData");
+        if (savedData) {
+          Papa.parse(savedData, {
+            header: true,
+            encoding: "UTF-8",
+            complete: (result) => {
+              const rawData = result.data as any[];
+              processData(rawData);
+            },
+          });
+          return;
+        }
         const response = await fetch(
           `${window.location.origin}${process.env.PUBLIC_URL}/calendario_laboral_2025 (1).csv`
         );
@@ -134,38 +146,39 @@ const Festivos = () => {
           encoding: "UTF-8",
           complete: (result) => {
             const rawData = result.data as any[];
-
-            const lugares = rawData
-              .map((item) => item.lugar?.trim())
-              .filter(Boolean);
-
-            const lugaresUnicos = Array.from(new Set(lugares));
-
-            const opciones = lugaresUnicos.map((lugar) => ({
-              value: lugar,
-              label: lugar,
-            }));
-
-            const datosCompletos: HolidayData[] = rawData.map((item) => ({
-              fecha: String(item.fecha),
-              descripcion: String(item.descripcion),
-              ambito: String(item.ambito),
-              id_municipio: item.id_municipio ?? Number(item.id_municipio),
-              lugar: String(item.lugar).trim(),
-            }));
-
-            setAllData(datosCompletos);
-            const opcionesOrdenadas = opciones.sort((a, b) =>
-              a.label.localeCompare(b.label, "es", { sensitivity: "base" })
-            );
-            setOptions(opcionesOrdenadas);
-            setLoading(false);
+            processData(rawData);
           },
         });
       } catch (error) {
         console.error("Error cargando CSV:", error);
         setLoading(false);
       }
+    };
+
+    const processData = (rawData: any[]) => {
+      const lugares = rawData.map((item) => item.lugar?.trim()).filter(Boolean);
+
+      const lugaresUnicos = Array.from(new Set(lugares));
+
+      const opciones = lugaresUnicos.map((lugar) => ({
+        value: lugar,
+        label: lugar,
+      }));
+
+      const datosCompletos: HolidayData[] = rawData.map((item) => ({
+        fecha: String(item.fecha),
+        descripcion: String(item.descripcion),
+        ambito: String(item.ambito),
+        id_municipio: item.id_municipio ?? Number(item.id_municipio),
+        lugar: String(item.lugar).trim(),
+      }));
+
+      setAllData(datosCompletos);
+      const opcionesOrdenadas = opciones.sort((a, b) =>
+        a.label.localeCompare(b.label, "es", { sensitivity: "base" })
+      );
+      setOptions(opcionesOrdenadas);
+      setLoading(false);
     };
 
     fetchData();

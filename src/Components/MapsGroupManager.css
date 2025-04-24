@@ -182,3 +182,50 @@
     cursor: pointer;
   }
 }
+
+.festivos-gestion {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Divide la pantalla en dos columnas de igual tamaño */
+  grid-gap: 10px;
+}
+.festivos-gestion-item {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  a {
+    text-align: center;
+    color: #274690;
+    text-decoration: none;
+    border: 1px solid #274690;
+    border-radius: 5px;
+  }
+}
+
+.file-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.upload-button {
+  padding: 0.5rem 1rem;
+  background-color: #395983;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #4a6fa5;
+}
+
+.file-name {
+  color: #666;
+  font-size: 0.9rem;
+}
