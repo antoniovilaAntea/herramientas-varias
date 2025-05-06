@@ -335,3 +335,6 @@ h6 {
 label {
   color: #395983;
 }
+* {
+  font-family: "Barlow";
+}
