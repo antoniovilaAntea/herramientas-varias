@@ -57,10 +57,8 @@ const Festivos = () => {
   }, [selectedOptions, allData, fecha]);
 
   const obtenerMunicipiosdeProvincia = useCallback(() => {
-    // 1. Obtener los rangos seleccionados
     const lugaresSeleccionados = selectedProvincias.map((opt) => opt.value);
 
-    // 2. Procesar los rangos a números
     const minMaxRanges = lugaresSeleccionados.map((item) => {
       const [minStr, maxStr] = item.split("-");
       return {
@@ -69,9 +67,7 @@ const Festivos = () => {
       };
     });
 
-    // 3. Filtrar los datos
     const filtered = allData.filter((item) => {
-      // Verificar si el municipio está en algún rango
       const enRango = minMaxRanges.some(
         (range) =>
           (item.id_municipio !== null &&
@@ -82,7 +78,6 @@ const Festivos = () => {
           item.ambito === "auton�mico"
       );
 
-      // Verificar fechas (asumiendo formato ISO)
       const fechaItem = new Date(item.fecha);
       const fechaInicio = new Date(fecha[0].startDate);
       const fechaFin = new Date(fecha[0].endDate);
@@ -384,7 +379,6 @@ const Festivos = () => {
           <div className="municipal">
             <h3>Municipal</h3>
             {filteredData.map(
-              //si no quiere tener ordenado por ayto poner sortedData
               (item) =>
                 item.ambito === "municipal" && (
                   <div

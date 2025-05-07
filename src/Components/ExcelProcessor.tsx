@@ -111,25 +111,20 @@ const ExcelProcessor = () => {
 
       const newWb = utils.book_new();
 
-      // Crear hoja vacía
       const newWs = utils.aoa_to_sheet([]);
 
-      // 1. Añadir cabecera original (3 primeras filas)
       utils.sheet_add_aoa(newWs, header, { origin: "A1" });
 
-      // 2. Añadir títulos de columnas en fila 4
       if (registros.length > 0) {
         const columnTitles = Object.keys(registros[0]);
         utils.sheet_add_aoa(newWs, [columnTitles], { origin: "A4" });
       }
 
-      // 3. Añadir datos a partir de fila 5
       utils.sheet_add_json(newWs, registros, {
         origin: "A5",
         skipHeader: true,
       });
 
-      // Ajustar columnas
       const cols: { width: number }[] = [];
       utils.sheet_to_json(newWs, { header: 1 }).forEach((row: any) => {
         row.forEach((cell: any, idx: number) => {

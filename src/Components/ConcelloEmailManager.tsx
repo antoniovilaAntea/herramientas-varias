@@ -23,14 +23,12 @@ const ConcelloEmailManager = () => {
     if (!editingEmail.concello || !editingEmail.email) return;
 
     if (editingEmail.concello) {
-      // Actualizar email existente
       const updatedEmails: ConcelloEmail[] = concellosEmails.map(
         (email: ConcelloEmail) =>
           email.concello === editingEmail.concello ? editingEmail : email
       );
       setConcellosEmails(updatedEmails);
     } else {
-      // Añadir nuevo email
       const updatedEmails: ConcelloEmail[] = [...concellosEmails, editingEmail];
       setConcellosEmails(updatedEmails);
     }

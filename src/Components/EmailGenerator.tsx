@@ -543,14 +543,12 @@ function EmailGenerator() {
       return;
     }
 
-    // Verificar si ya existe un concello con el mismo nombre
     const concelloExists = concellosEmails.some(
       (email) =>
         email.concello.toLowerCase() === newConcelloEmail.concello.toLowerCase()
     );
 
     if (editingConcelloEmail) {
-      // Actualizar email existente
       const updatedEmails = concellosEmails.map((email) =>
         email.concello === editingConcelloEmail.concello
           ? newConcelloEmail
@@ -561,7 +559,6 @@ function EmailGenerator() {
       setEditingConcelloEmail(null);
       showNotification("Email actualizado correctamente", "success");
     } else if (!concelloExists) {
-      // Añadir nuevo email
       const updatedEmails = [...concellosEmails, newConcelloEmail];
       setConcellosEmails(updatedEmails);
       localStorage.setItem("concellosEmails", JSON.stringify(updatedEmails));
@@ -571,7 +568,6 @@ function EmailGenerator() {
       return;
     }
 
-    // Resetear el formulario
     setNewConcelloEmail({
       concello: "",
       email: "",
@@ -593,7 +589,6 @@ function EmailGenerator() {
     setNewConcelloEmail(email);
   };
 
-  //EMAILS
   return (
     <div className="email">
       <div className="email-importar">
