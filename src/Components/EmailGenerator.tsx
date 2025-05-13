@@ -331,31 +331,64 @@ function EmailGenerator() {
 
   const createEmailBodyOperarios = (data: any[]): string => {
     let contenido = "";
-    const groupedData: { [key: string]: any[][] } = {};
+    const groupedData: {
+      [key: string]: { retirar: any[][]; instalar: any[][] };
+    } = {};
+
+    // Agrupar datos por fecha y tipo
     data.forEach((item) => {
-      const key = `${item.fecha}-${item.tipo}-${item.numero}`;
-      groupedData[key] = groupedData[key] || [];
-      groupedData[key].push(...item.selectedRows);
-    });
-
-    let lastDate = "";
-    Object.keys(groupedData).forEach((key, index) => {
-      const [fecha, tipo, dia] = key.split("-");
-      if (fecha !== lastDate) {
-        contenido += `${fecha.toUpperCase()} ${dia}\n\n`;
-        lastDate = fecha;
+      const key = `${item.fecha}-${item.numero}`;
+      if (!groupedData[key]) {
+        groupedData[key] = { retirar: [], instalar: [] };
       }
-      contenido += `Gomas a ${tipo.toUpperCase()}:\n`;
 
-      groupedData[key].forEach((row: any) => {
-        const codigo = row[1];
-        const partes = row[2];
-        const grupo = row[0];
-        contenido += `• ${codigo}___PK ${partes} - Grupo: ${grupo}\n`;
-      });
-
-      contenido += index < Object.keys(groupedData).length - 1 ? "\n" : "";
+      if (item.tipo === "Retirar") {
+        groupedData[key].retirar.push(...item.selectedRows);
+      } else if (item.tipo === "Instalar") {
+        groupedData[key].instalar.push(...item.selectedRows);
+      }
     });
+
+    // Ordenar las fechas
+    const sortedDates = Object.keys(groupedData).sort((a, b) => {
+      const [fechaA, numA] = a.split("-");
+      const [fechaB, numB] = b.split("-");
+      if (fechaA === fechaB) {
+        return parseInt(numA) - parseInt(numB);
+      }
+      return fechaA.localeCompare(fechaB);
+    });
+
+    // Generar contenido ordenado
+    sortedDates.forEach((key) => {
+      const [fecha, dia] = key.split("-");
+      contenido += `${fecha.toUpperCase()} ${dia}\n\n`;
+
+      // Primero las gomas a retirar
+      if (groupedData[key].retirar.length > 0) {
+        contenido += "Gomas a RETIRAR:\n";
+        groupedData[key].retirar.forEach((row: any) => {
+          const codigo = row[1];
+          const partes = row[2];
+          const grupo = row[0];
+          contenido += `• ${codigo}___PK ${partes} - Grupo: ${grupo}\n`;
+        });
+        contenido += "\n";
+      }
+
+      // Luego las gomas a instalar
+      if (groupedData[key].instalar.length > 0) {
+        contenido += "Gomas a INSTALAR:\n";
+        groupedData[key].instalar.forEach((row: any) => {
+          const codigo = row[1];
+          const partes = row[2];
+          const grupo = row[0];
+          contenido += `• ${codigo}___PK ${partes} - Grupo: ${grupo}\n`;
+        });
+        contenido += "\n";
+      }
+    });
+
     driveLinks(data);
     contenido += "\n" + rutas.join("\n\n");
 
