@@ -38,6 +38,21 @@ const Navigation = () => {
           </Link>
         </div>
         <div className="header-text">Herramientas</div>
+        <Tooltip title="Mapa tramos">
+          <Link
+            to={"https://mapa-red-de-carreteras.vercel.app/"}
+            onClick={() => setActiveLink("")}
+            className="tramos-icon"
+            target="_blank"
+          >
+            <img
+              width={"35px"}
+              height={"35px"}
+              src={`${window.location.origin}${process.env.PUBLIC_URL}/MapaTramos.png`}
+              alt="Logo de acceso a plataforma mapa de tramos"
+            />
+          </Link>
+        </Tooltip>
         <Tooltip title="Ayuda">
           <Link
             to={"/ayuda"}

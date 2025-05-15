@@ -320,15 +320,18 @@ h3 {
 .admin-icon {
   margin-left: 0.5em;
 }
+.tramos-icon {
+  margin-right: 0.5em;
+}
 
 .admin-icon,
-.ayuda-icon {
+.ayuda-icon,
+.tramos-icon {
   img:hover {
     filter: invert(47%) sepia(10%) saturate(2453%) hue-rotate(176deg)
       brightness(86%) contrast(89%);
   }
 }
-
 h6 {
   color: #395983;
 }
